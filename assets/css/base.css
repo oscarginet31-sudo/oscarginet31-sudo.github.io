@@ -109,9 +109,15 @@ kbd {
 }
 
 /* --- Schémas d'architecture (SVG, suivent le thème) ------------------- */
-.diagram-fig { margin: 20px 0 6px; padding: 14px 14px 10px; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in oklab, var(--card) 72%, transparent); overflow-x: auto; }
+.diagram-fig { margin: 20px 0 6px; padding: 14px 14px 10px; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in oklab, var(--card) 72%, transparent); container-type: inline-size; }
 .diagram-fig figcaption { margin-top: 6px; font-family: var(--mono); font-size: 10.5px; color: var(--fg-muted); }
-.diagram { display: block; width: 100%; min-width: 540px; height: auto; }
+.diagram { display: block; width: 100%; height: auto; }   /* toujours en entier dans son cadre */
+/* Cadre étroit (mobile) : version en colonne, plus lisible qu'une réduction. */
+.diagram.d-tall { display: none; max-width: 360px; margin-inline: auto; }
+@container (max-width: 499px) {
+  .diagram.d-wide { display: none; }
+  .diagram.d-tall { display: block; }
+}
 .diagram text { font-family: var(--mono); fill: var(--fg); paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; }
 .diagram .d-t { font-size: 11.5px; font-weight: 500; }
 .diagram .d-s { font-size: 9.5px; fill: var(--fg-soft); }

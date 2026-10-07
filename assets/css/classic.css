@@ -524,7 +524,7 @@ a.cl:hover i { transform: translate(2px, -2px); color: #f0b48a; }
 .case-cta-title { font-family: var(--serif); font-size: clamp(26px, 3vw, 34px); margin-bottom: 4px; }
 .case-cta .cc-cta { margin-top: 18px; }
 @media (max-width: 980px) {
-  .case-layout { grid-template-columns: 1fr; gap: 0; padding-top: 104px; }
+  .case-layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 104px; }   /* minmax : le bloc de code défile au lieu d’élargir la page */
   .case-toc { display: none; }
 }
 @media (max-width: 720px) {

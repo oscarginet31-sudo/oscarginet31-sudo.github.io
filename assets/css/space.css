@@ -63,6 +63,7 @@ body.warping #hud-hint, body.warping #pointers, body.warping #target, body.warpi
   padding: 16px 22px; pointer-events: none;
 }
 .hud-top > * { pointer-events: auto; }
+body.intro-on .hud-top { z-index: 51; }   /* au-dessus du voile de l'intro, sinon les boutons ne sont pas cliquables */
 .hud-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 
 /* Indicateur de son : 3 barres qui dansent quand le son est actif. */
@@ -264,6 +265,7 @@ kbd {
   padding: 40px 36px 34px; opacity: 0;
   transition: opacity .35s ease, transform .35s cubic-bezier(.2,.8,.2,1);
 }
+.card-body:has(.diagram-fig) { width: min(720px, 92vw); }   /* place pour le schéma */
 .card-body::before {
   content: ""; position: absolute; top: 0; left: 24px; right: 24px; height: 2px;
   background: linear-gradient(90deg, transparent, var(--hub, var(--blue)), transparent);

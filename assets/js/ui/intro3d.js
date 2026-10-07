@@ -13,7 +13,9 @@
       this.entered = false;
       document.getElementById("enter").addEventListener("click", () => this.enter());
       document.getElementById("enter-tour").addEventListener("click", () => { this.enter(); onTour && onTour(); });
-      addEventListener("keydown", (e) => { if (!this.entered && e.key === "Enter") this.enter(); });
+      // Entrée = entrer, sauf si le focus est sur un bouton du HUD (qui garde sa propre action).
+      addEventListener("keydown", (e) => { if (!this.entered && e.key === "Enter" && !e.target.closest("button, a, input")) this.enter(); });
+      document.body.classList.add("intro-on");   // la barre du haut passe au-dessus de l'intro
       PF.onLang(() => this.localize());
       this.localize();
       if (U.env.reducedMotion) this.root.classList.add("reduced");
@@ -45,6 +47,7 @@
       if (this.entered) return;
       this.entered = true;
       this.root.classList.add("gone");
+      document.body.classList.remove("intro-on");
       setTimeout(() => { this.root.style.display = "none"; }, 900);
       this.onEnter();
     }
