@@ -32,8 +32,23 @@
       found.add(k);
       try { localStorage.setItem(FOUND_KEY, JSON.stringify([...found])); } catch (e) { /* ignore */ }
       refreshFound();
+      if (found.size >= total) unlock(true);
+    };
+    // Succès « Explorateur » : toutes les planètes vues → planète secrète près du cœur.
+    let unlocked = false;
+    const unlock = (announce) => {
+      if (unlocked) return;
+      unlocked = true;
+      app.revealSecret();
+      if (announce) {
+        const fr = PF.lang === "fr";
+        hud.achievement(fr ? "Succès débloqué : Explorateur" : "Achievement unlocked: Explorer",
+          fr ? "Une planète secrète vient d’apparaître près du cœur galactique." : "A secret planet just appeared near the galactic core.");
+        PF.sfx("open");
+      }
     };
     refreshFound();
+    if (found.size >= total) unlock(false);
 
     // --- Monde ↔ UI ---
     app.onTarget = (info) => { hud.setTarget(info); if (info) PF.sfx("blip"); };
@@ -51,6 +66,7 @@
     };
     app.onOpenPlanet = (planet) => openCard(() => { card.open(planet); discover(planet); });
     app.onOpenCore = () => openCard(() => card.openCore());
+    app.onOpenSecret = () => openCard(() => card.openSecret());
     card.onClose = () => { app.enableFlight(true); if (wasLocked) app.flight.requestLook(); };
 
     hud.onBack = () => app.exitSystem();
@@ -64,6 +80,14 @@
     const tour = new PF.Tour(app, card, { planet: (p) => app.onOpenPlanet(p), core: () => app.onOpenCore() });
     const term = new PF.Terminal({ app, tour, card, audio, openPlanet: (p) => app.onOpenPlanet(p), openCore: () => app.onOpenCore() });
     hud.onTour = () => tour.start();
+    hud.onGyro = async () => {
+      if (app.flight.gyro) { app.flight.disableGyro(); hud.setGyro(false); return; }
+      const ok = await app.flight.enableGyro();
+      hud.setGyro(ok);
+      if (!ok) hud.achievement(PF.lang === "fr" ? "Gyroscope indisponible" : "Gyroscope unavailable",
+        PF.lang === "fr" ? "Autorisation refusée ou capteur absent : glissez pour regarder." : "Permission denied or no sensor: drag to look around.");
+    };
+    hud.setGyro(false);
     document.getElementById("btn-term").addEventListener("click", () => term.toggle());
     addEventListener("keydown", (e) => {
       if (e.key.toLowerCase() === "t" && !e.metaKey && !e.ctrlKey && !term.isOpen && !tour.active &&

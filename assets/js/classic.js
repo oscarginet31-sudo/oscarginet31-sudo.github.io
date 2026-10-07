@@ -113,13 +113,13 @@
         <div class="tags">${env}</div>
         <div class="pc-foot">
           <button type="button" class="pc-open" data-open="${p.id}"><span>${esc(t("proj.open"))}</span><span aria-hidden="true">↗</span></button>
-          ${p.link ? `<a class="pc-gh" href="${esc(p.link.href)}" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>` : ""}
+          ${p.link ? `<a class="pc-gh" href="${esc(p.link.href)}"${/^https?:/.test(p.link.href) ? ' target="_blank" rel="noopener"' : ""}>${esc(tx(p.link.short || "GitHub"))} <span aria-hidden="true">${/^https?:/.test(p.link.href) ? "↗" : "→"}</span></a>` : ""}
         </div>
       </article>`;
     }).join("");
     return `<div class="wrap">
       ${head("03", "proj.label", P.title, P.intro, "projects")}
-      <div class="filters reveal" role="group">${chips}</div>
+      <div class="filters reveal" role="group" aria-label="${esc(PF.lang === "fr" ? "Filtrer les projets" : "Filter projects")}">${chips}</div>
       <div class="pgrid">${cards}</div>
     </div>`;
   }
@@ -427,11 +427,12 @@
       <h2 id="sheet-title">${esc(tx(p.title))}</h2>
       <p class="sheet-lead">${esc(tx(p.desc))}</p>
       ${p.metrics ? `<div class="pc-metrics">${p.metrics.map((m) => `<div><b>${esc(tx(m.value))}</b><span>${esc(tx(m.label))}</span></div>`).join("")}</div>` : ""}
+      ${p.diagram ? `<figure class="diagram-fig">${PF.diagram(p.diagram)}<figcaption>${esc(PF.diagramCaption())}</figcaption></figure>` : ""}
       <h3>${esc(t("proj.steps"))}</h3>
       <ul class="sheet-points">${p.points.map((x) => `<li>${esc(tx(x))}</li>`).join("")}</ul>
       <h3>${esc(t("proj.env"))}</h3>
       <div class="tags">${p.env.map((e) => `<span class="tag">${esc(e)}</span>`).join("")}</div>
-      ${p.link ? `<p class="sheet-link"><a class="btn btn-primary" href="${esc(p.link.href)}" target="_blank" rel="noopener">${esc(tx(p.link.label))} <span aria-hidden="true">↗</span></a></p>` : ""}`;
+      ${p.link ? `<p class="sheet-link"><a class="btn btn-primary" href="${esc(p.link.href)}"${/^https?:/.test(p.link.href) ? ' target="_blank" rel="noopener"' : ""}>${esc(tx(p.link.label))} <span aria-hidden="true">${/^https?:/.test(p.link.href) ? "↗" : "→"}</span></a></p>` : ""}`;
     if (!sheet.open) {
       if (sheet.showModal) sheet.showModal(); else sheet.setAttribute("open", "");
     }
@@ -543,6 +544,12 @@
   }
 
   /* -------------------------------- Boot -------------------------------- */
+  if (PF.isPrerender) {
+    if (PF.lang !== "fr") PF.setLang("fr");
+    render(false);
+    PF.prerender(["nav-links", "hero-status", "hero-role", "about", "path", "projects", "skills", "engagement", "galaxy-promo", "contact"]);
+    return;
+  }
   render(true);
   onScroll();
   network();

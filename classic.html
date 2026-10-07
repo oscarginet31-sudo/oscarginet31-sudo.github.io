@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Sécurité : aucune ressource tierce, aucun script en ligne, aucun référent envoyé aux sites externes. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
 <title>Oscar Ginet — Systèmes, Réseaux & Cybersécurité</title>
 <meta name="description" content="Portfolio d'Oscar Ginet, alternant Systèmes, Réseaux & Cybersécurité chez Lamberet SAS et étudiant en BUT Réseaux & Télécommunications parcours Cybersécurité à l'IUT d'Annecy. Active Directory, virtualisation, sauvegarde, supervision, EDR.">
 <meta name="author" content="Oscar Ginet">
@@ -21,9 +24,8 @@
 <meta name="theme-color" content="#faf7ef" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0d0f14" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="assets/js/core/early.js"></script>
+<link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/classic.css">
 <script type="application/ld+json">
@@ -48,7 +50,7 @@
   <a class="brand" href="#top" aria-label="Oscar Ginet — haut de page">
     <span class="brand-name">Oscar Ginet</span>
   </a>
-  <nav class="nav-links" id="nav-links" aria-label="Sections"></nav>
+  <nav class="nav-links" id="nav-links" aria-label="Sections"><!--prerender:nav-links--><a href="#about" data-sec="about"><span class="n">01</span>À propos</a><a href="#path" data-sec="path"><span class="n">02</span>Parcours</a><a href="#projects" data-sec="projects"><span class="n">03</span>Projets</a><a href="#skills" data-sec="skills"><span class="n">04</span>Compétences</a><a href="#engagement" data-sec="engagement"><span class="n">05</span>Engagements</a><a href="#contact" data-sec="contact"><span class="n">06</span>Contact</a><!--/prerender:nav-links--></nav>
   <div class="nav-controls">
     <a class="pill pill-galaxy" href="index.html"><span class="pill-star">✦</span><span data-t="nav.galaxy">Galaxie 3D</span></a>
     <button class="pill icon" id="theme-toggle" type="button" data-t-label="nav.theme" aria-label="Changer de thème">
@@ -70,9 +72,9 @@
     <canvas id="net" aria-hidden="true"></canvas>
     <div class="hero-grid wrap">
       <div class="hero-copy">
-        <p class="status"><span class="status-dot"></span><span id="hero-status"></span></p>
+        <p class="status"><span class="status-dot"></span><span id="hero-status"><!--prerender:hero-status-->En alternance chez Lamberet SAS<!--/prerender:hero-status--></span></p>
         <h1 class="hero-name">Oscar <em>Ginet</em></h1>
-        <p class="hero-role" id="hero-role"></p>
+        <p class="hero-role" id="hero-role"><!--prerender:hero-role-->Alternant chez Lamberet SAS · BUT R&amp;T parcours Cybersécurité · IUT d’Annecy<!--/prerender:hero-role--></p>
         <p class="hero-tagline" aria-live="polite"><span id="tagline"></span><span class="caret" aria-hidden="true"></span></p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#projects"><span data-t="hero.cta.projects">Voir les projets</span><span aria-hidden="true">→</span></a>
@@ -88,13 +90,405 @@
     <a class="scroll-cue" href="#about" aria-hidden="true" tabindex="-1"><span data-t="hero.scroll">défiler</span><i></i></a>
   </section>
 
-  <section class="section" id="about" aria-labelledby="about-title"></section>
-  <section class="section" id="path" aria-labelledby="path-title"></section>
-  <section class="section" id="projects" aria-labelledby="projects-title"></section>
-  <section class="section" id="skills" aria-labelledby="skills-title"></section>
-  <section class="section" id="engagement" aria-labelledby="engagement-title"></section>
-  <section class="section" id="galaxy-promo"></section>
-  <section class="section" id="contact" aria-labelledby="contact-title"></section>
+  <section class="section" id="about" aria-labelledby="about-title"><!--prerender:about--><div class="wrap">
+      
+    <header class="sec-head reveal">
+      <p class="sec-label"><span>01</span>À propos</p>
+      <h2 class="sec-title" id="about-title">Déterminé, curieux, et une <em>réelle volonté d’apprendre.</em></h2>
+      
+    </header>
+      <div class="about-grid">
+        <div class="about-bio reveal"><p>Alternant chez Lamberet SAS, constructeur français de carrosseries frigorifiques, et étudiant en BUT Réseaux &amp; Télécommunications parcours Cybersécurité à l’IUT d’Annecy.</p><p>Au sein d’une petite équipe informatique, je fais vivre l’infrastructure d’un groupe industriel multi-sites : annuaire, virtualisation, sauvegardes, supervision et sécurité des postes et des serveurs.</p><p>Depuis juillet 2026, je sers aussi dans la réserve opérationnelle au 27ᵉ Bataillon de Chasseurs Alpins. Le reste du temps, on me trouve sur mon vélo de route.</p></div>
+        <dl class="facts reveal">
+          <div><dt>Basé</dt><dd>Annecy (74) · Ain (01)</dd></div>
+          <div><dt>Statut</dt><dd>Alternance jusqu’en juillet 2027</dd></div>
+          <div><dt>Ensuite</dt><dd>Poursuite d’études en cyber dès sept. 2027, en alternance</dd></div>
+          <div><dt>Langues</dt><dd>Français · Anglais (TOEIC 550) · Espagnol</dd></div>
+          <div><dt>Mobilité</dt><dd>Permis B · véhicule personnel</dd></div>
+        </dl>
+      </div>
+      <ul class="stats">
+        <li class="reveal"><b data-count="7">7</b><span>sites migrés vers un Active Directory redondant</span></li>
+        <li class="reveal"><b data-count="11">11</b><span>étendues DHCP en failover 50/50</span></li>
+        <li class="reveal"><b data-count="2">2</b><span>ans d’alternance sur une infrastructure multi-sites</span></li>
+        <li class="reveal"><b data-count="5">5</b><span>certifications : Cisco CCNA ×2, ANSSI, TOEIC, Pix</span></li>
+      </ul>
+    </div><!--/prerender:about--></section>
+  <section class="section" id="path" aria-labelledby="path-title"><!--prerender:path--><div class="wrap">
+      
+    <header class="sec-head reveal">
+      <p class="sec-label"><span>02</span>Parcours</p>
+      <h2 class="sec-title" id="path-title">Du terrain <em>aux serveurs.</em></h2>
+      <p class="sec-intro">Deux ans d’alternance sur une infrastructure industrielle bien réelle, nourris par une formation en cybersécurité.</p>
+    </header>
+      <h3 class="sub-label reveal">Expérience</h3>
+      <div class="jobs">
+      <article class="job reveal">
+        <p class="job-date">Sept. 2024 — aujourd’hui</p>
+        <div class="job-main">
+          <h3>Alternant Systèmes, Réseaux &amp; Sécurité</h3>
+          <p class="job-org"><b>Lamberet SAS</b><span>Alternance · Saint-Cyr-sur-Menthon (01) · sur site</span></p>
+          <p class="job-desc">Gestion et évolution de l’infrastructure IT d’un groupe industriel multi-sites, au sein d’une petite équipe informatique.</p>
+          <div class="job-groups">
+            <div><h4>Systèmes &amp; annuaire</h4><ul><li>Migration Active Directory vers deux contrôleurs de domaine (Windows Server 2016 → 2025) sur 7 sites</li><li>Centralisation et bascule du DHCP : relais, failover, superscopes</li></ul></div>
+            <div><h4>Virtualisation &amp; sauvegarde</h4><ul><li>Administration VMware vSphere et mise en place de Proxmox VE sur HPE ProLiant DL380 Gen10</li><li>Migration de machines virtuelles VMware vers Proxmox</li><li>Veeam Backup &amp; Replication : montée 12.2 → v13, dépôt Linux durci</li></ul></div>
+            <div><h4>Supervision</h4><ul><li>Déploiement d’une stack Zabbix 7 + Grafana : serveurs, réseau, services, alerting</li></ul></div>
+            <div><h4>Cybersécurité</h4><ul><li>Migration de l’EDR vers Trend Micro Vision One (Apex One, Deep Security)</li><li>Triage et remédiation des alertes avec un SOC externe</li><li>Référentiel de compétences pour la montée en compétence de l’équipe</li></ul></div>
+          </div>
+          <div class="tags"><span class="tag">Active Directory</span><span class="tag">Proxmox</span><span class="tag">VMware</span><span class="tag">Veeam</span><span class="tag">Zabbix</span><span class="tag">Grafana</span><span class="tag">Vision One</span><span class="tag">PowerShell</span></div>
+        </div>
+      </article>
+      <article class="job reveal">
+        <p class="job-date">2019 — 2023</p>
+        <div class="job-main">
+          <h3>Employé agricole</h3>
+          <p class="job-org"><b>Exploitation agricole</b><span>Saisonnier · Saint-Benoît (01) · 2 mois cumulés</span></p>
+          <p class="job-desc">Premier contact avec le monde du travail : travail physique, rigueur et goût du travail en équipe.</p>
+          
+          <div class="tags"><span class="tag">Autonomie</span><span class="tag">Travail d’équipe</span><span class="tag">Rigueur</span></div>
+        </div>
+      </article></div>
+      <div class="path-cols">
+        <div><h3 class="sub-label reveal">Formation</h3><ol class="edu">
+      <li class="reveal">
+        <p class="li-date">2024 — 2027</p>
+        <h4>BUT Réseaux &amp; Télécommunications</h4>
+        <p class="li-org">IUT d’Annecy · parcours Cybersécurité · alternance</p>
+        <p class="li-desc">Routage, commutation, VLAN et Wi-Fi, administration Windows et Linux, programmation, télécoms et cybersécurité : vulnérabilités, cryptographie, pare-feu.</p>
+        
+      </li>
+      <li class="reveal">
+        <p class="li-date">2021 — 2024</p>
+        <h4>Baccalauréat général</h4>
+        <p class="li-org">Lycée du Bugey · mention Assez bien</p>
+        <p class="li-desc">Spécialités Mathématiques et Physique-Chimie, classe sport.</p>
+        
+      </li>
+      <li class="reveal">
+        <p class="li-date">2021</p>
+        <h4>Diplôme national du brevet</h4>
+        <p class="li-org">Collège Chartreuse de Portes · mention Très bien</p>
+        
+        
+      </li></ol></div>
+        <div><h3 class="sub-label reveal">Certifications</h3><ul class="certs">
+      <li class="reveal">
+        <div><h4>CCNA: Switching, Routing &amp; Wireless Essentials</h4><p>Cisco</p></div>
+        <span class="li-date">Juil. 2026</span>
+      </li>
+      <li class="reveal">
+        <div><h4>CCNA: Introduction to Networks</h4><p>Cisco</p></div>
+        <span class="li-date">Pendant le BUT</span>
+      </li>
+      <li class="reveal">
+        <div><h4>TOEIC</h4><p>ETS · Score 550 · valide jusqu’en mars 2028</p></div>
+        <span class="li-date">Mars 2026</span>
+      </li>
+      <li class="reveal">
+        <div><h4>MOOC ANSSI</h4><p>ANSSI — Agence nationale de la sécurité des SI</p></div>
+        <span class="li-date">Janv. 2025</span>
+      </li>
+      <li class="reveal">
+        <div><h4>Certification Pix</h4><p>Pix · 404 pix</p></div>
+        <span class="li-date">2023</span>
+      </li></ul></div>
+      </div>
+    </div><!--/prerender:path--></section>
+  <section class="section" id="projects" aria-labelledby="projects-title"><!--prerender:projects--><div class="wrap">
+      
+    <header class="sec-head reveal">
+      <p class="sec-label"><span>03</span>Projets</p>
+      <h2 class="sec-title" id="projects-title">Là où la curiosité <em>rencontre la prod.</em></h2>
+      <p class="sec-intro">Cinq chantiers menés en alternance sur l’infrastructure de Lamberet, et deux projets universitaires. Chaque fiche détaille la démarche et l’environnement technique.</p>
+    </header>
+      <div class="filters reveal" role="group" aria-label="Filtrer les projets">
+      <button type="button" class="fchip on" data-filter="all" aria-pressed="true">
+        Tous<sup>7</sup>
+      </button>
+      <button type="button" class="fchip" data-filter="pro" aria-pressed="false">
+        Alternance<sup>5</sup>
+      </button>
+      <button type="button" class="fchip" data-filter="iut" aria-pressed="false">
+        IUT<sup>2</sup>
+      </button></div>
+      <div class="pgrid">
+      <article class="pc featured reveal" data-ctx="pro" data-id="edr">
+        <div class="pc-top">
+          <span class="pc-num">/01</span>
+          <span class="pc-org">Lamberet SAS</span>
+          <span class="pc-badge">Mémoire de BUT</span>
+        </div>
+        <h3 class="pc-title">Migration EDR : WithSecure → Trend Micro Vision One</h3>
+        <p class="pc-desc">Remplacement de la protection des postes et serveurs du groupe, de l’étude comparative jusqu’au triage quotidien des alertes avec un SOC externe.</p>
+        <div class="pc-metrics">
+        <div><b>2</b><span>consoles : postes &amp; serveurs</span></div>
+        <div><b>22</b><span>compétences au référentiel</span></div></div>
+        <div class="tags"><span class="tag">Trend Micro Vision One</span><span class="tag">Apex One</span><span class="tag">Deep Security</span><span class="tag">Active Directory</span><span class="tag more">+1</span></div>
+        <div class="pc-foot">
+          <button type="button" class="pc-open" data-open="edr"><span>Lire la fiche</span><span aria-hidden="true">↗</span></button>
+          <a class="pc-gh" href="etude-edr.html">Étude de cas <span aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="pc featured reveal" data-ctx="pro" data-id="ad">
+        <div class="pc-top">
+          <span class="pc-num">/02</span>
+          <span class="pc-org">Lamberet SAS</span>
+          
+        </div>
+        <h3 class="pc-title">Active Directory redondant sur 7 sites</h3>
+        <p class="pc-desc">D’un contrôleur de domaine unique sous Windows Server 2016 à une architecture à deux DC, dont un sous Windows Server 2025, avec un DHCP centralisé en failover.</p>
+        <div class="pc-metrics">
+        <div><b>7</b><span>sites</span></div>
+        <div><b>2</b><span>contrôleurs de domaine</span></div>
+        <div><b>11</b><span>étendues DHCP</span></div></div>
+        <div class="tags"><span class="tag">Windows Server 2016 / 2025</span><span class="tag">Active Directory</span><span class="tag">DNS</span><span class="tag">DHCP</span><span class="tag more">+3</span></div>
+        <div class="pc-foot">
+          <button type="button" class="pc-open" data-open="ad"><span>Lire la fiche</span><span aria-hidden="true">↗</span></button>
+          
+        </div>
+      </article>
+      <article class="pc reveal" data-ctx="pro" data-id="zabbix">
+        <div class="pc-top">
+          <span class="pc-num">/03</span>
+          <span class="pc-org">Lamberet SAS</span>
+          
+        </div>
+        <h3 class="pc-title">Supervision Zabbix 7 + Grafana</h3>
+        <p class="pc-desc">Mise en place de la première plateforme de supervision centralisée du groupe, des serveurs jusqu’aux onduleurs.</p>
+        
+        <div class="tags"><span class="tag">Zabbix 7</span><span class="tag">Grafana</span><span class="tag">Debian</span><span class="tag">SNMP</span><span class="tag more">+2</span></div>
+        <div class="pc-foot">
+          <button type="button" class="pc-open" data-open="zabbix"><span>Lire la fiche</span><span aria-hidden="true">↗</span></button>
+          
+        </div>
+      </article>
+      <article class="pc reveal" data-ctx="pro" data-id="proxmox">
+        <div class="pc-top">
+          <span class="pc-num">/04</span>
+          <span class="pc-org">Lamberet SAS</span>
+          
+        </div>
+        <h3 class="pc-title">Proxmox VE sur HPE ProLiant DL380 Gen10</h3>
+        <p class="pc-desc">Reconversion d’un serveur auparavant sous VMware ESXi et HPE SimpliVity en plateforme Proxmox pour les tests et le stockage.</p>
+        
+        <div class="tags"><span class="tag">Proxmox VE</span><span class="tag">ZFS</span><span class="tag">VMware ESXi</span><span class="tag">HPE iLO 5</span><span class="tag more">+2</span></div>
+        <div class="pc-foot">
+          <button type="button" class="pc-open" data-open="proxmox"><span>Lire la fiche</span><span aria-hidden="true">↗</span></button>
+          
+        </div>
+      </article>
+      <article class="pc reveal" data-ctx="pro" data-id="veeam">
+        <div class="pc-top">
+          <span class="pc-num">/05</span>
+          <span class="pc-org">Lamberet SAS</span>
+          
+        </div>
+        <h3 class="pc-title">Sauvegardes Veeam : montée en v13 et dépôt durci</h3>
+        <p class="pc-desc">Fiabilisation de la chaîne de sauvegarde du groupe : montée de version, dépôt Linux durci et prise en charge du nouvel hyperviseur Proxmox.</p>
+        
+        <div class="tags"><span class="tag">Veeam B&amp;R 12.2 → v13</span><span class="tag">Linux</span><span class="tag">Proxmox VE</span><span class="tag">VMware vSphere</span></div>
+        <div class="pc-foot">
+          <button type="button" class="pc-open" data-open="veeam"><span>Lire la fiche</span><span aria-hidden="true">↗</span></button>
+          
+        </div>
+      </article>
+      <article class="pc reveal" data-ctx="iut" data-id="sdr">
+        <div class="pc-top">
+          <span class="pc-num">/06</span>
+          <span class="pc-org">IUT d’Annecy</span>
+          <span class="pc-badge">SAÉ 301</span>
+        </div>
+        <h3 class="pc-title">Radio logicielle (SDR) en Python</h3>
+        <p class="pc-desc">Traitement numérique du signal appliqué à la radio logicielle, à partir d’enregistrements issus d’un récepteur SDR.</p>
+        
+        <div class="tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">SciPy</span><span class="tag">Matplotlib</span><span class="tag more">+1</span></div>
+        <div class="pc-foot">
+          <button type="button" class="pc-open" data-open="sdr"><span>Lire la fiche</span><span aria-hidden="true">↗</span></button>
+          
+        </div>
+      </article>
+      <article class="pc reveal" data-ctx="iut" data-id="cyberzone">
+        <div class="pc-top">
+          <span class="pc-num">/07</span>
+          <span class="pc-org">IUT d’Annecy</span>
+          <span class="pc-badge">SAÉ 203</span>
+        </div>
+        <h3 class="pc-title">CyberZone, site d’un café gaming</h3>
+        <p class="pc-desc">Conception et développement en binôme du site web d’un café gaming, présenté devant un jury.</p>
+        
+        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">PHP</span><span class="tag">MySQL</span></div>
+        <div class="pc-foot">
+          <button type="button" class="pc-open" data-open="cyberzone"><span>Lire la fiche</span><span aria-hidden="true">↗</span></button>
+          <a class="pc-gh" href="https://github.com/oscarginet31-sudo/CyberZone" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </article></div>
+    </div><!--/prerender:projects--></section>
+  <section class="section" id="skills" aria-labelledby="skills-title"><!--prerender:skills--><div class="wrap">
+      
+    <header class="sec-head reveal">
+      <p class="sec-label"><span>04</span>Compétences</p>
+      <h2 class="sec-title" id="skills-title">Des outils <em>éprouvés en production.</em></h2>
+      <p class="sec-intro">Une stack construite à l’IUT et mise à l’épreuve chaque semaine sur l’infrastructure de Lamberet. Chaque compétence indique où elle est pratiquée.</p>
+    </header>
+      <p class="legend reveal">Pratiqué : <span class="ctx ctx-pro">Entreprise</span><span class="ctx ctx-iut">IUT</span><span class="ctx ctx-perso">Perso</span></p>
+      <div class="sgrid">
+      <div class="scat reveal">
+        <p class="scat-code">01 / SYS</p>
+        <h3>Systèmes &amp; annuaire</h3>
+        <ul>
+          <li>
+            <div class="si-head"><span class="si-name">Active Directory · DNS · DHCP</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Architecture à double contrôleur de domaine sur 7 sites, DHCP centralisé en failover, santé de l’annuaire contrôlée avec dcdiag et repadmin.</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Windows Server · GPO</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Nouveau contrôleur de domaine sous Windows Server 2025 et configuration des postes par stratégies de groupe (GPO).</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Linux (Debian)</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span><span class="ctx ctx-iut">IUT</span></span></div>
+            <p>Serveur Zabbix et dépôt de sauvegarde Veeam durci sous Debian ; administration système Windows et Linux à l’IUT.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="scat reveal">
+        <p class="scat-code">02 / INFRA</p>
+        <h3>Virtualisation &amp; sauvegarde</h3>
+        <ul>
+          <li>
+            <div class="si-head"><span class="si-name">VMware vSphere · ESXi</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Administration de l’environnement de production et migration de machines virtuelles vers Proxmox.</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Proxmox VE · ZFS</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Reconversion d’un HPE ProLiant DL380 Gen10 en hyperviseur : pools ZFS SSD et HDD, configuration via iLO 5, bridge VLAN-aware.</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Veeam Backup &amp; Replication</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Montée de version 12.2 → v13, dépôt Linux durci, intégration de Proxmox comme source et résolution d’incidents de sauvegarde.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="scat reveal">
+        <p class="scat-code">03 / SEC</p>
+        <h3>Cybersécurité</h3>
+        <ul>
+          <li>
+            <div class="si-head"><span class="si-name">EDR / XDR — Trend Micro Vision One</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Déploiement d’Apex One (postes) et Deep Security (serveurs), politiques passées de la détection au blocage après observation.</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Triage d’alertes &amp; SOC</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Investigation quotidienne des alertes (évasion de défense, chevaux de Troie, fuites d’identifiants) en lien avec un SOC externe.</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Réduction de la surface d’attaque</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Gestion de l’exposition au risque : modules de sécurité inactifs, comptes Active Directory obsolètes, postes non conformes.</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Sécurité des SI</span><span class="si-ctx"><span class="ctx ctx-iut">IUT</span></span></div>
+            <p>Analyse de vulnérabilités, cryptographie, pare-feu et sécurité des systèmes d’information.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="scat reveal">
+        <p class="scat-code">04 / NET</p>
+        <h3>Réseaux &amp; supervision</h3>
+        <ul>
+          <li>
+            <div class="si-head"><span class="si-name">Routage · commutation · VLAN · Wi-Fi</span><span class="si-ctx"><span class="ctx ctx-iut">IUT</span></span></div>
+            <p>Fondamentaux validés par les certifications Cisco CCNA Introduction to Networks et Switching, Routing &amp; Wireless Essentials.</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Relais DHCP · Juniper Mist</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Reconfiguration site par site des relais DHCP sur les routeurs lors de la migration de l’annuaire.</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Zabbix 7 · Grafana · SNMP</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Supervision des serveurs, hyperviseurs, switchs, onduleurs et sauvegardes, avec déclencheurs, escalades et tableaux de bord.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="scat reveal">
+        <p class="scat-code">05 / DEV</p>
+        <h3>Code &amp; automatisation</h3>
+        <ul>
+          <li>
+            <div class="si-head"><span class="si-name">PowerShell</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
+            <p>Automatisation de la configuration des postes et de l’administration de l’annuaire (Active Directory, DNS, DHCP).</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">Python</span><span class="si-ctx"><span class="ctx ctx-iut">IUT</span></span></div>
+            <p>Traitement du signal avec NumPy, SciPy et Matplotlib : démodulation AM/FM, RDS et BPSK.</p>
+          </li>
+          <li>
+            <div class="si-head"><span class="si-name">HTML · CSS · JS · PHP</span><span class="si-ctx"><span class="ctx ctx-iut">IUT</span><span class="ctx ctx-perso">Perso</span></span></div>
+            <p>Site CyberZone (PHP / MySQL) à l’IUT, et ce portfolio, galaxie 3D Three.js comprise.</p>
+          </li>
+        </ul>
+      </div></div>
+    </div><!--/prerender:skills--></section>
+  <section class="section" id="engagement" aria-labelledby="engagement-title"><!--prerender:engagement--><div class="wrap">
+      
+    <header class="sec-head reveal">
+      <p class="sec-label"><span>05</span>Engagements</p>
+      <h2 class="sec-title" id="engagement-title">Le terrain, <em>l’équipe, l’effort.</em></h2>
+      <p class="sec-intro">Ce qui m’occupe loin des écrans : servir, encadrer, organiser et rouler.</p>
+    </header>
+      <div class="egrid">
+        <article class="ecard featured reveal">
+          <span class="eglyph" aria-hidden="true">⌖</span>
+          <h3>Réserviste opérationnel — 27ᵉ BCA</h3>
+          <p class="emeta">Armée de Terre · depuis juillet 2026</p>
+          <p>Engagement de cinq ans dans la réserve opérationnelle, au sein du 27ᵉ Bataillon de Chasseurs Alpins, unité des troupes de montagne. Mené en parallèle de l’alternance et des études.</p>
+        </article>
+        <article class="ecard reveal">
+          <span class="eglyph" aria-hidden="true">★</span>
+          <h3>Vice-président — Association des jeunes</h3>
+          <p class="emeta">Lhuis (01)</p>
+          <p>Organisation et animation d’événements pour le village, coordination de l’équipe et de la logistique.</p>
+        </article>
+        <article class="ecard reveal">
+          <span class="eglyph" aria-hidden="true">⚑</span>
+          <h3>Football en club · 12 saisons</h3>
+          <p class="emeta">De 6 à 18 ans · encadrement des jeunes</p>
+          <p>Douze saisons en club, puis encadrement des entraînements des équipes de jeunes.</p>
+        </article>
+        <article class="ecard reveal">
+          <span class="eglyph" aria-hidden="true">↗</span>
+          <h3>Cyclisme sur route</h3>
+          <p class="emeta">~6 h de sport par semaine</p>
+          <p>Ma vraie passion. Complétée par la musculation, la course à pied et l’escalade.</p>
+        </article>
+      </div>
+    </div><!--/prerender:engagement--></section>
+  <section class="section" id="galaxy-promo"><!--prerender:galaxy-promo--><div class="wrap">
+      <a class="promo reveal" href="index.html">
+        <span class="promo-sky" aria-hidden="true"></span>
+        <span class="promo-text">
+          <span class="promo-kicker">✦ Galaxie 3D</span>
+          <span class="promo-pitch">Ce portfolio existe aussi en version jouable : une galaxie où chaque étoile est une section et chaque planète un projet.</span>
+        </span>
+        <span class="promo-cta">Explorer en 3D →</span>
+      </a>
+    </div><!--/prerender:galaxy-promo--></section>
+  <section class="section" id="contact" aria-labelledby="contact-title"><!--prerender:contact--><div class="wrap">
+      <div class="contact-card reveal">
+        <div class="cc-main">
+          <p class="sec-label"><span>06</span>Contact</p>
+          <h2 class="sec-title" id="contact-title">Un réseau à durcir, <em>une idée à creuser ?</em></h2>
+          <p class="cc-intro">Je cherche une poursuite d’études en cybersécurité, en alternance, à partir de septembre 2027. Ouvert aussi aux échanges sur un projet d’infrastructure ou une question technique. Réponse sous 48 h ouvrées.</p>
+          <div class="cc-mail">
+            <a class="cc-email" href="mailto:o.ginet.pro@gmail.com">o.ginet.pro@gmail.com</a>
+            <button type="button" class="copy" data-copy="o.ginet.pro@gmail.com">Copier</button>
+          </div>
+          <div class="cc-cta">
+            <a class="btn btn-cream" href="mailto:o.ginet.pro@gmail.com">Écrire un email <span aria-hidden="true">→</span></a>
+            <a class="btn btn-line" href="CV_Ginet_Oscar.pdf" download="">Télécharger le CV <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+        <div class="cc-links"><a class="cl" href="tel:+33685330014"><span>TÉL</span>06 85 33 00 14<i aria-hidden="true">↗</i></a><a class="cl" href="https://www.linkedin.com/in/oscar-ginet-6523862b3/" target="_blank" rel="noopener"><span>LINKEDIN</span>/in/oscar-ginet<i aria-hidden="true">↗</i></a><div class="cl"><span>LIEU</span>Annecy (74) · Ain (01) · Permis B</div></div>
+      </div>
+    </div><!--/prerender:contact--></section>
 </main>
 
 <footer class="footer wrap">
@@ -117,6 +511,7 @@
 </noscript>
 
 <script src="assets/js/data/content.js"></script>
+<script src="assets/js/data/diagrams.js"></script>
 <script src="assets/js/core/utils.js"></script>
 <script src="assets/js/ui/i18n.js"></script>
 <script src="assets/js/ui/theme.js"></script>

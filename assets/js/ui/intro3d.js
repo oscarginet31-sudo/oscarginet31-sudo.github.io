@@ -35,10 +35,10 @@
       const ctrl = this.root.querySelector(".intro-controls");
       const fr = PF.lang === "fr";
       if (ctrl) ctrl.innerHTML = U.env.touch
-        ? `<span>${PF.t("intro.controlsTouch")}</span><b>·</b><span>${fr ? "touchez une étoile" : "tap a star"}</span>`
+        ? `<span>${PF.t("intro.controlsTouch")}</span><b aria-hidden="true">·</b><span>${fr ? "touchez une étoile" : "tap a star"}</span>`
         : `<kbd>Z</kbd><kbd>Q</kbd><kbd>S</kbd><kbd>D</kbd><span>${PF.t("intro.controls")}</span>
-           <b>·</b><kbd>${fr ? "souris" : "mouse"}</kbd><span>${PF.t("intro.look")}</span>
-           <b>·</b><kbd>1</kbd>–<kbd>5</kbd><span>${fr ? "pilote auto" : "autopilot"}</span>`;
+           <b aria-hidden="true">·</b><kbd>${fr ? "souris" : "mouse"}</kbd><span>${PF.t("intro.look")}</span>
+           <b aria-hidden="true">·</b><kbd>1</kbd>–<kbd>5</kbd><span>${fr ? "pilote auto" : "autopilot"}</span>`;
     }
 
     enter() {

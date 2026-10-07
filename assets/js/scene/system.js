@@ -21,6 +21,8 @@
   const PLANET_LABEL = { scale: 0.21, font: 36 };
   const _v = new THREE.Vector3();
   const _Y = new THREE.Vector3(0, 1, 0);
+  const _up = new THREE.Vector3();
+  const SECRET_LABEL = { fr: "★ PLANÈTE SECRÈTE", en: "★ SECRET PLANET" };
 
   /** Identité visuelle de chaque système (classe spectrale réaliste). */
   const STYLE = {
@@ -427,12 +429,57 @@
         s.update(dt, s === focusSystem, cam);
         s.setExpand(s === focusSystem ? 1 : 0, dt);
       }
+      this._updateSecret(dt, !!focusSystem);
       const coreTarget = focusSystem || hideCore ? 0 : 1;
       this.coreLabel.material.opacity = U.damp(this.coreLabel.material.opacity, coreTarget, 0.002, dt);
       this.coreLabel.visible = this.coreLabel.material.opacity > 0.02;
     }
 
-    relabel() { this.systems.forEach((s) => s.relabel()); }
+    /**
+     * Succès « Explorateur » : une planète secrète apparaît en orbite autour
+     * du cœur galactique une fois les 41 planètes explorées.
+     * @returns le maillage à rendre cliquable
+     */
+    revealSecret() {
+      if (this.secret) return this.secret.mesh;
+      const light = { star: { value: new THREE.Vector3(0, 0, 0) }, starColor: { value: new THREE.Color("#ffe6c0") } };
+      const obj = F.planet("ocean", 4242, light);
+      obj.scale.setScalar(3.4);
+      obj.userData.setLOD(80);
+      const plane = new THREE.Group();
+      plane.rotation.set(0.32, 0, 0.12);
+      plane.add(obj);
+      const halo = F.glow("#ffd27a", 260, 0.45);
+      obj.add(halo);
+      this.scene.add(plane);
+      const label = F.label(PF.tx(SECRET_LABEL), "#ffd27a", { scale: 0.7, font: 42, spacing: 0.16 });
+      plane.add(label);
+      const mesh = obj.userData.mesh;
+      mesh.userData.isSecret = true;
+      this.secret = { plane, obj, label, mesh, angle: 0.8, R: 420 };
+      return mesh;
+    }
+
+    _updateSecret(dt, hidden) {
+      const s = this.secret;
+      if (!s) return;
+      s.angle += dt * 0.1;
+      s.obj.position.set(Math.cos(s.angle) * s.R, 0, Math.sin(s.angle) * s.R);
+      s.obj.userData.update(dt);
+      s.label.position.copy(s.obj.position).add(_up.set(0, s.obj.userData.radius * 3.4 + 46, 0));
+      s.label.material.opacity = U.damp(s.label.material.opacity, hidden ? 0 : 1, 0.002, dt);
+      s.label.visible = s.label.material.opacity > 0.02;
+    }
+
+    relabel() {
+      this.systems.forEach((s) => s.relabel());
+      if (this.secret) {
+        const sp = F.label(PF.tx(SECRET_LABEL), "#ffd27a", { scale: 0.7, font: 42, spacing: 0.16 });
+        this.secret.label.material.map = sp.material.map;
+        this.secret.label.scale.copy(sp.scale);
+        this.secret.label.material.needsUpdate = true;
+      }
+    }
 
     get planetCount() { return this.systems.reduce((n, s) => n + s.planets.length, 0); }
   }

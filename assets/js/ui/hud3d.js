@@ -32,6 +32,15 @@
 
       this._buildDock();
 
+      // Gyroscope : bouton visible uniquement sur les appareils tactiles.
+      this.onGyro = () => {};
+      if (U.env.touch && window.DeviceOrientationEvent) {
+        const b = this.gyroBtn = document.createElement("button");
+        b.className = "chip"; b.id = "btn-gyro"; b.setAttribute("aria-pressed", "false");
+        b.addEventListener("click", () => this.onGyro());
+        document.querySelector(".hud-actions").prepend(b);
+      }
+
       // Viseur : point + 4 graduations + anneau + crochets de verrouillage.
       this.reticle.innerHTML =
         `<i class="r-ring"></i><i class="r-dot"></i>` +
@@ -117,13 +126,13 @@
       this.backBtn.querySelector("span").textContent = PF.t("hud.back");
       const fr = PF.lang === "fr";
       this.hintEl.innerHTML = U.env.touch
-        ? `<span>${PF.t("intro.controlsTouch")}</span><b>·</b><span>${fr ? "touchez pour ouvrir" : "tap to open"}</span>`
+        ? `<span>${PF.t("intro.controlsTouch")}</span><b aria-hidden="true">·</b><span>${fr ? "touchez pour ouvrir" : "tap to open"}</span>`
         : `<kbd>Z</kbd><kbd>Q</kbd><kbd>S</kbd><kbd>D</kbd><span>${PF.t("intro.controls")}</span>
-           <b>·</b><kbd>${fr ? "souris" : "mouse"}</kbd><span>${PF.t("intro.look")}</span>
-           <b>·</b><kbd>${fr ? "clic" : "click"}</kbd><span>${PF.t("intro.select")}</span>
-           <b>·</b><kbd>1</kbd>–<kbd>5</kbd><span>${fr ? "pilote auto" : "autopilot"}</span>
-           <b>·</b><kbd>T</kbd><span>${fr ? "visite" : "tour"}</span>
-           <b>·</b><kbd>/</kbd><span>terminal</span>`;
+           <b aria-hidden="true">·</b><kbd>${fr ? "souris" : "mouse"}</kbd><span>${PF.t("intro.look")}</span>
+           <b aria-hidden="true">·</b><kbd>${fr ? "clic" : "click"}</kbd><span>${PF.t("intro.select")}</span>
+           <b aria-hidden="true">·</b><kbd>1</kbd>–<kbd>5</kbd><span>${fr ? "pilote auto" : "autopilot"}</span>
+           <b aria-hidden="true">·</b><kbd>T</kbd><span>${fr ? "visite" : "tour"}</span>
+           <b aria-hidden="true">·</b><kbd>/</kbd><span>terminal</span>`;
       const hubs = PF.CONTENT.hubs;
       this.dock.querySelectorAll("[data-i]").forEach((b) =>
         (b.querySelector(".dock-label").textContent = PF.tx(hubs[+b.dataset.i].label)));
@@ -132,9 +141,34 @@
       document.getElementById("btn-term").setAttribute("aria-label", PF.t("term.open"));
       document.getElementById("btn-term").title = PF.t("term.open") + " ( / )";
       this.discoverEl.title = fr ? "Planètes explorées" : "Planets explored";
+      if (this.gyroBtn) this.setGyro(this._gyro);
       if (this._disc) this.setDiscovered(...this._disc);
       if (this._mode) this.setMode(this._mode, this._sys);
       if (this._target) this.setTarget(this._target);
+    }
+
+    setGyro(on) {
+      this._gyro = !!on;
+      if (!this.gyroBtn) return;
+      const fr = PF.lang === "fr";
+      this.gyroBtn.innerHTML = `<span aria-hidden="true">◍</span><span class="chip-label">${on ? (fr ? "Gyro actif" : "Gyro on") : "Gyro"}</span>`;
+      this.gyroBtn.setAttribute("aria-pressed", String(!!on));
+      this.gyroBtn.setAttribute("aria-label", fr ? "Regarder en bougeant le téléphone" : "Look around by moving your phone");
+      this.gyroBtn.classList.toggle("on", !!on);
+    }
+
+    /** Toast « succès débloqué ». */
+    achievement(title, text) {
+      let el = document.getElementById("achv");
+      if (!el) {
+        el = document.createElement("div");
+        el.id = "achv"; el.className = "achv"; el.setAttribute("role", "status");
+        document.body.appendChild(el);
+      }
+      el.innerHTML = `<span class="achv-star" aria-hidden="true">★</span><span><b>${title}</b><br>${text}</span>`;
+      el.classList.remove("show"); void el.offsetWidth; el.classList.add("show");
+      clearTimeout(this._achvT);
+      this._achvT = setTimeout(() => el.classList.remove("show"), 9000);
     }
 
     setDiscovered(n, total) {

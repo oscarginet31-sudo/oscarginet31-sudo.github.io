@@ -133,8 +133,12 @@
           const dx = e.clientX - lx, dy = e.clientY - ly;
           lx = e.clientX; ly = e.clientY;
           moved += Math.abs(dx) + Math.abs(dy);
-          this.yaw -= dx * SENS;
-          this.pitch = U.clamp(this.pitch - dy * SENS, -Math.PI / 2 + 0.05, Math.PI / 2 - 0.05);
+          const g = this._gyroBase;
+          if (this.gyro && g) { g.y0 -= dx * SENS; g.p0 -= dy * SENS; }
+          else {
+            this.yaw -= dx * SENS;
+            this.pitch = U.clamp(this.pitch - dy * SENS, -Math.PI / 2 + 0.05, Math.PI / 2 - 0.05);
+          }
         });
         addEventListener("pointerup", () => {
           if (!down) return; down = false;
@@ -182,6 +186,7 @@
         if (tw.t >= 1) {
           const eu = new THREE.Euler().setFromQuaternion(this.cam.quaternion, "YXZ");
           this.yaw = eu.y; this.pitch = eu.x;
+          this._gyroBase = null;
           tw.onDone(); this.tween = null;
         }
         return;
@@ -232,6 +237,40 @@
         this._swayE.set(Math.sin(t * 0.37) * 0.0045 * k, Math.sin(t * 0.23 + 1.3) * 0.006 * k, Math.sin(t * 0.17) * 0.0025 * k);
         this.cam.quaternion.multiply(this._swayQ.setFromEuler(this._swayE));
       }
+    }
+
+    /* --- Gyroscope (mobile) : on regarde autour de soi en bougeant le téléphone. */
+    /** À appeler depuis un geste (iOS exige une autorisation). @returns true si actif */
+    async enableGyro() {
+      if (this.gyro) return true;
+      const DOE = window.DeviceOrientationEvent;
+      if (!DOE) return false;
+      try {
+        if (typeof DOE.requestPermission === "function" && (await DOE.requestPermission()) !== "granted") return false;
+      } catch (e) { return false; }
+      const zee = new THREE.Vector3(0, 0, 1), q1 = new THREE.Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5));
+      const qd = new THREE.Quaternion(), qs = new THREE.Quaternion(), e1 = new THREE.Euler(), e2 = new THREE.Euler();
+      const R = Math.PI / 180;
+      this._onOrient = (ev) => {
+        if (ev.alpha == null) return;
+        // Orientation de l'appareil → quaternion (même convention que DeviceOrientationControls).
+        const orient = ((screen.orientation && screen.orientation.angle) || window.orientation || 0) * R;
+        e1.set(ev.beta * R, ev.alpha * R, -ev.gamma * R, "YXZ");
+        qd.setFromEuler(e1).multiply(q1).multiply(qs.setFromAxisAngle(zee, -orient));
+        e2.setFromQuaternion(qd, "YXZ");
+        if (!this.enabled || this.tween) return;
+        const g = this._gyroBase || (this._gyroBase = { y: e2.y, p: e2.x, y0: this.yaw, p0: this.pitch });
+        this.yaw = g.y0 + (e2.y - g.y);
+        this.pitch = U.clamp(g.p0 + (e2.x - g.p), -Math.PI / 2 + 0.05, Math.PI / 2 - 0.05);
+      };
+      addEventListener("deviceorientation", this._onOrient);
+      this.gyro = true; this._gyroBase = null;
+      return true;
+    }
+
+    disableGyro() {
+      if (this._onOrient) removeEventListener("deviceorientation", this._onOrient);
+      this.gyro = false; this._gyroBase = null;
     }
 
     get speed01() { return Math.min(this.vel.length() / this.maxSpeed, 1); }

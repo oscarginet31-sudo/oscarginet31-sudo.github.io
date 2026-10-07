@@ -31,6 +31,10 @@
       status: t("En alternance chez Lamberet SAS", "Apprentice at Lamberet SAS"),
       location: t("Annecy (74) · Ain (01)", "Annecy & Ain, France"),
       availability: t("Alternance jusqu’en juillet 2027", "Apprenticeship until July 2027"),
+      goal: t(
+        "Je recherche une poursuite d’études en cybersécurité (master ou école d’ingénieurs), idéalement en alternance, à partir de septembre 2027.",
+        "I’m looking for further studies in cybersecurity (master’s or engineering school), ideally as an apprenticeship, from September 2027."
+      ),
       focus: t("AD · Virtualisation · EDR · Supervision", "AD · Virtualization · EDR · Monitoring"),
       taglines: {
         fr: [
@@ -59,7 +63,8 @@
       facts: [
         { label: t("Basé", "Based"), value: t("Annecy (74) · Ain (01)", "Annecy & Ain, France") },
         { label: t("Statut", "Status"), value: t("Alternance jusqu’en juillet 2027", "Apprenticeship until July 2027") },
-        { label: t("Langues", "Languages"), value: t("Français · Anglais (TOEIC) · Espagnol", "French · English (TOEIC) · Spanish") },
+        { label: t("Ensuite", "Next"), value: t("Poursuite d’études en cyber dès sept. 2027, en alternance", "Further cyber studies from Sept 2027, as an apprentice") },
+        { label: t("Langues", "Languages"), value: t("Français · Anglais (TOEIC 550) · Espagnol", "French · English (TOEIC 550) · Spanish") },
         { label: t("Mobilité", "Mobility"), value: t("Permis B · véhicule personnel", "Driving licence · own car") },
       ],
       stats: [
@@ -85,7 +90,7 @@
       ),
       languages: [
         { name: t("Français", "French"), level: t("courant", "fluent") },
-        { name: t("Anglais", "English"), level: t("intermédiaire · TOEIC 2026", "intermediate · TOEIC 2026") },
+        { name: t("Anglais", "English"), level: t("intermédiaire · TOEIC 550 (2026)", "intermediate · TOEIC 550 (2026)") },
         { name: t("Espagnol", "Spanish"), level: t("intermédiaire", "intermediate") },
       ],
       interests: [
@@ -308,7 +313,7 @@
       certifications: [
         { name: "CCNA: Switching, Routing & Wireless Essentials", short: "CCNA SRWE", issuer: "Cisco", date: t("Juil. 2026", "Jul 2026") },
         { name: "CCNA: Introduction to Networks", short: "CCNA ITN", issuer: "Cisco", date: t("Pendant le BUT", "During the BUT") },
-        { name: "TOEIC", issuer: "ETS", date: t("Mars 2026", "Mar 2026"), note: t("Valide jusqu’en mars 2028", "Valid until March 2028") },
+        { name: "TOEIC", issuer: "ETS", date: t("Mars 2026", "Mar 2026"), note: t("Score 550 · valide jusqu’en mars 2028", "Score 550 · valid until March 2028") },
         { name: "MOOC ANSSI", issuer: t("ANSSI — Agence nationale de la sécurité des SI", "ANSSI — French cybersecurity agency"), date: t("Janv. 2025", "Jan 2025") },
         { name: t("Certification Pix", "Pix certification"), short: "Pix", issuer: "Pix", date: "2023", note: t("404 pix", "404 pix") },
       ],
@@ -323,7 +328,8 @@
       ),
       items: [
         {
-          id: "edr", ctx: "pro", featured: true, short: t("Migration EDR", "EDR migration"),
+          id: "edr", ctx: "pro", featured: true, diagram: "edr",
+          link: { href: "etude-edr.html", label: t("Lire l’étude de cas complète", "Read the full case study"), short: t("Étude de cas", "Case study") }, short: t("Migration EDR", "EDR migration"),
           badge: t("Mémoire de BUT", "BUT thesis"),
           title: t("Migration EDR : WithSecure → Trend Micro Vision One", "EDR migration: WithSecure → Trend Micro Vision One"),
           desc: t(
@@ -350,7 +356,7 @@
           env: ["Trend Micro Vision One", "Apex One", "Deep Security", "Active Directory", "Windows Server"],
         },
         {
-          id: "ad", ctx: "pro", featured: true, short: t("AD redondant · 7 sites", "Redundant AD · 7 sites"),
+          id: "ad", ctx: "pro", featured: true, diagram: "ad", short: t("AD redondant · 7 sites", "Redundant AD · 7 sites"),
           title: t("Active Directory redondant sur 7 sites", "Redundant Active Directory across 7 sites"),
           desc: t(
             "D’un contrôleur de domaine unique sous Windows Server 2016 à une architecture à deux DC, dont un sous Windows Server 2025, avec un DHCP centralisé en failover.",
@@ -377,7 +383,7 @@
           env: ["Windows Server 2016 / 2025", "Active Directory", "DNS", "DHCP", "PowerShell", "VMware vSphere", "Juniper Mist"],
         },
         {
-          id: "zabbix", ctx: "pro", short: "Zabbix + Grafana",
+          id: "zabbix", ctx: "pro", diagram: "monitoring", short: "Zabbix + Grafana",
           title: t("Supervision Zabbix 7 + Grafana", "Zabbix 7 + Grafana monitoring"),
           desc: t(
             "Mise en place de la première plateforme de supervision centralisée du groupe, des serveurs jusqu’aux onduleurs.",
@@ -397,7 +403,7 @@
           env: ["Zabbix 7", "Grafana", "Debian", "SNMP", "VMware vSphere", "Windows Server"],
         },
         {
-          id: "proxmox", ctx: "pro", short: "Proxmox VE",
+          id: "proxmox", ctx: "pro", diagram: "backup", short: "Proxmox VE",
           title: t("Proxmox VE sur HPE ProLiant DL380 Gen10", "Proxmox VE on an HPE ProLiant DL380 Gen10"),
           desc: t(
             "Reconversion d’un serveur auparavant sous VMware ESXi et HPE SimpliVity en plateforme Proxmox pour les tests et le stockage.",
@@ -419,7 +425,7 @@
           env: ["Proxmox VE", "ZFS", "VMware ESXi", "HPE iLO 5", "Veeam B&R", "Debian"],
         },
         {
-          id: "veeam", ctx: "pro", short: "Veeam v13",
+          id: "veeam", ctx: "pro", diagram: "backup", short: "Veeam v13",
           title: t("Sauvegardes Veeam : montée en v13 et dépôt durci", "Veeam backups: v13 upgrade and hardened repository"),
           desc: t(
             "Fiabilisation de la chaîne de sauvegarde du groupe : montée de version, dépôt Linux durci et prise en charge du nouvel hyperviseur Proxmox.",
@@ -465,7 +471,7 @@
             t("Présentation orale du projet devant un jury", "Oral presentation of the project to a jury"),
           ],
           env: ["HTML", "CSS", "PHP", "MySQL"],
-          link: { href: "https://github.com/oscarginet31-sudo/CyberZone", label: t("Voir le code sur GitHub", "View the code on GitHub") },
+          link: { href: "https://github.com/oscarginet31-sudo/CyberZone", label: t("Voir le code sur GitHub", "View the code on GitHub"), short: "GitHub" },
         },
       ],
     },
@@ -517,8 +523,8 @@
     contact: {
       title: t("Un réseau à durcir, *une idée à creuser ?*", "A network to harden, *an idea to explore?*"),
       intro: t(
-        "Ouvert aux échanges : alternance, stage, projet d’infrastructure ou simple question technique. Réponse sous 48 h ouvrées.",
-        "Happy to talk: apprenticeship, internship, infrastructure project or just a technical question. Reply within 48 working hours."
+        "Je cherche une poursuite d’études en cybersécurité, en alternance, à partir de septembre 2027. Ouvert aussi aux échanges sur un projet d’infrastructure ou une question technique. Réponse sous 48 h ouvrées.",
+        "I’m looking for further cybersecurity studies, as an apprentice, from September 2027. Also happy to talk about an infrastructure project or a technical question. Reply within 48 working hours."
       ),
       email: "o.ginet.pro@gmail.com",
       links: [
@@ -606,6 +612,11 @@
     "galaxy.cta":       t("Explorer en 3D", "Explore in 3D"),
     "galaxy.pitch":     t("Ce portfolio existe aussi en version jouable : une galaxie où chaque étoile est une section et chaque planète un projet.",
                           "This portfolio also comes as a playable version: a galaxy where every star is a section and every planet a project."),
+    "case.back":        t("← Retour au portfolio", "← Back to portfolio"),
+    "case.toc":         t("Sommaire", "Contents"),
+    "case.more":        t("Voir les autres projets", "See the other projects"),
+    "case.home":        t("Portfolio", "Portfolio"),
+    "case.read":        t("Lire l’étude de cas", "Read the case study"),
     "tour.start":       t("Visite guidée", "Guided tour"),
     "tour.startLong":   t("Visite guidée · 1 min", "Guided tour · 1 min"),
     "tour.next":        t("Suivant", "Next"),

@@ -62,4 +62,29 @@
   };
 
   PF.U = U;
+
+  /**
+   * Pré-rendu (tools/prerender.py) : avec ?prerender dans l'URL, publie le HTML
+   * final des blocs `ids` dans <script type="application/json" id="__prerender">.
+   * Le script Python l'injecte ensuite dans la page source, pour que le contenu
+   * soit lisible sans JavaScript (moteurs de recherche, aperçus LinkedIn).
+   */
+  PF.isPrerender = /[?&]prerender\b/.test(location.search);
+  PF.prerender = (ids) => {
+    const out = {};
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const c = el.cloneNode(true);
+      c.querySelectorAll(".reveal").forEach((n) => { n.classList.remove("in"); n.removeAttribute("style"); });
+      c.querySelectorAll("a.on").forEach((n) => n.classList.remove("on"));   // lien de menu « courant »
+      c.querySelectorAll('[class=""]').forEach((n) => n.removeAttribute("class"));
+      out[id] = c.innerHTML.trim();
+    });
+    const s = document.createElement("script");
+    s.type = "application/json";
+    s.id = "__prerender";
+    s.textContent = JSON.stringify(out).replace(/</g, "\\u003c");
+    document.body.appendChild(s);
+  };
 })(window.PF = window.PF || {});

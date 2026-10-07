@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Sécurité : aucune ressource tierce, aucun script en ligne, aucun référent envoyé aux sites externes. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
 <title>Oscar Ginet — Galaxie cyber & réseaux</title>
 <meta name="description" content="Portfolio 3D d'Oscar Ginet, alternant Systèmes, Réseaux & Cybersécurité chez Lamberet SAS et étudiant en BUT R&T Cybersécurité à l'IUT d'Annecy. Explorez une galaxie où chaque étoile est une section et chaque planète un projet ou une compétence.">
 <meta name="author" content="Oscar Ginet">
@@ -20,15 +23,14 @@
 <meta name="twitter:image" content="og-cover.jpg">
 <meta name="theme-color" content="#020308">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪐</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/space.css">
 </head>
 <body>
+<a class="skip" href="classic.html">Version accessible du portfolio (mode classique)</a>
 
-<canvas id="scene" aria-label="Galaxie 3D interactive"></canvas>
+<canvas id="scene" role="img" aria-label="Galaxie 3D interactive : chaque étoile est une section du portfolio. Le contenu complet est aussi disponible en mode classique."></canvas>
 
 <!-- HUD -->
 <header class="hud-top">
@@ -58,7 +60,7 @@
 <!-- Fiche descriptive d'une planète -->
 <div id="card" class="card" aria-hidden="true">
   <div class="card-scrim"></div>
-  <div class="card-body" role="dialog" aria-modal="true">
+  <div class="card-body" role="dialog" aria-modal="true" aria-label="Fiche" tabindex="-1">
     <button class="card-close" aria-label="Fermer">✕</button>
     <div id="card-content"></div>
   </div>
@@ -68,8 +70,8 @@
 <section id="intro">
   <div class="intro-eyebrow"><span class="intro-eyebrow-text">Portfolio 3D · Cybersécurité &amp; Réseaux</span></div>
   <h1 class="intro-name">Oscar <span class="it">Ginet</span></h1>
-  <div class="intro-role"></div>
-  <p class="intro-tagline"></p>
+  <div class="intro-role">Alternant Systèmes, Réseaux &amp; Cybersécurité</div>
+  <p class="intro-tagline">Je sécurise les réseaux la semaine, je roule sur les routes le week‑end.</p>
   <div class="intro-ctas">
     <button id="enter"><span class="enter-glyph"></span><span class="enter-label">Entrer dans la galaxie</span></button>
     <button id="enter-tour"><span aria-hidden="true">▶</span><span class="enter-tour-label">Visite guidée · 1 min</span></button>
@@ -81,18 +83,19 @@
   </div>
 </section>
 
-<!-- Three.js r128 (build global : fonctionne aussi en double-clic, sans serveur) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<!-- Post-traitement (bloom). Facultatif : repli automatique si indisponible. -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<!-- Three.js r128 (build global, hébergé avec le site : aucune requête vers un CDN) -->
+<script src="assets/vendor/three/three.min.js"></script>
+<!-- Post-traitement (bloom). Repli automatique si indisponible. -->
+<script src="assets/vendor/three/CopyShader.js"></script>
+<script src="assets/vendor/three/LuminosityHighPassShader.js"></script>
+<script src="assets/vendor/three/EffectComposer.js"></script>
+<script src="assets/vendor/three/RenderPass.js"></script>
+<script src="assets/vendor/three/ShaderPass.js"></script>
+<script src="assets/vendor/three/UnrealBloomPass.js"></script>
 
 <!-- Données & utilitaires -->
 <script src="assets/js/data/content.js"></script>
+<script src="assets/js/data/diagrams.js"></script>
 <script src="assets/js/core/utils.js"></script>
 <script src="assets/js/data/systems.js"></script>
 <script src="assets/js/ui/i18n.js"></script>

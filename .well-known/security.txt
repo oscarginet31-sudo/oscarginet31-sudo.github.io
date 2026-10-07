@@ -1,0 +1,5 @@
+# Signalement de vulnérabilité sur ce site — Vulnerability disclosure for this site.
+# Merci de signaler toute faille de façon responsable. Please report responsibly.
+Contact: mailto:o.ginet.pro@gmail.com
+Expires: 2027-10-07T00:00:00.000Z
+Preferred-Languages: fr, en

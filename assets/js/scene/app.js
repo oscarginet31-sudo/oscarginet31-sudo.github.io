@@ -105,7 +105,7 @@
       });
 
       this.onTarget = this.onMode = this.onOpenPlanet = this.onPointers = this.onOpenCore = () => {};
-      this.onFrame = this.onFire = () => {};
+      this.onFrame = this.onFire = this.onOpenSecret = () => {};
       this.running = false; this._last = 0;
       this._perf = { t: 0, frames: 0, acc: 0 };
       this._loop = this._loop.bind(this);
@@ -289,7 +289,8 @@
         const xs = this.raycaster.intersectObjects(this.galaxyPicks, false);
         if (xs.length) {
           const o = xs[0].object;
-          hit = o.userData.isCore ? { type: "core", ref: this.galaxy } : { type: "system", ref: o.userData.system };
+          hit = o.userData.isSecret ? { type: "secret", ref: this.galaxy }
+            : o.userData.isCore ? { type: "core", ref: this.galaxy } : { type: "system", ref: o.userData.system };
         }
       } else if (this.activeSystem) {
         const xs = this.raycaster.intersectObjects(this.activeSystem.pickMeshes(), false);
@@ -323,6 +324,7 @@
       if (this.mode === "galaxy") {
         this.galaxy.systems.forEach((s) => cands.push([{ type: "system", ref: s }, s.center]));
         cands.push([{ type: "core", ref: this.galaxy }, ORIGIN]);
+        if (this.galaxy.secret) cands.push([{ type: "secret", ref: this.galaxy }, this.galaxy.secret.mesh.getWorldPosition(new THREE.Vector3())]);
       } else if (this.activeSystem) {
         const sys = this.activeSystem;
         sys.planets.forEach((p) => cands.push([{ type: "planet", ref: p }, p.worldPos(new THREE.Vector3())]));
@@ -347,6 +349,7 @@
       const w = this._aim || (this._aim = new THREE.Vector3());
       if (t.type === "system") w.copy(t.ref.center);
       else if (t.type === "core") w.set(0, 0, 0);
+      else if (t.type === "secret") this.galaxy.secret.mesh.getWorldPosition(w);
       else if (t.type === "planet") t.ref.worldPos(w);
       else t.ref.returnWorldPos(w);
       const cs = w.clone().applyMatrix4(this.camera.matrixWorldInverse);
@@ -358,6 +361,7 @@
     _targetInfo(hit) {
       if (hit.type === "system") return { type: "system", label: PF.tx(hit.ref.def.label), color: hit.ref.def.color };
       if (hit.type === "core") return { type: "core", label: PF.CONTENT.identity.name, color: "#ffd9a0" };
+      if (hit.type === "secret") return { type: "secret", label: PF.lang === "fr" ? "Planète secrète" : "Secret planet", color: "#ffd27a" };
       if (hit.type === "return") return { type: "return", label: PF.t("hud.returnNode"), color: "#e8dcc8" };
       return { type: "planet", label: PF.tx(hit.ref.body.name), color: hit.ref.color };
     }
@@ -367,6 +371,7 @@
       const t = this.target;
       if (t.type === "system") this.enterSystem(t.ref);
       else if (t.type === "core") this.onOpenCore();
+      else if (t.type === "secret") this.onOpenSecret();
       else if (t.type === "return") this.exitSystem();
       else this.onOpenPlanet(t.ref);
     }
@@ -480,6 +485,12 @@
       this.renderer.setSize(w, h, false);
       this.post.setSize(w, h, this.pr);
       [this.starfield, this.spiral, this.dust].forEach((o) => o.setPR(this.pr));
+    }
+
+    /** Fait apparaître la planète secrète (succès « Explorateur ») et la rend visable. */
+    revealSecret() {
+      const mesh = this.galaxy.revealSecret();
+      if (!this.galaxyPicks.includes(mesh)) this.galaxyPicks.push(mesh);
     }
 
     relabel() { this.galaxy.relabel(); }

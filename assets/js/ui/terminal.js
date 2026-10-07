@@ -119,6 +119,7 @@
           ["contact", L("afficher et copier mon email", "show and copy my email")],
           ["linkedin", L("ouvrir mon profil LinkedIn", "open my LinkedIn profile")],
           ["classic", L("passer au mode classique", "switch to classic mode")],
+          ["case", L("lire l’étude de cas EDR", "read the EDR case study")],
           ["lang fr|en · theme · sound", L("réglages", "settings")],
           ["nmap · ping · neofetch", L("à vous de voir…", "try them…")],
           ["clear · exit", L("effacer · fermer", "clear · close")],
@@ -181,6 +182,7 @@
           this.print(esc(L("Ouverture de LinkedIn…", "Opening LinkedIn…")), "t-ok");
         },
         classic: () => { location.href = "classic.html"; },
+        case: () => { location.href = "etude-edr.html"; }, etude: () => { location.href = "etude-edr.html"; },
         lang: (arg) => {
           const l = norm(arg) === "en" ? "en" : norm(arg) === "fr" ? "fr" : (PF.lang === "fr" ? "en" : "fr");
           PF.setLang(l); this.print(l === "fr" ? "Langue : français" : "Language: English", "t-ok");

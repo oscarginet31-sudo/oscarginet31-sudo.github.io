@@ -1,0 +1,7 @@
+Polices hébergées avec le site (sous-ensembles latin + latin-ext, format woff2),
+téléchargées depuis Google Fonts. Toutes sont distribuées sous licence
+SIL Open Font License, Version 1.1 — https://openfontlicense.org
+
+- Instrument Serif — Copyright 2022 The Instrument Serif Project Authors
+- Geist — Copyright 2024 The Geist Project Authors (Vercel)
+- JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors

@@ -40,6 +40,7 @@
 
     _build(cur) {
       if (cur === "core") return this._buildCore();
+      if (cur === "secret") return this._buildSecret();
       const planet = cur, b = planet.body, color = planet.color;
       const kind = CLASS[planet.obj.userData.type];
       const list = (arr) => arr && arr.length
@@ -53,7 +54,7 @@
       const cta = b.href ? `
         <div class="card-cta">
           <a class="btn btn-primary" href="${esc(b.href)}"${b.href.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>
-            ${esc(tx(b.hrefLabel || b.name))} ${b.hrefLabel ? "↗" : "→"}
+            ${esc(tx(b.hrefLabel || b.name))} ${b.href.startsWith("http") ? "↗" : "→"}
           </a>
         </div>` : "";
 
@@ -67,7 +68,7 @@
         ${b.sub ? `<div class="card-sub">${esc(tx(b.sub))}</div>` : ""}
         ${b.highlight ? `<div class="card-highlight">★ ${esc(tx(b.highlight))}</div>` : ""}
         ${tx(b.desc) ? `<p class="card-desc">${esc(tx(b.desc))}</p>` : ""}
-        ${metrics}${list(b.points)}${groups}${tags}${cta}`;
+        ${metrics}${b.diagram ? `<figure class="diagram-fig">${PF.diagram(b.diagram)}<figcaption>${esc(PF.diagramCaption())}</figcaption></figure>` : ""}${list(b.points)}${groups}${tags}${cta}`;
       this.root.style.setProperty("--hub", color);
     }
 
@@ -92,11 +93,35 @@
       this.root.style.setProperty("--hub", "#ffd9a0");
     }
 
+    _buildSecret() {
+      const fr = PF.lang === "fr", gold = "#ffd27a", n = PF.app3d ? PF.app3d.app.galaxy.planetCount : 41;
+      this.content.innerHTML = `
+        <div class="card-eyebrow" style="color:${gold}"><span class="card-dot" style="background:${gold}"></span>${fr ? "Succès débloqué" : "Achievement unlocked"}</div>
+        <h2 class="card-title">${fr ? "Explorateur de galaxie" : "Galaxy explorer"}</h2>
+        <div class="card-meta">${fr ? `Les ${n} planètes explorées` : `All ${n} planets explored`}</div>
+        <p class="card-quote">${fr ? "Merci d’être allé <em>jusqu’au bout.</em>" : "Thanks for going <em>all the way.</em>"}</p>
+        <p class="card-desc">${fr
+          ? "Vous avez vu l’ensemble de mon parcours : projets, compétences, formation et engagements. Si vous êtes arrivé jusqu’ici, nous avons sûrement des choses à nous dire."
+          : "You’ve seen my whole journey: projects, skills, education and commitments. If you made it this far, we probably have things to talk about."}</p>
+        <p class="card-desc">${fr ? "Dernier secret : ouvrez le terminal (touche /) et tapez" : "One last secret: open the terminal (/ key) and type"} <code class="card-code">sudo hire oscar</code>.</p>
+        <div class="card-cta">
+          <a class="btn btn-primary" href="mailto:${esc(PF.CONTENT.contact.email)}">${fr ? "Écrire un email" : "Send an email"} →</a>
+          <a class="btn btn-ghost" href="${PF.t("cv.file")}" download>${fr ? "Télécharger le CV" : "Download CV"} ↓</a>
+        </div>`;
+      this.root.style.setProperty("--hub", gold);
+    }
+
+    openSecret() { this.open("secret"); }
+
     open(planet) {
+      if (!this.current) this._returnFocus = document.activeElement;
       this.current = planet;
       this._build(planet);
       this.root.classList.add("open");
       this.root.setAttribute("aria-hidden", "false");
+      const title = this.content.querySelector(".card-title");
+      this.root.querySelector(".card-body").setAttribute("aria-label", title ? title.textContent : "Fiche");
+      setTimeout(() => this.root.querySelector(".card-close").focus({ preventScroll: true }), 60);
       this.root.querySelector(".card-body").scrollTop = 0;
     }
 
@@ -107,6 +132,9 @@
       this.current = null;
       this.root.classList.remove("open");
       this.root.setAttribute("aria-hidden", "true");
+      const back = this._returnFocus;
+      this._returnFocus = null;
+      if (back && back.focus && document.contains(back)) back.focus({ preventScroll: true });
       this.onClose();
     }
   }
