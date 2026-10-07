@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Oscar Ginet — Systèmes, Réseaux & Cybersécurité</title>
+<meta name="description" content="Portfolio d'Oscar Ginet, alternant Systèmes, Réseaux & Cybersécurité chez Lamberet SAS et étudiant en BUT Réseaux & Télécommunications parcours Cybersécurité à l'IUT d'Annecy. Active Directory, virtualisation, sauvegarde, supervision, EDR.">
+<meta name="author" content="Oscar Ginet">
+<meta property="og:title" content="Oscar Ginet — Systèmes, Réseaux & Cybersécurité">
+<meta property="og:description" content="Alternant SysAdmin & Cyber chez Lamberet SAS · BUT R&T Cybersécurité à l'IUT d'Annecy. Projets, compétences et parcours.">
+<meta property="og:type" content="profile">
+<meta property="og:locale" content="fr_FR">
+<!-- Aperçu de partage (LinkedIn, Teams, WhatsApp…) — image générée par tools/og.html.
+     Une fois le site en ligne, mettre l'URL absolue (ex. https://…/og-cover.jpg). -->
+<meta property="og:image" content="og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Oscar Ginet — portfolio 3D, cybersécurité et réseaux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og-cover.jpg">
+<meta name="theme-color" content="#faf7ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0f14" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/classic.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Oscar Ginet",
+  "jobTitle": "Alternant Systèmes, Réseaux & Cybersécurité",
+  "worksFor": { "@type": "Organization", "name": "Lamberet SAS" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "IUT d'Annecy" },
+  "email": "mailto:o.ginet.pro@gmail.com",
+  "sameAs": ["https://www.linkedin.com/in/oscar-ginet-6523862b3/"],
+  "knowsAbout": ["Active Directory", "Windows Server", "Proxmox VE", "VMware vSphere", "Veeam Backup & Replication", "Zabbix", "Grafana", "EDR", "Trend Micro Vision One", "PowerShell", "Python"]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main" data-t="skip">Aller au contenu</a>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Oscar Ginet — haut de page">
+    <span class="brand-name">Oscar Ginet</span>
+  </a>
+  <nav class="nav-links" id="nav-links" aria-label="Sections"></nav>
+  <div class="nav-controls">
+    <a class="pill pill-galaxy" href="index.html"><span class="pill-star">✦</span><span data-t="nav.galaxy">Galaxie 3D</span></a>
+    <button class="pill icon" id="theme-toggle" type="button" data-t-label="nav.theme" aria-label="Changer de thème">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sun" d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.41-1.41M4.93 19.07l1.41-1.41m0-11.32L4.93 4.93m14.14 14.14-1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/><path class="moon" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+    <button class="pill lang" id="lang-toggle" type="button" data-t-label="nav.lang" aria-label="Changer de langue">
+      <span data-lang-pill="fr">FR</span><span data-lang-pill="en">EN</span>
+    </button>
+    <a class="pill pill-cv" href="CV_Ginet_Oscar.pdf" download><span data-t="nav.cv">CV</span><span aria-hidden="true">↓</span></a>
+    <button class="pill icon burger" id="burger" type="button" aria-expanded="false" aria-controls="nav-links" data-t-label="nav.menu" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <canvas id="net" aria-hidden="true"></canvas>
+    <div class="hero-grid wrap">
+      <div class="hero-copy">
+        <p class="status"><span class="status-dot"></span><span id="hero-status"></span></p>
+        <h1 class="hero-name">Oscar <em>Ginet</em></h1>
+        <p class="hero-role" id="hero-role"></p>
+        <p class="hero-tagline" aria-live="polite"><span id="tagline"></span><span class="caret" aria-hidden="true"></span></p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects"><span data-t="hero.cta.projects">Voir les projets</span><span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="CV_Ginet_Oscar.pdf" download><span data-t="hero.cta.cv">Télécharger le CV</span><span aria-hidden="true">↓</span></a>
+          <a class="btn btn-link" href="#contact" data-t="hero.cta.contact">Me contacter</a>
+        </div>
+      </div>
+      <figure class="term" aria-label="Terminal">
+        <div class="term-bar"><i></i><i></i><i></i><span>oscar@infra: ~</span></div>
+        <pre class="term-body" id="term"></pre>
+      </figure>
+    </div>
+    <a class="scroll-cue" href="#about" aria-hidden="true" tabindex="-1"><span data-t="hero.scroll">défiler</span><i></i></a>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-title"></section>
+  <section class="section" id="path" aria-labelledby="path-title"></section>
+  <section class="section" id="projects" aria-labelledby="projects-title"></section>
+  <section class="section" id="skills" aria-labelledby="skills-title"></section>
+  <section class="section" id="engagement" aria-labelledby="engagement-title"></section>
+  <section class="section" id="galaxy-promo"></section>
+  <section class="section" id="contact" aria-labelledby="contact-title"></section>
+</main>
+
+<footer class="footer wrap">
+  <span class="footer-brand">Oscar Ginet</span>
+  <span data-t="footer.crafted">Conçu et codé à la main par Oscar Ginet</span>
+  <span class="footer-links"><a href="index.html" data-t="nav.galaxy">Galaxie 3D</a><a href="#top" data-t="footer.top">Haut de page ↑</a></span>
+</footer>
+
+<!-- Fiche projet -->
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
+  <form method="dialog"><button class="sheet-close" value="close" data-t-label="proj.close" aria-label="Fermer">✕</button></form>
+  <div id="sheet-content"></div>
+</dialog>
+
+<noscript>
+  <div class="noscript">
+    <p><strong>Oscar Ginet</strong> — Alternant Systèmes, Réseaux &amp; Cybersécurité chez Lamberet SAS, BUT R&amp;T Cybersécurité à l'IUT d'Annecy.</p>
+    <p><a href="CV_Ginet_Oscar.pdf">Télécharger le CV</a> · <a href="https://www.linkedin.com/in/oscar-ginet-6523862b3/">LinkedIn</a> · <a href="mailto:o.ginet.pro@gmail.com">o.ginet.pro@gmail.com</a></p>
+  </div>
+</noscript>
+
+<script src="assets/js/data/content.js"></script>
+<script src="assets/js/core/utils.js"></script>
+<script src="assets/js/ui/i18n.js"></script>
+<script src="assets/js/ui/theme.js"></script>
+<script src="assets/js/classic.js"></script>
+</body>
+</html>

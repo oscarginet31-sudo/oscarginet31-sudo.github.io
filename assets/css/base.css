@@ -1,0 +1,109 @@
+/* =============================================================================
+ * base.css — Variables de thème, reset, typographie, primitives partagées
+ * (boutons, tags). Le thème bascule via [data-theme] sur <html>.
+ * ========================================================================== */
+:root {
+  --blue: #1d3a5f;
+  --blue-deep: #15293f;
+  --blue-soft: #2d5687;
+  --cream: #f1e8d6;
+  --cream-soft: #f7f0e0;
+  --bg: #faf7ef;
+  --fg: #1c1f26;
+  --fg-soft: #4a4f5a;
+  --fg-muted: #8a8f9a;
+  --line: rgba(28, 31, 38, 0.12);
+  --line-soft: rgba(28, 31, 38, 0.06);
+  --accent: #bf6a39;
+  --card: #ffffff;
+  --card-hover: #fdfaf2;
+  --shadow-md: 0 4px 12px rgba(21, 41, 63, 0.08), 0 12px 32px rgba(21, 41, 63, 0.12);
+  --shadow-lg: 0 8px 24px rgba(21, 41, 63, 0.12), 0 24px 64px rgba(21, 41, 63, 0.18);
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Geist', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+[data-theme="dark"] {
+  --blue: #7eaed4;
+  --blue-deep: #0e1a28;
+  --blue-soft: #5a8ab5;
+  --cream: #e8dcc8;
+  --cream-soft: #2a2520;
+  --bg: #0d0f14;
+  --fg: #e4e5e9;
+  --fg-soft: #b0b4be;
+  --fg-muted: #6b7080;
+  --line: rgba(228, 229, 233, 0.14);
+  --line-soft: rgba(228, 229, 233, 0.06);
+  --accent: #d08651;
+  --card: #181b22;
+  --card-hover: #20232c;
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4), 0 24px 64px rgba(0, 0, 0, 0.55);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;            /* la scène occupe tout l'écran */
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+a { color: inherit; }
+
+/* --- Boutons partagés ------------------------------------------------- */
+.btn {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 13px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg);
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 9px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(.2,.8,.2,1), background 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--blue); color: var(--cream); border-color: var(--blue); }
+.btn-primary:hover { box-shadow: var(--shadow-md); }
+.btn-ghost:hover { background: var(--card); border-color: var(--blue); }
+
+/* --- Tags partagés ---------------------------------------------------- */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--cream-soft);
+  color: var(--blue);
+  letter-spacing: 0.05em;
+  border: 1px solid var(--line-soft);
+}
+
+kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--fg-soft);
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

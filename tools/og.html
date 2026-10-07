@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Générateur d'image d'aperçu (og-cover)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  Outil : génère og-cover.jpg (1200×630), l'aperçu affiché quand le lien du
+  portfolio est partagé (LinkedIn, Teams, WhatsApp…).
+  1. Servir le dossier du portfolio (python3 -m http.server) et ouvrir /tools/og.html
+     dans un navigateur avec carte graphique (pas en headless).
+  2. Attendre l'aperçu, puis « Télécharger » et placer le fichier à la racine.
+-->
+<style>
+  body { margin: 0; padding: 24px; background: #111; color: #ddd; font: 14px system-ui, sans-serif; }
+  .row { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
+  button, a.btn { background: #f1e8d6; color: #111; border: 0; border-radius: 999px; padding: 10px 18px; font: 600 13px system-ui; cursor: pointer; text-decoration: none; }
+  #out { width: 600px; height: 315px; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+  /* Iframe visible (un iframe hors écran serait mis en veille par le navigateur). */
+  .live { width: 600px; height: 315px; overflow: hidden; border-radius: 8px; margin-top: 16px; }
+  iframe { width: 1200px; height: 630px; border: 0; transform: scale(.5); transform-origin: 0 0; }
+</style>
+</head>
+<body>
+<div class="row"><button id="go">Régénérer</button><a class="btn" id="dl" download="og-cover.jpg">Télécharger og-cover.jpg</a><span id="st">Chargement de la galaxie…</span></div>
+<canvas id="out" width="1200" height="630"></canvas>
+<div class="live"><iframe id="frame" src="../index.html?og"></iframe></div>
+<script>
+(async function () {
+  const W = 1200, H = 630;
+  const out = document.getElementById("out"), ctx = out.getContext("2d");
+  const frame = document.getElementById("frame"), st = document.getElementById("st");
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  // Attente de la galaxie (par sondage : l'événement load peut déjà être passé).
+  while (!(frame.contentWindow && frame.contentWindow.PF && frame.contentWindow.PF.app3d)) await wait(150);
+  await Promise.all([
+    document.fonts.load('128px "Instrument Serif"'), document.fonts.load('italic 128px "Instrument Serif"'),
+    document.fonts.load('500 15px "JetBrains Mono"'),
+  ]);
+
+  async function render() {
+    st.textContent = "Rendu…";
+    const PFf = frame.contentWindow.PF;
+    await wait(2500);                                  // ciel cuit, label du cœur estompé
+    const app = PFf.app3d.app;
+    app.running = false;                               // on fige la boucle et on rend nous-mêmes
+    app.post.render(0.016, 0, app._exposure, app._renderFlare);
+    ctx.drawImage(app.canvas, 0, 0, W, H);             // même tâche que le rendu : tampon encore valide
+    app.start();
+
+    // Voile pour la lisibilité du titre.
+    const g = ctx.createRadialGradient(W / 2, 250, 40, W / 2, 250, 560);
+    g.addColorStop(0, "rgba(2,3,8,.62)"); g.addColorStop(.55, "rgba(2,3,8,.28)"); g.addColorStop(1, "rgba(2,3,8,0)");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    const v = ctx.createLinearGradient(0, 0, 0, H);
+    v.addColorStop(0, "rgba(2,3,8,.55)"); v.addColorStop(.3, "rgba(2,3,8,0)"); v.addColorStop(.85, "rgba(2,3,8,0)"); v.addColorStop(1, "rgba(2,3,8,.5)");
+    ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+
+    ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    // Sur-titre
+    ctx.font = '500 15px "JetBrains Mono"'; ctx.fillStyle = "#e09060";
+    if ("letterSpacing" in ctx) ctx.letterSpacing = "4px";
+    const eyebrow = "PORTFOLIO 3D · CYBERSÉCURITÉ & RÉSEAUX";
+    ctx.fillText(eyebrow, W / 2, 150);
+    const ew = ctx.measureText(eyebrow).width;
+    ctx.fillRect(W / 2 - ew / 2 - 56, 145, 36, 1); ctx.fillRect(W / 2 + ew / 2 + 20, 145, 36, 1);
+    if ("letterSpacing" in ctx) ctx.letterSpacing = "-2px";
+    // Nom : « Oscar » droit + « Ginet » italique bleu
+    ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 30;
+    ctx.font = '128px "Instrument Serif"';
+    const a = "Oscar ", wa = ctx.measureText(a).width;
+    ctx.font = 'italic 128px "Instrument Serif"';
+    const wb = ctx.measureText("Ginet").width;
+    const x0 = W / 2 - (wa + wb) / 2;
+    ctx.textAlign = "left";
+    ctx.font = '128px "Instrument Serif"'; ctx.fillStyle = "#efe9de"; ctx.fillText(a, x0, 278);
+    ctx.font = 'italic 128px "Instrument Serif"'; ctx.fillStyle = "#9cc3ea"; ctx.fillText("Ginet", x0 + wa, 278);
+    ctx.shadowBlur = 0;
+    ctx.textAlign = "center";
+    if ("letterSpacing" in ctx) ctx.letterSpacing = "2.5px";
+    ctx.font = '500 15px "JetBrains Mono"'; ctx.fillStyle = "#b4bac8";
+    ctx.fillText("ALTERNANT SYSTÈMES, RÉSEAUX & CYBERSÉCURITÉ", W / 2, 326);
+    if ("letterSpacing" in ctx) ctx.letterSpacing = "0px";
+    ctx.font = 'italic 30px "Instrument Serif"'; ctx.fillStyle = "#d6d9e0";
+    ctx.fillText("Annuaire redondant, sauvegardes vérifiées, alertes triées.", W / 2, 376);
+
+    const url = out.toDataURL("image/jpeg", 0.88);
+    document.getElementById("dl").href = url;
+    st.textContent = "Prêt.";
+    window.ogDataURL = url;
+    // Pipeline automatisé : si un serveur local accepte /__save, on y dépose l'image.
+    if (new URLSearchParams(location.search).has("save")) {
+      const r = await fetch("/__save?name=og-cover.jpg", { method: "POST", body: url }).catch(() => null);
+      st.textContent = r && r.ok ? "Enregistré : og-cover.jpg" : "Prêt (téléchargement manuel).";
+    }
+  }
+
+  document.getElementById("go").addEventListener("click", render);
+  render();
+})();
+</script>
+</body>
+</html>

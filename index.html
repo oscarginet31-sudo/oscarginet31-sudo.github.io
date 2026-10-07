@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Oscar Ginet — Galaxie cyber & réseaux</title>
+<meta name="description" content="Portfolio 3D d'Oscar Ginet, alternant Systèmes, Réseaux & Cybersécurité chez Lamberet SAS et étudiant en BUT R&T Cybersécurité à l'IUT d'Annecy. Explorez une galaxie où chaque étoile est une section et chaque planète un projet ou une compétence.">
+<meta name="author" content="Oscar Ginet">
+<meta property="og:title" content="Oscar Ginet — Galaxie cyber & réseaux">
+<meta property="og:description" content="Un portfolio 3D jouable : volez dans ma galaxie, sautez d'un système à l'autre, explorez mes projets planète par planète.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<!-- Aperçu de partage (LinkedIn, Teams, WhatsApp…) — image générée par tools/og.html.
+     Une fois le site en ligne, mettre l'URL absolue (ex. https://…/og-cover.jpg). -->
+<meta property="og:image" content="og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Oscar Ginet — portfolio 3D, cybersécurité et réseaux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og-cover.jpg">
+<meta name="theme-color" content="#020308">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪐</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/space.css">
+</head>
+<body>
+
+<canvas id="scene" aria-label="Galaxie 3D interactive"></canvas>
+
+<!-- HUD -->
+<header class="hud-top">
+  <div id="discover" class="chip discover"></div>
+  <nav class="hud-actions">
+    <button id="btn-term" class="chip" aria-label="Terminal"><span class="term-glyph">&gt;_</span></button>
+    <button id="btn-sound" class="chip" aria-pressed="false"></button>
+    <button id="btn-theme" class="chip" aria-label="Thème clair / sombre">☾ / ☀</button>
+    <button id="btn-lang" class="chip lang-pill" aria-label="Langue">
+      <span data-lang-pill="fr">FR</span><span data-lang-pill="en">EN</span>
+    </button>
+    <a id="link-cv" class="chip" href="CV_Ginet_Oscar.pdf" download><span>↓</span><span class="chip-label">CV</span></a>
+    <a id="link-classic" class="chip" href="classic.html"><span class="chip-label">Mode classique</span><span>→</span></a>
+  </nav>
+</header>
+
+<div id="crumb"></div>
+<button id="back"><span>Retour à la galaxie</span></button>
+
+<div id="pointers"></div>
+<div id="reticle"></div>
+<div id="target"><span class="target-name"></span><span class="target-verb"></span></div>
+<div id="lockhint"></div>
+<div id="hud-hint"></div>
+<nav id="dock" aria-label="Pilote automatique"></nav>
+
+<!-- Fiche descriptive d'une planète -->
+<div id="card" class="card" aria-hidden="true">
+  <div class="card-scrim"></div>
+  <div class="card-body" role="dialog" aria-modal="true">
+    <button class="card-close" aria-label="Fermer">✕</button>
+    <div id="card-content"></div>
+  </div>
+</div>
+
+<!-- Intro (en transparence sur la galaxie) -->
+<section id="intro">
+  <div class="intro-eyebrow"><span class="intro-eyebrow-text">Portfolio 3D · Cybersécurité &amp; Réseaux</span></div>
+  <h1 class="intro-name">Oscar <span class="it">Ginet</span></h1>
+  <div class="intro-role"></div>
+  <p class="intro-tagline"></p>
+  <div class="intro-ctas">
+    <button id="enter"><span class="enter-glyph"></span><span class="enter-label">Entrer dans la galaxie</span></button>
+    <button id="enter-tour"><span aria-hidden="true">▶</span><span class="enter-tour-label">Visite guidée · 1 min</span></button>
+  </div>
+  <div class="intro-controls"></div>
+  <div class="intro-foot">
+    <a class="intro-classic" href="classic.html"><span class="intro-classic-label">Mode classique →</span></a>
+    <span class="intro-reduced"></span>
+  </div>
+</section>
+
+<!-- Three.js r128 (build global : fonctionne aussi en double-clic, sans serveur) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- Post-traitement (bloom). Facultatif : repli automatique si indisponible. -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+
+<!-- Données & utilitaires -->
+<script src="assets/js/data/content.js"></script>
+<script src="assets/js/core/utils.js"></script>
+<script src="assets/js/data/systems.js"></script>
+<script src="assets/js/ui/i18n.js"></script>
+<script src="assets/js/ui/theme.js"></script>
+
+<!-- Scène 3D -->
+<script src="assets/js/scene/shaders.js"></script>
+<script src="assets/js/scene/factory.js"></script>
+<script src="assets/js/scene/cosmos.js"></script>
+<script src="assets/js/scene/system.js"></script>
+<script src="assets/js/scene/flight.js"></script>
+<script src="assets/js/scene/post.js"></script>
+<script src="assets/js/scene/flare.js"></script>
+<script src="assets/js/scene/app.js"></script>
+
+<!-- UI -->
+<script src="assets/js/ui/audio.js"></script>
+<script src="assets/js/ui/infocard.js"></script>
+<script src="assets/js/ui/hud3d.js"></script>
+<script src="assets/js/ui/tour.js"></script>
+<script src="assets/js/ui/terminal.js"></script>
+<script src="assets/js/ui/intro3d.js"></script>
+<script src="assets/js/main3d.js"></script>
+</body>
+</html>

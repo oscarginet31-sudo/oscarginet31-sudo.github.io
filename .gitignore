@@ -1,0 +1,11 @@
+# Système
+.DS_Store
+
+# Réglages locaux de l'éditeur / de Claude
+.claude/
+
+# Anciennes versions (non publiées)
+_archive/
+
+# Projet séparé, hors portfolio
+todo-flow/
