@@ -257,6 +257,11 @@ body { overflow-x: hidden; overflow-y: auto; }
   font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg);
 }
 .pc-open span:last-child { transition: transform .25s; }
+.pc-foot { display: flex; align-items: center; gap: 18px; margin-top: 18px; }
+.pc-foot .pc-open { margin-top: 0; }
+.pc-gh { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-soft); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+.pc-gh:hover { color: var(--fg); border-color: var(--accent); }
+.sheet-link { margin-top: 26px; }
 .pc:hover .pc-open span:last-child { transform: translate(2px, -2px); }
 
 /* --- Compétences ----------------------------------------------------------- */

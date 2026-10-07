@@ -46,6 +46,7 @@
           name: p.title, short: p.short,
           meta: join(" · ", PF.STRINGS["proj.org." + p.ctx], p.badge),
           desc: p.desc, points: p.points, metrics: p.metrics, tags: p.env,
+          href: p.link && p.link.href, hrefLabel: p.link && p.link.label,
         }));
 
       case "engagement":

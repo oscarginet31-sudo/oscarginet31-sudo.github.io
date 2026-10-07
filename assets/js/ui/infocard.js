@@ -53,7 +53,7 @@
       const cta = b.href ? `
         <div class="card-cta">
           <a class="btn btn-primary" href="${esc(b.href)}"${b.href.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>
-            ${esc(tx(b.name))} →
+            ${esc(tx(b.hrefLabel || b.name))} ${b.hrefLabel ? "↗" : "→"}
           </a>
         </div>` : "";
 

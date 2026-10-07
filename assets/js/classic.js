@@ -111,7 +111,10 @@
         <p class="pc-desc">${esc(tx(p.desc))}</p>
         ${metrics}
         <div class="tags">${env}</div>
-        <button type="button" class="pc-open" data-open="${p.id}"><span>${esc(t("proj.open"))}</span><span aria-hidden="true">↗</span></button>
+        <div class="pc-foot">
+          <button type="button" class="pc-open" data-open="${p.id}"><span>${esc(t("proj.open"))}</span><span aria-hidden="true">↗</span></button>
+          ${p.link ? `<a class="pc-gh" href="${esc(p.link.href)}" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>` : ""}
+        </div>
       </article>`;
     }).join("");
     return `<div class="wrap">
@@ -427,7 +430,8 @@
       <h3>${esc(t("proj.steps"))}</h3>
       <ul class="sheet-points">${p.points.map((x) => `<li>${esc(tx(x))}</li>`).join("")}</ul>
       <h3>${esc(t("proj.env"))}</h3>
-      <div class="tags">${p.env.map((e) => `<span class="tag">${esc(e)}</span>`).join("")}</div>`;
+      <div class="tags">${p.env.map((e) => `<span class="tag">${esc(e)}</span>`).join("")}</div>
+      ${p.link ? `<p class="sheet-link"><a class="btn btn-primary" href="${esc(p.link.href)}" target="_blank" rel="noopener">${esc(tx(p.link.label))} <span aria-hidden="true">↗</span></a></p>` : ""}`;
     if (!sheet.open) {
       if (sheet.showModal) sheet.showModal(); else sheet.setAttribute("open", "");
     }

@@ -465,6 +465,7 @@
             t("Présentation orale du projet devant un jury", "Oral presentation of the project to a jury"),
           ],
           env: ["HTML", "CSS", "PHP", "MySQL"],
+          link: { href: "https://github.com/oscarginet31-sudo/CyberZone", label: t("Voir le code sur GitHub", "View the code on GitHub") },
         },
       ],
     },
