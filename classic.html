@@ -134,7 +134,7 @@
           <p class="job-org"><b>Lamberet SAS</b><span>Alternance · Saint-Cyr-sur-Menthon (01) · sur site</span></p>
           <p class="job-desc">Gestion et évolution de l’infrastructure IT d’un groupe industriel multi-sites, au sein d’une petite équipe informatique.</p>
           <div class="job-groups">
-            <div><h4>Systèmes &amp; annuaire</h4><ul><li>Migration Active Directory vers deux contrôleurs de domaine (Windows Server 2016 → 2025) sur 7 sites</li><li>Centralisation et bascule du DHCP : relais, failover, superscopes</li></ul></div>
+            <div><h4>Systèmes &amp; annuaire</h4><ul><li>Migration Active Directory vers deux contrôleurs de domaine (Windows Server 2016 → 2025) sur 7 sites</li><li>DHCP redondant entre les deux DC : failover 50/50, relais, superscopes</li></ul></div>
             <div><h4>Virtualisation &amp; sauvegarde</h4><ul><li>Administration VMware vSphere et mise en place de Proxmox VE sur HPE ProLiant DL380 Gen10</li><li>Migration de machines virtuelles VMware vers Proxmox</li><li>Veeam Backup &amp; Replication : montée 12.2 → v13, dépôt Linux durci</li></ul></div>
             <div><h4>Supervision</h4><ul><li>Déploiement d’une stack Zabbix 7 + Grafana : serveurs, réseau, services, alerting</li></ul></div>
             <div><h4>Cybersécurité</h4><ul><li>Migration de l’EDR vers Trend Micro Vision One (Apex One, Deep Security)</li><li>Triage et remédiation des alertes avec un SOC externe</li><li>Référentiel de compétences pour la montée en compétence de l’équipe</li></ul></div>
@@ -251,7 +251,7 @@
           
         </div>
         <h3 class="pc-title">Active Directory redondant sur 7 sites</h3>
-        <p class="pc-desc">D’un contrôleur de domaine unique sous Windows Server 2016 à une architecture à deux DC, dont un sous Windows Server 2025, avec un DHCP centralisé en failover.</p>
+        <p class="pc-desc">D’un contrôleur de domaine unique sous Windows Server 2016, qui portait à lui seul l’annuaire et tout le DHCP, à deux DC redondants (dont un sous Windows Server 2025) qui se partagent le DHCP en failover.</p>
         <div class="pc-metrics">
         <div><b>7</b><span>sites</span></div>
         <div><b>2</b><span>contrôleurs de domaine</span></div>
@@ -353,7 +353,7 @@
         <ul>
           <li>
             <div class="si-head"><span class="si-name">Active Directory · DNS · DHCP</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>
-            <p>Architecture à double contrôleur de domaine sur 7 sites, DHCP centralisé en failover, santé de l’annuaire contrôlée avec dcdiag et repadmin.</p>
+            <p>Architecture à double contrôleur de domaine sur 7 sites, DHCP en failover entre les deux DC, santé de l’annuaire contrôlée avec dcdiag et repadmin.</p>
           </li>
           <li>
             <div class="si-head"><span class="si-name">Windows Server · GPO</span><span class="si-ctx"><span class="ctx ctx-pro">Entreprise</span></span></div>

@@ -130,8 +130,8 @@
         "Cinq chantiers menés en production. La migration EDR fait l’objet de mon mémoire de BUT.",
         "Five projects delivered in production. The EDR migration is the subject of my BUT thesis.") },
       { system: "projects", item: 1, title: t("Projets", "Projects"), text: t(
-        "Un Active Directory redondant sur 7 sites, avec un DHCP centralisé en failover.",
-        "A redundant Active Directory across 7 sites, with centralized DHCP in failover.") },
+        "Un Active Directory redondant sur 7 sites, avec le DHCP en failover entre les deux contrôleurs de domaine.",
+        "A redundant Active Directory across 7 sites, with DHCP in failover between the two domain controllers.") },
       { system: "skills", title: t("Compétences", "Skills"), text: t(
         "Chaque planète est une compétence, avec l’endroit où je la pratique : en entreprise, à l’IUT ou en projet perso.",
         "Every planet is a skill, tagged with where I practise it: on the job, at university or in personal projects.") },
@@ -170,8 +170,8 @@
           name: t("Systèmes & annuaire", "Systems & directory"),
           items: [
             { name: "Active Directory · DNS · DHCP", short: "Active Directory", ctx: ["pro"], note: t(
-              "Architecture à double contrôleur de domaine sur 7 sites, DHCP centralisé en failover, santé de l’annuaire contrôlée avec dcdiag et repadmin.",
-              "Dual domain controller architecture across 7 sites, centralized DHCP in failover, directory health checked with dcdiag and repadmin.") },
+              "Architecture à double contrôleur de domaine sur 7 sites, DHCP en failover entre les deux DC, santé de l’annuaire contrôlée avec dcdiag et repadmin.",
+              "Dual domain controller architecture across 7 sites, DHCP in failover between the two DCs, directory health checked with dcdiag and repadmin.") },
             { name: "Windows Server · GPO", ctx: ["pro"], note: t(
               "Nouveau contrôleur de domaine sous Windows Server 2025 et configuration des postes par stratégies de groupe (GPO).",
               "New Windows Server 2025 domain controller and workstation configuration through Group Policy (GPO).") },
@@ -266,8 +266,8 @@
             { label: t("Systèmes & annuaire", "Systems & directory"), points: [
               t("Migration Active Directory vers deux contrôleurs de domaine (Windows Server 2016 → 2025) sur 7 sites",
                 "Active Directory migration to two domain controllers (Windows Server 2016 → 2025) across 7 sites"),
-              t("Centralisation et bascule du DHCP : relais, failover, superscopes",
-                "DHCP centralization and cutover: relays, failover, superscopes"),
+              t("DHCP redondant entre les deux DC : failover 50/50, relais, superscopes",
+                "Redundant DHCP across both DCs: 50/50 failover, relays, superscopes"),
             ] },
             { label: t("Virtualisation & sauvegarde", "Virtualization & backup"), points: [
               t("Administration VMware vSphere et mise en place de Proxmox VE sur HPE ProLiant DL380 Gen10",
@@ -385,15 +385,15 @@
           id: "ad", ctx: "pro", featured: true, diagram: "ad", short: t("AD redondant · 7 sites", "Redundant AD · 7 sites"),
           title: t("Active Directory redondant sur 7 sites", "Redundant Active Directory across 7 sites"),
           desc: t(
-            "D’un contrôleur de domaine unique sous Windows Server 2016 à une architecture à deux DC, dont un sous Windows Server 2025, avec un DHCP centralisé en failover.",
-            "From a single Windows Server 2016 domain controller to a two-DC architecture, including a new Windows Server 2025 one, with centralized DHCP in failover."),
+            "D’un contrôleur de domaine unique sous Windows Server 2016, qui portait à lui seul l’annuaire et tout le DHCP, à deux DC redondants (dont un sous Windows Server 2025) qui se partagent le DHCP en failover.",
+            "From a single Windows Server 2016 domain controller that carried the directory and all of DHCP on its own, to two redundant DCs (including a new Windows Server 2025 one) sharing DHCP in failover."),
           points: [
             t("Promotion et configuration du nouveau contrôleur de domaine, contrôle de la réplication et de la santé de l’annuaire (dcdiag, repadmin)",
               "Promoted and configured the new domain controller, checked replication and directory health (dcdiag, repadmin)"),
-            t("Centralisation du DHCP, jusque-là assuré par des NAS et des switchs locaux, vers les contrôleurs de domaine",
-              "Moved DHCP, previously served by NAS units and local switches, onto the domain controllers"),
-            t("Relation de failover DHCP en répartition de charge 50/50 sur 11 étendues",
-              "DHCP failover relationship in 50/50 load-balancing mode across 11 scopes"),
+            t("Configuration DHCP conservée à l’identique (une étendue filaire et une étendue Wi-Fi par site), désormais portée par les deux DC",
+              "DHCP configuration kept identical (one wired and one Wi-Fi scope per site), now carried by both DCs"),
+            t("Relation de failover DHCP entre les deux DC, en répartition de charge 50/50 sur 11 étendues",
+              "DHCP failover relationship between the two DCs, 50/50 load balancing across 11 scopes"),
             t("Migration site par site avec reconfiguration des relais DHCP sur les routeurs",
               "Site-by-site migration with DHCP relays reconfigured on the routers"),
             t("Nettoyage des autorisations DHCP et des enregistrements DNS obsolètes",

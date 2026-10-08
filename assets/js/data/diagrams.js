@@ -36,20 +36,24 @@
     `<marker id="${id}-s" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="d-m" d="M10 0L0 5L10 10z"/></marker>` +
     `</defs>${body}</svg>`;
 
-  /* --- Active Directory : avant / après ---------------------------------- */
+  /* --- Active Directory : avant / après ---------------------------------- *
+   * Avant : un seul DC porte l'annuaire ET tout le DHCP (une étendue filaire
+   * et une étendue Wi-Fi par site, servies via les relais des routeurs).
+   * Après : deux DC redondants, même configuration DHCP, en failover 50/50. */
   const AD = () => ({
-    label: L("Schéma : Active Directory avant et après la migration", "Diagram: Active Directory before and after the migration"),
+    label: L("Schéma : Active Directory et DHCP avant et après la migration", "Diagram: Active Directory and DHCP before and after the migration"),
     before: L("AVANT", "BEFORE"), after: L("APRÈS", "AFTER"),
     dc: L("DC unique", "Single DC"), spof: L("⚠ point de défaillance unique", "⚠ single point of failure"),
     sites: [L("Site 1", "Site 1"), L("Site 2", "Site 2"), L("Sites 3–7", "Sites 3–7")],
-    siteSubs: [L("DHCP local", "local DHCP"), "NAS / switch"],
-    auth: L("authentification AD", "AD authentication"),
-    oldNote: L("DHCP éparpillé, un seul contrôleur", "Scattered DHCP, a single controller"),
-    dc1: [L("WS 2025 · nouveau", "WS 2025 · new")], dc2: [L("redondance", "redundancy")],
+    siteSubs: [L("filaire", "wired"), "Wi-Fi"],
+    roles: "AD · DNS · DHCP",
+    auth: L("annuaire + DHCP", "directory + DHCP"),
+    oldNote: L("Un seul DC pour l’annuaire et le DHCP", "One DC for both directory and DHCP"),
+    dc1: L("WS 2025 · nouveau", "WS 2025 · new"), dc2: L("redondance", "redundancy"),
     repl: L("réplication AD · DNS", "AD · DNS replication"),
     band: L("Failover DHCP 50/50 · 11 étendues", "DHCP failover 50/50 · 11 scopes"),
     relay: L("7 sites · relais DHCP sur les routeurs", "7 sites · DHCP relay on the routers"),
-    newNote: L("Annuaire redondant, DHCP centralisé", "Redundant directory, centralized DHCP"),
+    newNote: L("Même config DHCP, désormais redondante", "Same DHCP setup, now redundant"),
   });
 
   function adWide() {
@@ -61,18 +65,18 @@
     return svg(id, "wide", 640, 300, c.label,
       text(18, 22, c.before, "d-h", "start") + text(342, 22, c.after, "d-h", "start") +
       `<line class="d-sep" x1="320" y1="10" x2="320" y2="290"/>` +
-      // Avant : les sites remontent vers un DC unique (bus en pointillés)
-      box(60, 40, 180, 50, c.dc, ["Windows Server 2016"], "d-warn") + text(150, 34, c.spof, "d-w") +
+      // Avant : un seul DC (annuaire + DHCP) dessert tous les sites
+      box(60, 40, 180, 56, c.dc, ["Windows Server 2016", c.roles], "d-warn") + text(150, 34, c.spof, "d-w") +
       [10, 106, 202].map((x, i) => box(x, 196, 88, 56, c.sites[i], c.siteSubs) + line(x + 44, 196, x + 44, 172, "", "d-dash")).join("") +
-      line(54, 172, 246, 172, "", "d-dash") + line(150, 172, 150, 94, id, "d-dash") +
+      line(54, 172, 246, 172, "", "d-dash") + line(150, 172, 150, 100, id, "d-dash") +
       text(158, 138, c.auth, "d-s", "start") +
       text(150, 282, c.oldNote, "d-n") +
-      // Après : deux DC répliqués, DHCP en failover, relais sur les 7 sites
-      box(345, 40, 120, 50, "DC-01", c.dc1, "d-key") + box(515, 40, 120, 50, "DC-02", c.dc2, "d-key") +
-      line(469, 66, 511, 66, id, "", true) + text(490, 34, c.repl, "d-xs") +
-      `<g class="d-band"><rect x="345" y="104" width="290" height="26" rx="13"/></g>` +
-      text(490, 121, c.band, "d-t d-acc-t") +
-      line(490, 130, 490, 186) + line(364, 186, 616, 186) +
+      // Après : deux DC répliqués qui se partagent le DHCP en failover
+      box(345, 40, 120, 56, "DC-01", [c.dc1, c.roles], "d-key") + box(515, 40, 120, 56, "DC-02", [c.dc2, c.roles], "d-key") +
+      line(469, 68, 511, 68, id, "", true) + text(490, 34, c.repl, "d-xs") +
+      `<g class="d-band"><rect x="345" y="108" width="290" height="26" rx="13"/></g>` +
+      text(490, 125, c.band, "d-t d-acc-t") +
+      line(490, 134, 490, 186) + line(364, 186, 616, 186) +
       sites + text(490, 270, c.relay, "d-s") + text(490, 288, c.newNote, "d-n"));
   }
 
@@ -80,23 +84,23 @@
     const id = "arw-ad-t", c = AD();
     const sites = Array.from({ length: 7 }, (_, i) => {
       const x = 14 + i * 40;
-      return box(x, 364, 32, 30, "S" + (i + 1), [], "d-small") + line(x + 16, 346, x + 16, 362, id, "d-thin");
+      return box(x, 374, 32, 30, "S" + (i + 1), [], "d-small") + line(x + 16, 356, x + 16, 372, id, "d-thin");
     }).join("");
-    return svg(id, "tall", 300, 444, c.label,
+    return svg(id, "tall", 300, 454, c.label,
       text(12, 16, c.before, "d-h", "start") +
-      text(150, 36, c.spof, "d-w") + box(60, 44, 180, 46, c.dc, ["Windows Server 2016"], "d-warn") +
-      [12, 108, 204].map((x, i) => box(x, 128, 84, 54, c.sites[i], c.siteSubs) + line(x + 42, 128, x + 42, 112, "", "d-dash")).join("") +
-      line(54, 112, 246, 112, "", "d-dash") + line(150, 112, 150, 92, id, "d-dash") +
-      text(158, 106, c.auth, "d-xs", "start") +
-      text(150, 200, c.oldNote, "d-n") +
-      `<line class="d-sep" x1="12" y1="214" x2="288" y2="214"/>` +
-      text(12, 236, c.after, "d-h", "start") + text(150, 236, c.repl, "d-xs") +
-      box(12, 244, 120, 46, "DC-01", c.dc1, "d-key") + box(168, 244, 120, 46, "DC-02", c.dc2, "d-key") +
-      line(136, 267, 164, 267, id, "", true) +
-      `<g class="d-band"><rect x="12" y="302" width="276" height="26" rx="13"/></g>` +
-      text(150, 319, c.band, "d-t d-acc-t") +
-      line(150, 328, 150, 346) + line(30, 346, 270, 346) +
-      sites + text(150, 414, c.relay, "d-s") + text(150, 432, c.newNote, "d-n"));
+      text(150, 32, c.spof, "d-w") + box(60, 40, 180, 56, c.dc, ["Windows Server 2016", c.roles], "d-warn") +
+      [12, 108, 204].map((x, i) => box(x, 132, 84, 54, c.sites[i], c.siteSubs) + line(x + 42, 132, x + 42, 116, "", "d-dash")).join("") +
+      line(54, 116, 246, 116, "", "d-dash") + line(150, 116, 150, 98, id, "d-dash") +
+      text(158, 110, c.auth, "d-xs", "start") +
+      text(150, 204, c.oldNote, "d-n") +
+      `<line class="d-sep" x1="12" y1="218" x2="288" y2="218"/>` +
+      text(12, 240, c.after, "d-h", "start") + text(150, 240, c.repl, "d-xs") +
+      box(12, 248, 120, 56, "DC-01", [c.dc1, c.roles], "d-key") + box(168, 248, 120, 56, "DC-02", [c.dc2, c.roles], "d-key") +
+      line(136, 276, 164, 276, id, "", true) +
+      `<g class="d-band"><rect x="12" y="314" width="276" height="26" rx="13"/></g>` +
+      text(150, 331, c.band, "d-t d-acc-t") +
+      line(150, 340, 150, 356) + line(30, 356, 270, 356) +
+      sites + text(150, 424, c.relay, "d-s") + text(150, 442, c.newNote, "d-n"));
   }
 
   /* --- EDR + SOC ---------------------------------------------------------- */
