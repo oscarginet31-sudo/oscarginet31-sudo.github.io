@@ -71,7 +71,7 @@
         { value: "7",   label: t("sites migrés vers un Active Directory redondant", "sites moved to a redundant Active Directory") },
         { value: "11",  label: t("étendues DHCP en failover 50/50", "DHCP scopes in 50/50 failover") },
         { value: "2",   label: t("ans d’alternance sur une infrastructure multi-sites", "years of apprenticeship on a multi-site infrastructure") },
-        { value: "5",   label: t("certifications : Cisco CCNA ×2, ANSSI, TOEIC, Pix", "certifications: Cisco CCNA ×2, ANSSI, TOEIC, Pix") },
+        { value: "6",   label: t("certifications : Stormshield CSNA, Cisco CCNA 1 & 2, ANSSI, TOEIC, Pix", "certifications: Stormshield CSNA, Cisco CCNA 1 & 2, ANSSI, TOEIC, Pix") },
       ],
       terminal: [
         { cmd: "whoami",               out: t("Oscar Ginet — alternant SysAdmin & Cyber", "Oscar Ginet — SysAdmin & Cyber apprentice") },
@@ -102,7 +102,7 @@
       skills: [
         { k: t("Systèmes", "Systems"), v: "Active Directory · GPO · DNS/DHCP · Windows Server · Linux" },
         { k: t("Virtualisation", "Virtualization"), v: "VMware vSphere · Proxmox VE · Veeam" },
-        { k: t("Sécurité", "Security"), v: t("EDR/XDR · triage d’alertes SOC", "EDR/XDR · SOC alert triage") },
+        { k: t("Sécurité", "Security"), v: t("EDR/XDR · pare-feu Stormshield · triage d’alertes SOC", "EDR/XDR · Stormshield firewall · SOC alert triage") },
         { k: t("Réseau", "Networking"), v: t("VLAN · routage · Wi-Fi · Zabbix", "VLAN · routing · Wi-Fi · Zabbix") },
         { k: "Scripts", v: "PowerShell · Python" },
       ],
@@ -218,8 +218,8 @@
           name: t("Réseaux & supervision", "Networks & monitoring"),
           items: [
             { name: t("Routage · commutation · VLAN · Wi-Fi", "Routing · switching · VLAN · Wi-Fi"), short: t("Routage & VLAN", "Routing & VLAN"), ctx: ["iut"], note: t(
-              "Fondamentaux validés par les certifications Cisco CCNA Introduction to Networks et Switching, Routing & Wireless Essentials.",
-              "Fundamentals validated by the Cisco CCNA Introduction to Networks and Switching, Routing & Wireless Essentials certifications.") },
+              "Fondamentaux validés par les certifications Cisco CCNA 1 (Introduction to Networks) et CCNA 2 (Switching, Routing & Wireless Essentials).",
+              "Fundamentals validated by the Cisco CCNA 1 (Introduction to Networks) and CCNA 2 (Switching, Routing & Wireless Essentials) certifications.") },
             { name: t("Relais DHCP · Juniper Mist", "DHCP relay · Juniper Mist"), ctx: ["pro"], note: t(
               "Reconfiguration site par site des relais DHCP sur les routeurs lors de la migration de l’annuaire.",
               "Site-by-site reconfiguration of DHCP relays on routers during the directory migration.") },
@@ -335,8 +335,10 @@
         },
       ],
       certifications: [
-        { name: "CCNA: Switching, Routing & Wireless Essentials", short: "CCNA SRWE", issuer: "Cisco", date: t("Juil. 2026", "Jul 2026") },
-        { name: "CCNA: Introduction to Networks", short: "CCNA ITN", issuer: "Cisco", date: t("Pendant le BUT", "During the BUT") },
+        { name: "CCNA 2 — Switching, Routing & Wireless Essentials", short: "CCNA 2", issuer: "Cisco", date: t("Juil. 2026", "Jul 2026") },
+        { name: "Stormshield CSNA — Certified Stormshield Network Administrator", short: "Stormshield CSNA", issuer: "Stormshield", date: t("Juin 2026", "Jun 2026"),
+          note: t("Administration des pare-feu Stormshield Network Security", "Stormshield Network Security firewall administration") },
+        { name: "CCNA 1 — Introduction to Networks", short: "CCNA 1", issuer: "Cisco", date: t("Pendant le BUT", "During the BUT") },
         { name: "TOEIC", cvName: "TOEIC 550", issuer: "ETS", date: t("Mars 2026", "Mar 2026"), note: t("Score 550 · valide jusqu’en mars 2028", "Score 550 · valid until March 2028") },
         { name: "MOOC ANSSI", issuer: t("ANSSI — Agence nationale de la sécurité des SI", "ANSSI — French cybersecurity agency"), date: t("Janv. 2025", "Jan 2025") },
         { name: t("Certification Pix", "Pix certification"), short: "Pix", issuer: "Pix", date: "2023", note: t("404 pix", "404 pix") },

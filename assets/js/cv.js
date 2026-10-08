@@ -28,10 +28,12 @@
   ].filter(Boolean);
 
   // Une ligne par certification : nom en gras, organisme et année à droite.
-  const certs = X.certifications.map((c) => ({
-    k: c.cvName || c.short || tx(c.name),
-    v: [c.issuer && tx(c.issuer).split(" — ")[0], (/\d{4}/.exec(tx(c.date)) || [""])[0]].filter((x) => x && x !== (c.short || tx(c.name))).join(" · "),
-  }));
+  // (l'organisme est omis quand il figure déjà dans le nom : « Stormshield CSNA », « Pix »).
+  const certs = X.certifications.map((c) => {
+    const k = c.cvName || c.short || tx(c.name);
+    const v = [c.issuer && tx(c.issuer).split(" — ")[0], (/\d{4}/.exec(tx(c.date)) || [""])[0]].filter((x) => x && !k.includes(x));
+    return { k, v: v.join(" · ") };
+  });
   const kv = (items, cls = "") => `<ul class="kv ${cls}">${items.map((i) => `<li><b>${esc(i.k)}</b><span>${esc(i.v)}</span></li>`).join("")}</ul>`;
 
   document.getElementById("cv").innerHTML = `
