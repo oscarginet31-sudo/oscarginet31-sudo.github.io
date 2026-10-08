@@ -40,6 +40,14 @@ Les pages sont construites en JavaScript, mais `tools/prerender.py` injecte le r
 
 `CV_Ginet_Oscar.pdf` (FR) et `CV_Ginet_Oscar_EN.pdf` (EN) sont générés depuis **`cv.html`**, qui lit le même `content.js`. Le site sert automatiquement le CV dans la langue choisie.
 
+**Téléphone** : il n'apparaît sur aucune page du site ni dans le code, seulement dans les CV PDF. `build_cv.py` le lit dans **`tools/private.json`** (fichier local, ignoré par Git) et ne l'injecte que dans les PDF :
+
+```
+{"phone": "+33 6 12 34 56 78"}
+```
+
+Sans ce fichier, le CV est généré sans numéro (à recréer sur un nouvel ordinateur).
+
 ## Image d'aperçu de partage
 
 `og-cover.jpg` (1200×630) s'affiche quand le lien est partagé sur LinkedIn, Teams, WhatsApp… Pour la régénérer : servir le dossier (`python3 -m http.server`), ouvrir `/tools/og.html` dans un navigateur, puis « Télécharger ».
@@ -64,7 +72,7 @@ Contrastes WCAG AA vérifiés dans les deux thèmes, lien d'évitement vers le m
 - **Visite guidée** : bouton « Visite guidée · 1 min » de l'intro, bouton ▶ du dock ou touche `T`.
 - **Terminal caché** : touche `/` ou bouton `>_` (`help`, `goto projets`, `open veeam`, `case`, `nmap`, `neofetch`, `sudo hire oscar`…).
 - **Mobile** : bouton gyroscope pour regarder autour de soi en inclinant le téléphone (permission demandée sur iPhone).
-- **Succès caché** : découvrir les 41 planètes débloque un dernier secret.
+- **Succès caché** : découvrir toutes les planètes (40) débloque un dernier secret.
 
 ## Structure
 

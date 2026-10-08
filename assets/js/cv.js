@@ -10,17 +10,19 @@
   document.title = L("CV — Oscar Ginet", "Resume — Oscar Ginet");
 
   /* --- Colonne latérale --- */
-  const links = C.contact.links;
+  // Le téléphone n'est pas dans le dépôt : tools/build_cv.py l'injecte (<meta name="cv-phone">)
+  // depuis tools/private.json, fichier local ignoré par Git. Sans lui, la ligne est omise.
+  const tel = (document.querySelector('meta[name="cv-phone"]') || {}).content || "";   // ex. "+33 6 12 34 56 78"
   const contact = [
     [L("Email", "Email"), `<a href="mailto:${esc(C.contact.email)}">${esc(C.contact.email)}</a>`],
-    [L("Téléphone", "Phone"), `<a href="tel:+33685330014">${esc(L(links[1].value, "+33 6 85 33 00 14"))}</a>`],
-    ["LinkedIn", `<a href="${esc(links[2].href)}">linkedin.com/in/oscar-ginet-6523862b3</a>`],
+    tel && [L("Téléphone", "Phone"), `<a href="tel:${esc(tel.replace(/\s/g, ""))}">${esc(fr ? tel.replace(/^\+33\s?/, "0") : tel)}</a>`],
+    ["LinkedIn", `<a href="${esc(C.contact.linkedin)}">linkedin.com/in/oscar-ginet-6523862b3</a>`],
     [L("Basé", "Based"), esc(tx(C.identity.location))],
     [L("Mobilité", "Mobility"), esc(L("Permis B · véhicule personnel", "Driving licence · own car"))],
   ];
   document.getElementById("side").innerHTML = `
     <section><h2>${L("Contact", "Contact")}</h2>
-      <ul class="contact">${contact.map(([k, v]) => `<li><span>${k}</span>${v}</li>`).join("")}</ul></section>
+      <ul class="contact">${contact.filter(Boolean).map(([k, v]) => `<li><span>${k}</span>${v}</li>`).join("")}</ul></section>
     <section><h2>${L("Compétences", "Skills")}</h2>
       <div class="skills">${C.skills.categories.map((c) => `
         <div><h3>${esc(tx(c.name))}</h3><p>${c.items.map((i) => esc(tx(i.name))).join(" · ")}</p></div>`).join("")}</div></section>

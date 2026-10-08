@@ -527,9 +527,10 @@
         "I’m looking for further cybersecurity studies, as an apprentice, from September 2027. Also happy to talk about an infrastructure project or a technical question. Reply within 48 working hours."
       ),
       email: "o.ginet.pro@gmail.com",
+      linkedin: "https://www.linkedin.com/in/oscar-ginet-6523862b3/",
+      // Pas de numéro de téléphone sur le site : il n'apparaît que dans le CV PDF (voir tools/build_cv.py).
       links: [
         { label: "EMAIL", value: "o.ginet.pro@gmail.com", href: "mailto:o.ginet.pro@gmail.com" },
-        { label: t("TÉL", "PHONE"), value: "06 85 33 00 14", href: "tel:+33685330014" },
         { label: "LINKEDIN", value: "/in/oscar-ginet", href: "https://www.linkedin.com/in/oscar-ginet-6523862b3/" },
         { label: t("LIEU", "LOCATION"), value: t("Annecy (74) · Ain (01) · Permis B", "Annecy & Ain, France · Driving licence"), href: null },
       ],

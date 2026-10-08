@@ -87,7 +87,7 @@
         <div class="card-metrics">${stats}</div>
         <div class="card-cta">
           <a class="btn btn-primary" href="${PF.t("cv.file")}" download>${fr ? "Télécharger le CV" : "Download CV"} ↓</a>
-          <a class="btn btn-ghost" href="${esc(PF.CONTENT.contact.links[2].href)}" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="${esc(PF.CONTENT.contact.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a>
           <a class="btn btn-ghost" href="classic.html">${esc(PF.t("hud.classic"))} →</a>
         </div>`;
       this.root.style.setProperty("--hub", "#ffd9a0");

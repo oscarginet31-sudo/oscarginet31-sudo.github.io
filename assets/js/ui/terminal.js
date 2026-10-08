@@ -178,7 +178,7 @@
         },
         contact: () => this._contact(), mail: () => this._contact(), email: () => this._contact(),
         linkedin: () => {
-          window.open(C.contact.links[2].href, "_blank", "noopener");
+          window.open(C.contact.linkedin, "_blank", "noopener");
           this.print(esc(L("Ouverture de LinkedIn…", "Opening LinkedIn…")), "t-ok");
         },
         classic: () => { location.href = "classic.html"; },
@@ -232,7 +232,7 @@
 
     _contact() {
       const mail = C.contact.email;
-      this.print(`EMAIL   <a href="mailto:${esc(mail)}">${esc(mail)}</a><br>${L("TÉL", "PHONE")}     ${esc(C.contact.links[1].value)}<br>LINKEDIN <a href="${esc(C.contact.links[2].href)}" target="_blank" rel="noopener">/in/oscar-ginet</a>`);
+      this.print(`EMAIL   <a href="mailto:${esc(mail)}">${esc(mail)}</a><br>LINKEDIN <a href="${esc(C.contact.linkedin)}" target="_blank" rel="noopener">/in/oscar-ginet</a>`);
       if (navigator.clipboard) navigator.clipboard.writeText(mail).then(() => this.print(esc(L("✔ Email copié dans le presse-papiers.", "✔ Email copied to clipboard.")), "t-ok"), () => {});
     }
 
