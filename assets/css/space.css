@@ -49,7 +49,7 @@ body.warping #hud-hint, body.warping #pointers, body.warping #target, body.warpi
   background: var(--hud-bg); backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   color: var(--hud-soft); text-decoration: none; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; flex-shrink: 0;
   transition: border-color .2s, color .2s, background .2s;
 }
 .chip:hover { border-color: rgba(220, 228, 245, 0.4); color: var(--hud-fg); }
@@ -466,6 +466,14 @@ body.touring .card-body { top: 44%; max-height: min(64vh, calc(100vh - 260px)); 
   .dock-btn { padding: 7px 10px; font-size: 10.5px; }
   .card-body { padding: 34px 22px 26px; }
   .card-groups { grid-template-columns: 1fr; }
+}
+/* Téléphones étroits : la barre du haut doit tenir sur une ligne. */
+@media (max-width: 420px) {
+  .hud-top { padding: 10px 8px; gap: 6px; }
+  .hud-actions { gap: 4px; }
+  .chip { padding: 6px 7px; font-size: 10.5px; gap: 4px; }
+  .chip-sep { display: none; }
+  .lang-pill span { padding: 2px 4px; }
 }
 
 /* --- Succès débloqué ------------------------------------------------- */

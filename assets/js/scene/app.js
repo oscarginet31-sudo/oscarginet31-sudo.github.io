@@ -431,13 +431,16 @@
     }
 
     /* --------------------------- Transitions --------------------------- */
-    /** Point d'arrivée devant un système, en surplomb, côté caméra. */
+    /** Point d'arrivée devant un système (en surplomb, côté caméra) et point visé. */
     _arrival(sys) {
       const dir = new THREE.Vector3().subVectors(this.flight.pos, sys.center).setY(0);
       if (dir.lengthSq() < 1) dir.set(0, 0, 1);
       dir.normalize();
-      const d = sys.viewDistance(this.camera);
-      return new THREE.Vector3().copy(sys.center).addScaledVector(dir, d * 0.9).add(new THREE.Vector3(0, d * 0.4, 0));
+      const f = sys.frame(this.camera);                          // cadrage calculé par StarSystem.frame()
+      return {
+        pos: new THREE.Vector3().copy(sys.center).addScaledVector(dir, f.d * f.back).add(new THREE.Vector3(0, f.d * f.up, 0)),
+        look: new THREE.Vector3().copy(sys.center).addScaledVector(dir, f.lookBack).add(new THREE.Vector3(0, f.lookUp, 0)),
+      };
     }
 
     enterSystem(sys) {
@@ -447,12 +450,12 @@
       this.warping = true;
       this.pendingSystem = sys;
       this._clearTarget();
-      const dest = this._arrival(sys);
+      const { pos: dest, look } = this._arrival(sys);
       const dist = this.flight.pos.distanceTo(dest);
       const dur = U.clamp(dist / 1500, 1.3, 2.8);
       this.onMode("warp", sys);
       PF.sfx && PF.sfx("warp", dur);
-      this.flight.flyTo(dest, sys.center, dur, () => {
+      this.flight.flyTo(dest, look, dur, () => {
         this.warping = false; this.mode = "system"; this.activeSystem = sys; this.pendingSystem = null;
         this.onMode("system", sys);
       }, U.clamp(dist / 2600, 0.35, 1));

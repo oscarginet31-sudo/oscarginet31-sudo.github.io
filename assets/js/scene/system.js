@@ -24,6 +24,29 @@
   const _up = new THREE.Vector3();
   const SECRET_LABEL = { fr: "★ PLANÈTE SECRÈTE", en: "★ SECRET PLANET" };
 
+  /* --- Mise à l'échelle -------------------------------------------------
+   * L'écart entre deux orbites dépend de la taille RÉELLE des deux planètes
+   * voisines (anneaux compris) : jamais de chevauchement, et un système grandit
+   * régulièrement avec son nombre de planètes (plus de paliers). */
+  /** Écart mini entre deux orbites : aéré pour un petit système, serré pour un gros. */
+  const orbitMin = (n) => Math.max(28, 50 - 1.5 * n);
+  const ORBIT_CLEAR = 10;      // vide entre les bords de deux planètes voisines
+  const BELT_ROOM = 36;        // place réservée à la ceinture d'astéroïdes
+  /** Systèmes chargés : planètes un peu plus petites (−15 % au plus). */
+  const sizeFor = (n) => U.clamp(1.12 - 0.02 * n, 0.85, 1);
+  /**
+   * Caméra d'arrivée dans un système : plongée de 30° sur écran large, jusqu'à
+   * 55° en portrait (téléphone) pour que le disque, vu plus du dessus, remplisse
+   * la hauteur de l'écran au lieu d'être une fine ellipse.
+   */
+  const arrivalFor = (aspect) => {
+    const t = U.clamp((1.3 - aspect) / 0.7, 0, 1);
+    const e = THREE.MathUtils.degToRad(30 + 25 * t);
+    return { back: Math.cos(e), up: Math.sin(e) };
+  };
+  /** Taille des noms de planètes à l'écran (px) : jamais énormes, jamais illisibles. */
+  const LABEL_PX = { max: 44, min: 26 };
+
   /** Identité visuelle de chaque système (classe spectrale réaliste). */
   const STYLE = {
     skills:     { kind: "star",   color: "#a9c4ff", radius: 17, intensity: 1.85 },            // type B, bleu-blanc
@@ -53,11 +76,16 @@
       const seed = system.seed * 100 + index * 7.31;
 
       this.obj = F.planet(type, seed, system.light);
-      this.radius = this.obj.userData.radius;
+      this.k = system.sizeK;
+      this.obj.scale.setScalar(this.k);
+      this.r0 = this.obj.userData.radius;                       // rayon dans le repère de la planète
+      this.radius = this.r0 * this.k;                           // rayon réel dans le système
       this.color = this.obj.userData.uiColor;
       this.obj.userData.mesh.userData.planet = this;            // raycast
 
-      this.orbitR = system.orbitOf(index);
+      // Encombrement (halo d'atmosphère, anneaux) → place réservée sur l'orbite.
+      this.extent = this.radius * (this.obj.userData.ring ? 1.7 : 1.15);   // anneaux fins : ils peuvent frôler une orbite
+      this.orbitR = system.placeOrbit(index, this.extent);
       this.angle = hash(seed + 3) * Math.PI * 2;
       this.speed = 0.24 * Math.pow(110 / this.orbitR, 1.5);     // Kepler
 
@@ -70,12 +98,12 @@
 
       this.label = F.label(shortName(body), LABEL, PLANET_LABEL);
       this.label.userData.base = this.label.scale.clone();
-      this.label.position.set(0, this.radius + 9, 0);
+      this.label.position.set(0, this.r0 + 9, 0);
       this.label.material.opacity = 0;
       this.obj.add(this.label);
 
       this.selector = F.selector(this.color);
-      this.selector.scale.setScalar(this.radius * 3.6);
+      this.selector.scale.setScalar(this.r0 * 3.6);
       this.obj.add(this.selector);
 
       this.hovered = false;
@@ -101,8 +129,8 @@
       const near = THREE.MathUtils.smoothstep(dist, this.radius * 12, this.radius * 30);
       // Hauteur à l'écran plafonnée (texte ≈ 19 px) : lisible de loin, jamais énorme de près.
       const base = this.label.userData.base;
-      const px = (base.y * this.system.group.scale.x / Math.max(dist, 1e-3)) * (PF.viewK || 800);
-      const f = Math.min(1, 44 / Math.max(px, 1e-3));
+      const px = (base.y * this.k * this.system.group.scale.x / Math.max(dist, 1e-3)) * (PF.viewK || 800);
+      const f = U.clamp(LABEL_PX.min / Math.max(px, 1e-3), Math.min(1, LABEL_PX.max / Math.max(px, 1e-3)), 4);
       this.label.scale.set(base.x * f, base.y * f, 1);
       const lo = this.label.material;
       lo.opacity = U.damp(lo.opacity, focused ? (this.hovered ? 1 : 0.62) * near : 0, 0.001, dt);
@@ -112,7 +140,7 @@
       so.opacity = U.damp(so.opacity, this.hovered ? 0.95 * (0.25 + 0.75 * near) : 0, 0.0005, dt);
       so.rotation += dt * 0.5;
       this.selector.visible = so.opacity > 0.02;
-      const s = this.radius * (3.4 + 0.25 * Math.sin(performance.now() * 0.004));
+      const s = this.r0 * (3.4 + 0.25 * Math.sin(performance.now() * 0.004));
       this.selector.scale.set(s, s, 1);
       const hu = this.obj.userData.mesh.material.uniforms.uHover;
       hu.value = U.damp(hu.value, this.hovered ? 1 : 0, 0.001, dt);
@@ -198,10 +226,14 @@
       this.title.position.set(0, 110, 0);
       this.group.add(this.title);
 
-      // Orbites : départ hors de la couronne, espacement selon le nombre de corps.
+      // Orbites : départ hors de la couronne, puis chaque planète prend la place
+      // qu'il lui faut (voir placeOrbit). Ceinture : couloir libre réservé.
       const total = def.bodies.length;
       this.innerR = Math.max(95, this.style.radius * 5 + 30);
-      this.spacing = total > 10 ? 25 : total > 6 ? 34 : 44;
+      this.sizeK = sizeFor(total);
+      this.minGap = orbitMin(total);
+      this._orbits = []; this._ext = [];
+      this.beltK = this.style.belt && total > 3 ? Math.floor(total * 0.45) : -1;
       let prev = null;
       this.planets = def.bodies.map((b, i) => {
         const type = pickType(total > 1 ? i / (total - 1) : 0.4, this.seed * 13 + i * 3.7, prev);
@@ -212,10 +244,11 @@
       });
       this.maxR = this.orbitOf(total - 1);
 
-      if (this.style.belt && total > 3) {
-        const k = Math.floor(total * 0.45);
-        const r = (this.orbitOf(k - 1) + this.orbitOf(k)) / 2;
-        this.belt = F.asteroidBelt(r - this.spacing * 0.32, r + this.spacing * 0.32, PF.Cosmos.Q.low ? 350 : 800, this.seed);
+      if (this.beltK > 0) {
+        const k = this.beltK;
+        const lo = this.orbitOf(k - 1) + this._ext[k - 1], hi = this.orbitOf(k) - this._ext[k];
+        const mid = (lo + hi) / 2, half = (hi - lo) * 0.32;
+        this.belt = F.asteroidBelt(mid - half, mid + half, PF.Cosmos.Q.low ? 350 : 800, this.seed);
         this.group.add(this.belt);
       }
 
@@ -239,14 +272,72 @@
       this._applyExpand();
     }
 
-    orbitOf(i) { return this.innerR + i * this.spacing + (hash(this.seed * 31 + i) - 0.5) * this.spacing * 0.3; }
+    /** Rayon de l'orbite i, calculé d'après l'encombrement des planètes i-1 et i. */
+    placeOrbit(i, ext) {
+      const o = this._orbits, e = this._ext;
+      if (i === 0) o[0] = this.innerR + ext * 0.5;
+      else {
+        const gap = Math.max(this.minGap, e[i - 1] + ext + ORBIT_CLEAR) * (0.94 + 0.12 * hash(this.seed * 31 + i));
+        o[i] = o[i - 1] + gap + (i === this.beltK ? BELT_ROOM : 0);
+      }
+      e[i] = ext;
+      return o[i];
+    }
 
-    /** Distance de caméra pour cadrer tout le système déplié (selon le format d'écran). */
-    viewDistance(cam) {
-      const tanV = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
-      const tanH = tanV * cam.aspect;
-      const fit = (this.maxR + 30) / Math.min(tanH * 1.05, tanV * 1.6);
-      return U.clamp(fit, this.maxR * 0.9, this.maxR * 2.6) + 40;
+    orbitOf(i) { return this._orbits[i]; }
+
+    /**
+     * Cadrage d'arrivée dans le système déplié, calculé par projection
+     * (perspective comprise). La caméra est en surplomb (voir ARRIVAL) : le
+     * disque apparaît comme une ellipse, bord proche plus grand que bord
+     * lointain. On vise donc un point un peu en avant de l'étoile pour centrer
+     * l'ellipse à l'écran, puis on cherche la plus petite distance où l'orbite
+     * extérieure, ses planètes et leurs étiquettes tiennent, hors bandes du HUD.
+     * Repère local : caméra côté +Z. Renvoie { d, back, up, lookBack, lookUp } :
+     * la caméra se place à (d·back) en recul et (d·up) en hauteur.
+     */
+    frame(cam) {
+      const tanV = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)), tanH = tanV * cam.aspect;
+      const R = this.maxR + this._ext[this._ext.length - 1] + 10;
+      const ARRIVAL = arrivalFor(cam.aspect);
+      const MX = 0.9, MY = 0.72;                                 // marges : HUD en haut, dock en bas
+      const TILT = 0.12, LBL = 0.075;                            // orbites inclinées, étiquettes au-dessus
+      const pts = [];
+      for (let k = 0; k < 48; k++) {
+        const a = (k / 48) * Math.PI * 2, x = Math.cos(a) * R, z = Math.sin(a) * R;
+        pts.push([x, -TILT * R, z], [x, TILT * R, z], [x, (TILT + LBL) * R, z]);
+      }
+      const view = (d) => {
+        const cy = d * ARRIVAL.up, cz = d * ARRIVAL.back;
+        // Axe de visée : bissectrice entre le bas du bord proche et le haut du bord lointain.
+        const n1 = Math.hypot(-TILT * R - cy, R - cz), n2 = Math.hypot((TILT + LBL) * R - cy, -R - cz);
+        let fy = (-TILT * R - cy) / n1 + ((TILT + LBL) * R - cy) / n2, fz = (R - cz) / n1 + (-R - cz) / n2;
+        const fl = Math.hypot(fy, fz); fy /= fl; fz /= fl;
+        const uy = -fz, uz = fy;                                 // « haut » de la caméra (droite = +X)
+        let ok = true;
+        for (const [px, py, pz] of pts) {
+          const vy = py - cy, vz = pz - cz, z = vy * fy + vz * fz;
+          if (z <= 1) { ok = false; break; }
+          const x = px / (z * tanH), y = (vy * uy + vz * uz) / (z * tanV);
+          if (Math.abs(x) > MX || Math.abs(y) > MY) { ok = false; break; }
+        }
+        // Point visé : sur l'axe, à hauteur du plan des orbites.
+        const t = cy / -fy;
+        return { ok, lookBack: cz + fz * t, lookUp: 0 };
+      };
+      let lo = this.maxR * 0.4, hi = this.maxR * 8;
+      for (let it = 0; it < 24; it++) { const mid = (lo + hi) / 2; if (view(mid).ok) hi = mid; else lo = mid; }
+      const v = view(hi);
+      return { d: hi, back: ARRIVAL.back, up: ARRIVAL.up, lookBack: v.lookBack, lookUp: v.lookUp };
+    }
+
+    viewDistance(cam) { return this.frame(cam).d; }
+
+    /** Déplace tout le système (placement dans la galaxie). */
+    moveTo(c) {
+      this.center.copy(c);
+      this.group.position.copy(c);
+      this.light.star.value.copy(c);
     }
 
     _applyExpand() {
@@ -382,13 +473,27 @@
       this.corePick.userData.isCore = true;
       scene.add(this.corePick);
 
+      // Chaque système glisse le long de son bras spiral (vers l'intérieur ou
+      // l'extérieur, au plus près de sa place d'origine) jusqu'à être assez loin
+      // de ses voisins : déplié (orbites + portail « Retour »), il ne doit jamais
+      // englober l'étoile d'un autre système.
       const ids = PF.systemIds();
       const RADII = [1150, 1550, 1300, 1800, 1450];
-      ids.forEach((id, i) => {
-        const r = RADII[i % RADII.length];
+      const at = (r, i) => {
         const a = armAngle(r, i % 4) + 0.05;
-        const center = new THREE.Vector3(Math.cos(a) * r, (i % 2 ? 1 : -1) * 40, Math.sin(a) * r);
-        const sys = new StarSystem(PF.getSystem(id), center, i);
+        return new THREE.Vector3(Math.cos(a) * r, (i % 2 ? 1 : -1) * 40, Math.sin(a) * r);
+      };
+      ids.forEach((id, i) => {
+        const sys = new StarSystem(PF.getSystem(id), new THREE.Vector3(), i);
+        sys.ext = sys.maxR + 140;
+        const r0 = RADII[i % RADII.length];
+        const free = (c) => this.systems.every((o) => c.distanceTo(o.base) > Math.max(sys.ext, o.ext) + 260);
+        let center = at(r0, i);
+        for (let step = 1; step <= 30 && !free(center); step++) {
+          const r = r0 + Math.ceil(step / 2) * 50 * (step % 2 ? 1 : -1);   // +50, −50, +100, −100…
+          if (r >= 950 && r <= 2300 && free(at(r, i))) center = at(r, i);
+        }
+        sys.moveTo(center);
         sys.base = center.clone();
         scene.add(sys.group);
         this.systems.push(sys);
