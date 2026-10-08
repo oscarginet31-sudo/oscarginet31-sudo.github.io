@@ -337,7 +337,7 @@
       certifications: [
         { name: "CCNA 2 — Switching, Routing & Wireless Essentials", short: "CCNA 2", issuer: "Cisco", date: t("Juil. 2026", "Jul 2026") },
         { name: "Stormshield CSNA — Certified Stormshield Network Administrator", short: "Stormshield CSNA", issuer: "Stormshield", date: t("Juin 2026", "Jun 2026"),
-          note: t("Administration des pare-feu Stormshield Network Security", "Stormshield Network Security firewall administration") },
+          note: t("Pare-feu Stormshield Network Security · valide jusqu’en juin 2029", "Stormshield Network Security firewalls · valid until June 2029") },
         { name: "CCNA 1 — Introduction to Networks", short: "CCNA 1", issuer: "Cisco", date: t("Pendant le BUT", "During the BUT") },
         { name: "TOEIC", cvName: "TOEIC 550", issuer: "ETS", date: t("Mars 2026", "Mar 2026"), note: t("Score 550 · valide jusqu’en mars 2028", "Score 550 · valid until March 2028") },
         { name: "MOOC ANSSI", issuer: t("ANSSI — Agence nationale de la sécurité des SI", "ANSSI — French cybersecurity agency"), date: t("Janv. 2025", "Jan 2025") },
