@@ -84,20 +84,36 @@
 
     /* --- CV (PDF généré depuis cv.html, voir README) -------------------- */
     cv: {
-      summary: t(
-        "Au sein d’une petite équipe informatique d’un groupe industriel multi-sites, je fais vivre l’infrastructure au quotidien : annuaire, virtualisation, sauvegardes, supervision et sécurité des postes et des serveurs.",
-        "Within the small IT team of a multi-site industrial group, I run and evolve the infrastructure day to day: directory services, virtualization, backups, monitoring, and endpoint and server security."
-      ),
+      // Le CV doit se lire en quelques secondes : l'essentiel en **gras**, le détail ensuite.
+      now: [t("**BUT R&T Cybersécurité, 3ᵉ année** · IUT d’Annecy", "**BUT Networks & Telecom, Cybersecurity — 3rd year** · IUT Annecy"),
+            t("Alternant chez **Lamberet SAS** depuis 2024", "Apprentice at **Lamberet SAS** since 2024")],
+      goal: t("Je recherche une **poursuite d’études en cybersécurité** (master ou école d’ingénieurs), **en alternance dès septembre 2027**.",
+              "Looking for **further studies in cybersecurity** (master’s or engineering school), **as an apprentice from September 2027**."),
+      highlights: [
+        t("**Migration EDR + SOC externe** sur ≈ 450 postes et serveurs (Trend Micro Vision One), sujet de mon mémoire",
+          "**EDR + external SOC rollout** across ≈ 450 workstations and servers (Trend Micro Vision One), subject of my thesis"),
+        t("**Active Directory redondant** : 2ᵉ contrôleur de domaine Windows Server 2025, **DHCP en failover** sur 7 sites",
+          "**Redundant Active Directory**: second domain controller on Windows Server 2025, **DHCP failover** across 7 sites"),
+        t("**Supervision Zabbix 7 + Grafana** : première plateforme de supervision centralisée du groupe",
+          "**Zabbix 7 + Grafana monitoring**: the group’s first centralized monitoring platform"),
+        t("**Sauvegardes Veeam v13** avec dépôt Linux durci, nouvel hyperviseur **Proxmox VE**",
+          "**Veeam v13 backups** with a hardened Linux repository, new **Proxmox VE** hypervisor"),
+      ],
+      skills: [
+        { k: t("Systèmes", "Systems"), v: "Active Directory · GPO · DNS/DHCP · Windows Server · Linux" },
+        { k: t("Virtualisation", "Virtualization"), v: "VMware vSphere · Proxmox VE · Veeam" },
+        { k: t("Sécurité", "Security"), v: t("EDR/XDR · triage d’alertes SOC", "EDR/XDR · SOC alert triage") },
+        { k: t("Réseau", "Networking"), v: t("VLAN · routage · Wi-Fi · Zabbix", "VLAN · routing · Wi-Fi · Zabbix") },
+        { k: "Scripts", v: "PowerShell · Python" },
+      ],
       languages: [
         { name: t("Français", "French"), level: t("courant", "fluent") },
-        { name: t("Anglais", "English"), level: t("intermédiaire · TOEIC 550 (2026)", "intermediate · TOEIC 550 (2026)") },
+        { name: t("Anglais", "English"), level: "TOEIC 550" },
         { name: t("Espagnol", "Spanish"), level: t("intermédiaire", "intermediate") },
       ],
-      interests: [
-        t("Cyclisme sur route, musculation, course à pied, escalade (~6 h / semaine)", "Road cycling, strength training, running, climbing (~6 h / week)"),
-        t("Football en club pendant 12 saisons, puis encadrement des équipes de jeunes", "Club football for 12 seasons, then youth team coaching"),
-        t("Vice-président de l’association des jeunes de Lhuis (01)", "Vice-president of the Lhuis youth association (France)"),
-      ],
+      hobbies: t("Vélo de route, course, escalade · 12 saisons de foot en club · vice-président d’une association de jeunes",
+                 "Road cycling, running, climbing · 12 seasons of club football · vice-president of a youth association"),
+      foot: t("**Curieux ?** Mon portfolio se visite en vaisseau spatial", "**Curious?** My portfolio is a spaceship ride"),
     },
 
     /* --- Visite guidée de la galaxie (≈ 1 min) ------------------------- */
@@ -292,9 +308,17 @@
           date: "2024 — 2027",
           title: t("BUT Réseaux & Télécommunications", "BUT Networks & Telecommunications"), short: "BUT R&T",
           org: t("IUT d’Annecy · parcours Cybersécurité · alternance", "IUT Annecy · Cybersecurity track · apprenticeship"),
+          badge: t("3ᵉ année", "3rd year"),
           desc: t(
             "Routage, commutation, VLAN et Wi-Fi, administration Windows et Linux, programmation, télécoms et cybersécurité : vulnérabilités, cryptographie, pare-feu.",
             "Routing, switching, VLAN and Wi-Fi, Windows and Linux administration, programming, telecoms and cybersecurity: vulnerabilities, cryptography, firewalls."),
+        },
+        {
+          date: "2026",
+          title: t("DUT Réseaux & Télécommunications", "DUT Networks & Telecommunications"), short: "DUT R&T",
+          org: t("IUT d’Annecy · diplôme intermédiaire du BUT", "IUT Annecy · intermediate diploma of the BUT"),
+          badge: t("obtenu", "awarded"),
+          desc: t("", ""),
         },
         {
           date: "2021 — 2024",
@@ -307,13 +331,13 @@
           date: "2021",
           title: t("Diplôme national du brevet", "Brevet (lower secondary diploma)"), short: "Brevet",
           org: t("Collège Chartreuse de Portes · mention Très bien", "Collège Chartreuse de Portes · highest honours"),
-          desc: t("", ""),
+          desc: t("", ""), cv: false,   // pas sur le CV (trop ancien)
         },
       ],
       certifications: [
         { name: "CCNA: Switching, Routing & Wireless Essentials", short: "CCNA SRWE", issuer: "Cisco", date: t("Juil. 2026", "Jul 2026") },
         { name: "CCNA: Introduction to Networks", short: "CCNA ITN", issuer: "Cisco", date: t("Pendant le BUT", "During the BUT") },
-        { name: "TOEIC", issuer: "ETS", date: t("Mars 2026", "Mar 2026"), note: t("Score 550 · valide jusqu’en mars 2028", "Score 550 · valid until March 2028") },
+        { name: "TOEIC", cvName: "TOEIC 550", issuer: "ETS", date: t("Mars 2026", "Mar 2026"), note: t("Score 550 · valide jusqu’en mars 2028", "Score 550 · valid until March 2028") },
         { name: "MOOC ANSSI", issuer: t("ANSSI — Agence nationale de la sécurité des SI", "ANSSI — French cybersecurity agency"), date: t("Janv. 2025", "Jan 2025") },
         { name: t("Certification Pix", "Pix certification"), short: "Pix", issuer: "Pix", date: "2023", note: t("404 pix", "404 pix") },
       ],

@@ -72,7 +72,7 @@ Contrastes WCAG AA vérifiés dans les deux thèmes, lien d'évitement vers le m
 - **Visite guidée** : bouton « Visite guidée · 1 min » de l'intro, bouton ▶ du dock ou touche `T`.
 - **Terminal caché** : touche `/` ou bouton `>_` (`help`, `goto projets`, `open veeam`, `case`, `nmap`, `neofetch`, `sudo hire oscar`…).
 - **Mobile** : bouton gyroscope pour regarder autour de soi en inclinant le téléphone (permission demandée sur iPhone).
-- **Succès caché** : découvrir toutes les planètes (40) débloque un dernier secret.
+- **Succès caché** : découvrir toutes les planètes débloque un dernier secret.
 
 ## Structure
 

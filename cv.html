@@ -15,10 +15,11 @@
   ?lang=fr (défaut) ou ?lang=en
 -->
 <style>
+  /* CV pensé pour être lu en quelques secondes : l'essentiel en gras, le détail ensuite. */
   @page { size: A4; margin: 0; }
   :root {
-    --navy: #15293f; --blue: #1d3a5f; --blue-2: #2d5687; --accent: #bf6a39;
-    --cream: #f1e8d6; --ink: #1c1f26; --soft: #4a4f5a; --muted: #8a8f9a; --line: #e4ded2;
+    --navy: #15293f; --blue-2: #2d5687; --accent: #b0582a; --peach: #f0b48a;
+    --cream: #f6f1e7; --ink: #1c1f26; --soft: #4a4f5a; --muted: #7d828c; --line: #e4ded2;
     --serif: 'Instrument Serif', Georgia, serif;
     --sans: 'Geist', system-ui, sans-serif;
     --mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -27,75 +28,72 @@
   html, body { background: #fff; }
   body { font-family: var(--sans); color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   @media screen { body { background: #e9e5dc; padding: 24px 0; } .page { margin: 0 auto; box-shadow: 0 10px 40px rgba(0,0,0,.15); } }
+  b { font-weight: 600; color: var(--ink); }
 
-  .page { width: 210mm; height: 297mm; display: grid; grid-template-columns: 66mm 1fr; overflow: hidden; background: #fff; }
+  .page { position: relative; width: 210mm; height: 297mm; overflow: hidden; background: #fff;
+          padding: 16mm 15mm 11mm; display: flex; flex-direction: column; gap: 6.5mm; }
+  .page::before { content: ""; position: absolute; inset: 0 0 auto; height: 2.6mm;
+                  background: linear-gradient(90deg, var(--navy), var(--blue-2) 55%, var(--accent)); }
 
-  /* --- Colonne latérale ------------------------------------------------ */
-  .side { background: var(--navy); color: var(--cream); padding: 15mm 7mm 10mm 9mm; display: flex; flex-direction: column; gap: 6.2mm; }
-  .side h2 { font-family: var(--mono); font-size: 7pt; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #f0b48a; margin-bottom: 2.4mm; display: flex; align-items: center; gap: 2.4mm; }
-  .side h2::after { content: ""; flex: 1; height: .3mm; background: rgba(241, 232, 214, .2); }
-  .contact { list-style: none; display: grid; gap: 1.7mm; font-size: 8.2pt; line-height: 1.35; }
-  .contact span { display: block; font-family: var(--mono); font-size: 6.3pt; letter-spacing: .12em; color: rgba(241, 232, 214, .55); text-transform: uppercase; }
-  .contact a { color: var(--cream); text-decoration: none; word-break: break-word; }
-  .skills { display: grid; gap: 2.3mm; }
-  .skills h3 { font-family: var(--serif); font-weight: 400; font-size: 11pt; line-height: 1.1; }
-  .skills p { font-size: 7.6pt; line-height: 1.42; color: rgba(241, 232, 214, .8); margin-top: .6mm; }
-  .certs { list-style: none; display: grid; gap: 1.8mm; }
-  .certs b { display: block; font-size: 8pt; font-weight: 500; line-height: 1.3; }
-  .certs span { display: block; font-family: var(--mono); font-size: 6.6pt; line-height: 1.35; color: rgba(241, 232, 214, .6); margin-top: .3mm; }
-  .langs { list-style: none; display: grid; gap: 1.2mm; font-size: 8pt; }
-  .langs span { color: rgba(241, 232, 214, .62); }
-  .interests { list-style: none; display: grid; gap: 1.4mm; font-size: 7.6pt; line-height: 1.4; color: rgba(241, 232, 214, .82); }
+  /* --- En-tête --- */
+  .top { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; }
+  .top h1 { font-family: var(--serif); font-weight: 400; font-size: 44pt; line-height: .88; letter-spacing: -.02em; }
+  .top h1 em { color: var(--blue-2); }
+  .role { margin-top: 3.4mm; font-family: var(--mono); font-size: 8.4pt; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .now { margin-top: 1.4mm; font-size: 10pt; color: var(--soft); }
+  .role + .now { margin-top: 2mm; }
+  .contact { list-style: none; text-align: right; font-size: 9pt; line-height: 1.65; color: var(--soft); white-space: nowrap; }
+  .contact a { color: var(--ink); text-decoration: none; }
 
-  /* --- Colonne principale ---------------------------------------------- */
-  .main { padding: 12mm 12mm 8mm 11mm; display: flex; flex-direction: column; gap: 4mm; }
-  .head .name { font-family: var(--serif); font-weight: 400; font-size: 38pt; line-height: .92; letter-spacing: -.02em; }
-  .head .name em { color: var(--blue-2); }
-  .head .role { margin-top: 2.6mm; font-family: var(--mono); font-size: 8pt; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-  .head .sub { margin-top: 1.2mm; font-size: 8.6pt; color: var(--soft); }
-  .summary { font-size: 8.8pt; line-height: 1.5; color: var(--soft); border-left: .6mm solid var(--accent); padding-left: 3.2mm; }
-  .goal { font-size: 8.3pt; line-height: 1.45; color: var(--ink); background: #f4efe4; border-radius: 2mm; padding: 1.8mm 3mm; margin-top: -1.4mm; }
-  .goal b { font-family: var(--mono); font-size: 6.8pt; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-right: 1.6mm; }
+  /* --- Objectif : la ligne la plus importante --- */
+  .goal { background: var(--navy); color: #e9e1d2; border-radius: 3mm; padding: 3.6mm 5mm; font-size: 10.6pt; line-height: 1.45; }
+  .goal span { font-family: var(--mono); font-size: 7.4pt; letter-spacing: .16em; text-transform: uppercase; color: var(--peach); margin-right: 2.6mm; }
+  .goal b { color: #fff; }
 
-  .main h2 { font-family: var(--mono); font-size: 7.4pt; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 2.6mm; margin-bottom: 2.4mm; }
-  .main h2::after { content: ""; flex: 1; height: .3mm; background: var(--line); }
+  .cols { display: grid; grid-template-columns: 1fr 57mm; gap: 9mm; align-items: start; }
+  h2 { font-family: var(--mono); font-size: 8pt; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
+       display: flex; align-items: center; gap: 3mm; margin-bottom: 3.4mm; }
+  h2::after { content: ""; flex: 1; height: .3mm; background: var(--line); }
+  section + section { margin-top: 7mm; }
 
-  .job + .job { margin-top: 2.4mm; }
-  .job-top { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
-  .job h3 { font-family: var(--serif); font-weight: 400; font-size: 13.5pt; line-height: 1.1; }
-  .date { font-family: var(--mono); font-size: 7pt; color: var(--accent); white-space: nowrap; }
-  .org { font-family: var(--mono); font-size: 7.2pt; color: var(--soft); margin-top: .6mm; }
-  .org b { color: var(--ink); font-weight: 500; }
-  .groups { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 5mm; margin-top: 2mm; }
-  .groups h4 { font-family: var(--mono); font-size: 6.6pt; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); margin-bottom: .7mm; }
-  ul.dots { list-style: none; display: grid; gap: .6mm; }
-  ul.dots li { position: relative; padding-left: 3mm; font-size: 7.9pt; line-height: 1.4; color: var(--soft); }
-  ul.dots li::before { content: ""; position: absolute; left: .4mm; top: 1.55mm; width: 1.2mm; height: 1.2mm; border-radius: 50%; background: var(--accent); }
-  .desc { font-size: 8.1pt; line-height: 1.45; color: var(--soft); margin-top: 1mm; }
-  .domains { display: flex; flex-wrap: wrap; gap: 1.4mm; margin-top: 1.8mm; }
-  .domains span { font-family: var(--mono); font-size: 6.6pt; color: var(--blue); background: #f4efe4; border: .25mm solid var(--line); border-radius: 9px; padding: .5mm 2mm; }
+  /* --- Expérience --- */
+  .job + .job { margin-top: 5mm; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .job h3 { font-size: 11.6pt; font-weight: 600; }
+  .date { font-family: var(--mono); font-size: 7.8pt; color: var(--muted); white-space: nowrap; }
+  .org { margin-top: .8mm; font-size: 9pt; color: var(--soft); }
+  ul.hl { list-style: none; margin-top: 3mm; display: grid; gap: 2mm; }
+  ul.hl li { position: relative; padding-left: 4.4mm; font-size: 9.6pt; line-height: 1.45; color: var(--soft); }
+  ul.hl li::before { content: ""; position: absolute; left: .6mm; top: 2.1mm; width: 1.6mm; height: 1.6mm; border-radius: 50%; background: var(--accent); }
 
-  .projects { list-style: none; display: grid; gap: 1.7mm; }
-  .projects b { font-size: 8.6pt; font-weight: 600; color: var(--ink); }
-  .projects b em { font-style: normal; font-family: var(--mono); font-size: 6.4pt; font-weight: 500; color: var(--accent); border: .25mm solid rgba(191, 106, 57, .5); border-radius: 9px; padding: .2mm 1.4mm; margin-left: 1.4mm; vertical-align: 1px; }
-  .projects p { font-size: 7.9pt; line-height: 1.42; color: var(--soft); margin-top: .4mm; }
-  .projects .tech { font-family: var(--mono); font-size: 6.5pt; color: var(--muted); margin-top: .4mm; }
-  .iut { font-size: 7.9pt; line-height: 1.42; color: var(--soft); margin-top: 2.2mm; }
-  .iut b { color: var(--ink); font-weight: 600; }
+  /* --- Formation --- */
+  .edu { list-style: none; display: grid; gap: 3.4mm; }
+  .edu li { display: grid; grid-template-columns: 21mm 1fr; gap: 3mm; }
+  .edu .date { padding-top: .8mm; }
+  .edu h3 { font-size: 10.2pt; font-weight: 600; line-height: 1.3; }
+  .edu h3 em { font-style: normal; font-family: var(--mono); font-size: 7pt; font-weight: 500; color: var(--accent);
+               border: .25mm solid rgba(176, 88, 42, .45); border-radius: 9px; padding: .3mm 1.8mm; margin-left: 1.6mm; vertical-align: 1.5px; white-space: nowrap; }
+  .edu p { margin-top: .5mm; font-size: 8.8pt; color: var(--soft); }
 
-  .edu { list-style: none; display: grid; gap: 1.8mm; }
-  .edu li { display: grid; grid-template-columns: 20mm 1fr; gap: 3mm; }
-  .edu b { font-size: 8.6pt; font-weight: 600; }
-  .edu p { font-size: 7.8pt; color: var(--soft); line-height: 1.4; }
+  /* --- Encadré latéral --- */
+  .side { background: var(--cream); border-radius: 3mm; padding: 5.5mm 5mm; }
+  .side section + section { margin-top: 5.5mm; }
+  .kv { list-style: none; display: grid; gap: 2.4mm; }
+  .kv b { display: block; font-size: 9.2pt; }
+  .kv span { display: block; font-size: 8.5pt; line-height: 1.4; color: var(--soft); }
+  .kv.line { gap: 1.6mm; }
+  .kv.line li { display: flex; justify-content: space-between; align-items: baseline; gap: 2mm; }
+  .kv.line span { font-size: 8.3pt; text-align: right; }
+  .hobbies { font-size: 8.6pt; line-height: 1.5; color: var(--soft); }
 
-  .foot { margin-top: auto; font-family: var(--mono); font-size: 6.6pt; color: var(--muted); display: flex; justify-content: space-between; border-top: .3mm solid var(--line); padding-top: 2mm; }
+  /* --- Pied de page --- */
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: baseline; gap: 6mm;
+          border-top: .3mm solid var(--line); padding-top: 3mm; font-size: 9pt; color: var(--soft); }
+  .foot a { font-family: var(--mono); font-size: 8.6pt; color: var(--blue-2); text-decoration: none; }
 </style>
 </head>
 <body>
-<div class="page">
-  <aside class="side" id="side"></aside>
-  <main class="main" id="main"></main>
-</div>
+<div class="page" id="cv"></div>
 
 <script src="assets/js/data/content.js"></script>
 <script src="assets/js/ui/i18n.js"></script>
