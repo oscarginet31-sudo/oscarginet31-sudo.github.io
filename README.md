@@ -1,5 +1,7 @@
 # Portfolio — Oscar Ginet
 
+**En ligne : https://oscarginet31-sudo.github.io/** (GitHub Pages, publié depuis la branche `main` à chaque `git push`).
+
 Trois façons de visiter le même contenu :
 
 - **`index.html`** : la galaxie 3D (Three.js). Chaque étoile est une section, chaque planète un projet ou une compétence.
@@ -41,13 +43,13 @@ Les pages sont construites en JavaScript, mais `tools/prerender.py` injecte le r
 ## Image d'aperçu de partage
 
 `og-cover.jpg` (1200×630) s'affiche quand le lien est partagé sur LinkedIn, Teams, WhatsApp… Pour la régénérer : servir le dossier (`python3 -m http.server`), ouvrir `/tools/og.html` dans un navigateur, puis « Télécharger ».
-Une fois le site en ligne, remplacer `og-cover.jpg` par son URL absolue dans les balises `og:image`.
+Les balises `og:image`, `og:url` et `canonical` pointent vers l'adresse en ligne (à changer en cas de nom de domaine personnel, comme `sitemap.xml`, `robots.txt` et `security.txt`).
 
 ## Sécurité
 
 - **CSP stricte** sur chaque page : scripts et polices uniquement depuis le site, aucun script en ligne, aucune iframe, aucun formulaire externe.
 - `referrer: no-referrer` : aucune URL n'est transmise aux sites liés.
-- **Zéro tiers** : pas de CDN, pas de Google Fonts, pas d'analytics (licences dans `assets/vendor/`).
+- **Zéro tiers** : pas de CDN, pas de Google Fonts, pas d'analytics (licences complètes : `assets/vendor/three/LICENSE` en MIT, `assets/vendor/fonts/OFL.txt`).
 - `.well-known/security.txt` : contact pour signaler une vulnérabilité (à renouveler avant octobre 2027).
 - `robots.txt` : `tools/` et `cv.html` exclus de l'indexation.
 - Schémas et étude de cas **anonymisés** : aucun nom de serveur, d'IP, de chemin interne, de collègue ni de prestataire.
@@ -73,6 +75,8 @@ cv.html                      source des CV PDF
 CV_Ginet_Oscar*.pdf          CV téléchargeables (FR, EN)
 og-cover.jpg                 image d'aperçu de partage
 .well-known/security.txt     contact sécurité
+sitemap.xml, robots.txt      référencement
+.nojekyll                    GitHub Pages sert les fichiers tels quels (dont .well-known/)
 tools/                       prerender.py (HTML statique), build_cv.py (CV PDF), og.html (image d'aperçu)
 assets/vendor/               Three.js r128 + post-traitement, polices woff2 (hébergés en local)
 assets/css/

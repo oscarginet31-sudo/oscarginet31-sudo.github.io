@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /tools/
 Disallow: /cv.html
+
+Sitemap: https://oscarginet31-sudo.github.io/sitemap.xml
