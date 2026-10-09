@@ -4,6 +4,8 @@
 (function (PF) {
   "use strict";
 
+  const REDUCED = matchMedia("(prefers-reduced-motion: reduce)");
+
   const U = {
     /** Borne v dans [min, max]. */
     clamp: (v, min, max) => (v < min ? min : v > max ? max : v),
@@ -57,7 +59,8 @@
     /** Détection capacités d'environnement (calculée une fois). */
     env: {
       touch: matchMedia("(hover: none), (pointer: coarse)").matches,
-      reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
+      /** Lu en direct : suit le réglage système même s'il change pendant la visite. */
+      get reducedMotion() { return REDUCED.matches; },
     },
   };
 

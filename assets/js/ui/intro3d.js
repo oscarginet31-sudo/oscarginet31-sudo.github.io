@@ -33,7 +33,6 @@
       set(".enter-tour-label", PF.t("tour.startLong"));
       set(".intro-classic-label", PF.t("hud.classic") + " →");
       set(".intro-reduced", PF.t("intro.reduced"));
-      set(".intro-eyebrow-text", PF.lang === "fr" ? "Portfolio 3D · Cybersécurité & Réseaux" : "3D portfolio · Cybersecurity & Networks");
       const ctrl = this.root.querySelector(".intro-controls");
       const fr = PF.lang === "fr";
       if (ctrl) ctrl.innerHTML = U.env.touch

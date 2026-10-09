@@ -79,7 +79,8 @@
 
     /** Intensité hyperespace courante : monte puis redescend pendant le saut. */
     get warp() {
-      if (!this.tween || !this.tween.warp) return 0;
+      // Animations réduites : trajet sans effet hyperespace (traînées, zoom, éblouissement).
+      if (!this.tween || !this.tween.warp || U.env.reducedMotion) return 0;
       return Math.pow(Math.sin(Math.PI * this.tween.t), 1.6) * this.tween.warp;
     }
 
@@ -224,7 +225,7 @@
 
       // Flottement léger quand on ne pilote pas : la scène ne paraît jamais figée.
       const still = this.vel.lengthSq() < 400 && !this._drag;
-      this._sway = U.damp(this._sway, still ? 1 : 0, 0.05, dt);
+      this._sway = U.damp(this._sway, still && !U.env.reducedMotion ? 1 : 0, 0.05, dt);
       this.sync();
     }
 

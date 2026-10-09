@@ -150,7 +150,8 @@
       // Le système d'arrivée commence à se déplier en fin de saut.
       const t = this.flight.tweenT;
       const focus = this.activeSystem || (this.pendingSystem && t != null && t > 0.55 ? this.pendingSystem : null);
-      const spinning = this.mode === "galaxy" && !this.pendingSystem;
+      // La galaxie ne tourne pas toute seule si l'utilisateur a demandé moins d'animations.
+      const spinning = this.mode === "galaxy" && !this.pendingSystem && !U.env.reducedMotion;
       this.galaxy.update(dt, focus, this.camera, this.idle, spinning);
       if (spinning) for (const m of this.galaxyPicks) if (m.userData.system) m.position.copy(m.userData.system.center);
       this.keyLight.position.copy(focus ? focus.center : ORIGIN);

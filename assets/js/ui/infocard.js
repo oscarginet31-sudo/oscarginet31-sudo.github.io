@@ -36,6 +36,18 @@
         if (this.current && (e.key === "Escape" || e.key.toLowerCase() === "e")) this.close();
       });
       PF.onLang(() => { if (this.current) this._build(this.current); });
+
+      // Halo sous le curseur, à la couleur du système (port de « Magic Card »,
+      // Magic UI) : souris uniquement, rien sur écran tactile.
+      const body = root.querySelector(".card-body");
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        body.addEventListener("pointermove", (e) => {
+          const r = body.getBoundingClientRect();
+          body.style.setProperty("--mx", (e.clientX - r.left).toFixed(0) + "px");
+          body.style.setProperty("--my", (e.clientY - r.top).toFixed(0) + "px");
+        }, { passive: true });
+        body.addEventListener("pointerleave", () => { body.style.removeProperty("--mx"); body.style.removeProperty("--my"); });
+      }
     }
 
     _build(cur) {
@@ -59,14 +71,11 @@
         </div>` : "";
 
       this.content.innerHTML = `
-        <div class="card-eyebrow" style="color:${color}">
-          <span class="card-dot" style="background:${color}"></span>${esc(tx(planet.system.def.label))}
-          ${kind ? `<span class="card-class">· ${esc(tx(kind))}</span>` : ""}
-        </div>
         <h2 class="card-title">${esc(tx(b.name))}</h2>
+        <div class="card-origin"><span class="card-dot" style="background:${color}"></span>${esc(tx(planet.system.def.label))}${kind ? ` · ${esc(tx(kind))}` : ""}</div>
         ${b.meta && tx(b.meta) ? `<div class="card-meta">${esc(tx(b.meta))}</div>` : ""}
         ${b.sub ? `<div class="card-sub">${esc(tx(b.sub))}</div>` : ""}
-        ${b.highlight ? `<div class="card-highlight">★ ${esc(tx(b.highlight))}</div>` : ""}
+        ${b.highlight ? `<div class="card-highlight">${esc(tx(b.highlight))}</div>` : ""}
         ${tx(b.desc) ? `<p class="card-desc">${esc(tx(b.desc))}</p>` : ""}
         ${metrics}${b.diagram ? `<figure class="diagram-fig">${PF.diagram(b.diagram)}<figcaption>${esc(PF.diagramCaption())}</figcaption></figure>` : ""}${list(b.points)}${groups}${tags}${cta}`;
       this.root.style.setProperty("--hub", color);
@@ -77,10 +86,8 @@
       const fr = PF.lang === "fr";
       const stats = id.stats.map((s) => `<div><b>${esc(tx(s.value))}</b><span>${esc(tx(s.label))}</span></div>`).join("");
       this.content.innerHTML = `
-        <div class="card-eyebrow" style="color:#ffd9a0">
-          <span class="card-dot" style="background:#ffd9a0"></span>${fr ? "Cœur galactique" : "Galactic core"}
-        </div>
         <h2 class="card-title">${esc(id.name)}</h2>
+        <div class="card-origin"><span class="card-dot" style="background:#ffd9a0"></span>${fr ? "Cœur galactique" : "Galactic core"}</div>
         <div class="card-meta">${esc(tx(id.headline))}</div>
         <p class="card-quote">${rich(tx(id.motto))}</p>
         ${id.bio.map((p) => `<p class="card-desc">${esc(tx(p))}</p>`).join("")}
@@ -96,8 +103,8 @@
     _buildSecret() {
       const fr = PF.lang === "fr", gold = "#ffd27a", n = PF.app3d ? PF.app3d.app.galaxy.planetCount : 41;
       this.content.innerHTML = `
-        <div class="card-eyebrow" style="color:${gold}"><span class="card-dot" style="background:${gold}"></span>${fr ? "Succès débloqué" : "Achievement unlocked"}</div>
         <h2 class="card-title">${fr ? "Explorateur de galaxie" : "Galaxy explorer"}</h2>
+        <div class="card-origin"><span class="card-dot" style="background:${gold}"></span>${fr ? "Succès débloqué" : "Achievement unlocked"}</div>
         <div class="card-meta">${fr ? `Les ${n} planètes explorées` : `All ${n} planets explored`}</div>
         <p class="card-quote">${fr ? "Merci d’être allé <em>jusqu’au bout.</em>" : "Thanks for going <em>all the way.</em>"}</p>
         <p class="card-desc">${fr
