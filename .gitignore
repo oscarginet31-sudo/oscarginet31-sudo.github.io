@@ -13,3 +13,6 @@ todo-flow/
 # Données personnelles non publiées (téléphone du CV) et copie temporaire du CV
 tools/private.json
 cv.build.html
+
+# Configuration MCP locale (outils de Claude Code, pas le site)
+.mcp.json

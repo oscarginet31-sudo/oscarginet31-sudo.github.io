@@ -54,7 +54,7 @@
   <a class="brand" href="#top" aria-label="Oscar Ginet — haut de page">
     <span class="brand-name">Oscar Ginet</span>
   </a>
-  <nav class="nav-links" id="nav-links" aria-label="Sections"><!--prerender:nav-links--><a href="#about" data-sec="about"><span class="n">01</span>À propos</a><a href="#path" data-sec="path"><span class="n">02</span>Parcours</a><a href="#projects" data-sec="projects"><span class="n">03</span>Projets</a><a href="#skills" data-sec="skills"><span class="n">04</span>Compétences</a><a href="#engagement" data-sec="engagement"><span class="n">05</span>Engagements</a><a href="#contact" data-sec="contact"><span class="n">06</span>Contact</a><!--/prerender:nav-links--></nav>
+  <nav class="nav-links" id="nav-links" aria-label="Sections"><!--prerender:nav-links--><a href="#about" data-sec="about">À propos</a><a href="#path" data-sec="path">Parcours</a><a href="#projects" data-sec="projects">Projets</a><a href="#skills" data-sec="skills">Compétences</a><a href="#engagement" data-sec="engagement">Engagements</a><a href="#contact" data-sec="contact">Contact</a><!--/prerender:nav-links--></nav>
   <div class="nav-controls">
     <a class="pill pill-galaxy" href="index.html"><span class="pill-star">✦</span><span data-t="nav.galaxy">Galaxie 3D</span></a>
     <button class="pill icon" id="theme-toggle" type="button" data-t-label="nav.theme" aria-label="Changer de thème">
@@ -76,10 +76,10 @@
     <canvas id="net" aria-hidden="true"></canvas>
     <div class="hero-grid wrap">
       <div class="hero-copy">
-        <p class="status"><span class="status-dot"></span><span id="hero-status"><!--prerender:hero-status-->En alternance chez Lamberet SAS<!--/prerender:hero-status--></span></p>
         <h1 class="hero-name">Oscar <em>Ginet</em></h1>
-        <p class="hero-role" id="hero-role"><!--prerender:hero-role-->Alternant chez Lamberet SAS · BUT R&amp;T parcours Cybersécurité · IUT d’Annecy<!--/prerender:hero-role--></p>
+        <p class="hero-role" id="hero-role"><!--prerender:hero-role-->Alternant chez Lamberet SAS · BUT R&amp;T Cybersécurité, 3ᵉ année · IUT d’Annecy<!--/prerender:hero-role--></p>
         <p class="hero-tagline" aria-live="polite"><span id="tagline"></span><span class="caret" aria-hidden="true"></span></p>
+        <p class="seeking"><span class="seeking-dot" aria-hidden="true"></span><span id="hero-status"><!--prerender:hero-status-->Disponible dès septembre 2027 pour un master ou une école d’ingénieurs en cybersécurité, en alternance.<!--/prerender:hero-status--></span></p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#projects"><span data-t="hero.cta.projects">Voir les projets</span><span aria-hidden="true">→</span></a>
           <a class="btn btn-ghost" href="CV_Ginet_Oscar.pdf" download><span data-t="hero.cta.cv">Télécharger le CV</span><span aria-hidden="true">↓</span></a>
@@ -97,7 +97,6 @@
   <section class="section" id="about" aria-labelledby="about-title"><!--prerender:about--><div class="wrap">
       
     <header class="sec-head reveal">
-      <p class="sec-label"><span>01</span>À propos</p>
       <h2 class="sec-title" id="about-title">Déterminé, curieux, et une <em>réelle volonté d’apprendre.</em></h2>
       
     </header>
@@ -121,7 +120,6 @@
   <section class="section" id="path" aria-labelledby="path-title"><!--prerender:path--><div class="wrap">
       
     <header class="sec-head reveal">
-      <p class="sec-label"><span>02</span>Parcours</p>
       <h2 class="sec-title" id="path-title">Du terrain <em>aux serveurs.</em></h2>
       <p class="sec-intro">Deux ans d’alternance sur une infrastructure industrielle bien réelle, nourris par une formation en cybersécurité.</p>
     </header>
@@ -212,7 +210,6 @@
   <section class="section" id="projects" aria-labelledby="projects-title"><!--prerender:projects--><div class="wrap">
       
     <header class="sec-head reveal">
-      <p class="sec-label"><span>03</span>Projets</p>
       <h2 class="sec-title" id="projects-title">Là où la curiosité <em>rencontre la prod.</em></h2>
       <p class="sec-intro">Cinq chantiers menés en alternance sur l’infrastructure de Lamberet, et deux projets universitaires. Chaque fiche détaille la démarche et l’environnement technique.</p>
     </header>
@@ -227,9 +224,9 @@
         IUT<sup>2</sup>
       </button></div>
       <div class="pgrid">
-      <article class="pc featured reveal" data-ctx="pro" data-id="edr">
+      <article class="pc featured has-beam reveal" data-ctx="pro" data-id="edr">
+        <span class="pc-beam" aria-hidden="true"></span>
         <div class="pc-top">
-          <span class="pc-num">/01</span>
           <span class="pc-org">Lamberet SAS</span>
           <span class="pc-badge">Mémoire de BUT</span>
         </div>
@@ -245,8 +242,8 @@
         </div>
       </article>
       <article class="pc featured reveal" data-ctx="pro" data-id="ad">
+        
         <div class="pc-top">
-          <span class="pc-num">/02</span>
           <span class="pc-org">Lamberet SAS</span>
           
         </div>
@@ -263,8 +260,8 @@
         </div>
       </article>
       <article class="pc reveal" data-ctx="pro" data-id="zabbix">
+        
         <div class="pc-top">
-          <span class="pc-num">/03</span>
           <span class="pc-org">Lamberet SAS</span>
           
         </div>
@@ -278,8 +275,8 @@
         </div>
       </article>
       <article class="pc reveal" data-ctx="pro" data-id="proxmox">
+        
         <div class="pc-top">
-          <span class="pc-num">/04</span>
           <span class="pc-org">Lamberet SAS</span>
           
         </div>
@@ -293,8 +290,8 @@
         </div>
       </article>
       <article class="pc reveal" data-ctx="pro" data-id="veeam">
+        
         <div class="pc-top">
-          <span class="pc-num">/05</span>
           <span class="pc-org">Lamberet SAS</span>
           
         </div>
@@ -308,8 +305,8 @@
         </div>
       </article>
       <article class="pc reveal" data-ctx="iut" data-id="sdr">
+        
         <div class="pc-top">
-          <span class="pc-num">/06</span>
           <span class="pc-org">IUT d’Annecy</span>
           <span class="pc-badge">SAÉ 301</span>
         </div>
@@ -323,8 +320,8 @@
         </div>
       </article>
       <article class="pc reveal" data-ctx="iut" data-id="cyberzone">
+        
         <div class="pc-top">
-          <span class="pc-num">/07</span>
           <span class="pc-org">IUT d’Annecy</span>
           <span class="pc-badge">SAÉ 203</span>
         </div>
@@ -341,14 +338,12 @@
   <section class="section" id="skills" aria-labelledby="skills-title"><!--prerender:skills--><div class="wrap">
       
     <header class="sec-head reveal">
-      <p class="sec-label"><span>04</span>Compétences</p>
       <h2 class="sec-title" id="skills-title">Des outils <em>éprouvés en production.</em></h2>
       <p class="sec-intro">Une stack construite à l’IUT et mise à l’épreuve chaque semaine sur l’infrastructure de Lamberet. Chaque compétence indique où elle est pratiquée.</p>
     </header>
       <p class="legend reveal">Pratiqué : <span class="ctx ctx-pro">Entreprise</span><span class="ctx ctx-iut">IUT</span><span class="ctx ctx-perso">Perso</span></p>
       <div class="sgrid">
       <div class="scat reveal">
-        <p class="scat-code">01 / SYS</p>
         <h3>Systèmes &amp; annuaire</h3>
         <ul>
           <li>
@@ -366,7 +361,6 @@
         </ul>
       </div>
       <div class="scat reveal">
-        <p class="scat-code">02 / INFRA</p>
         <h3>Virtualisation &amp; sauvegarde</h3>
         <ul>
           <li>
@@ -384,7 +378,6 @@
         </ul>
       </div>
       <div class="scat reveal">
-        <p class="scat-code">03 / SEC</p>
         <h3>Cybersécurité</h3>
         <ul>
           <li>
@@ -406,7 +399,6 @@
         </ul>
       </div>
       <div class="scat reveal">
-        <p class="scat-code">04 / NET</p>
         <h3>Réseaux &amp; supervision</h3>
         <ul>
           <li>
@@ -424,7 +416,6 @@
         </ul>
       </div>
       <div class="scat reveal">
-        <p class="scat-code">05 / DEV</p>
         <h3>Code &amp; automatisation</h3>
         <ul>
           <li>
@@ -445,31 +436,30 @@
   <section class="section" id="engagement" aria-labelledby="engagement-title"><!--prerender:engagement--><div class="wrap">
       
     <header class="sec-head reveal">
-      <p class="sec-label"><span>05</span>Engagements</p>
       <h2 class="sec-title" id="engagement-title">Le terrain, <em>l’équipe, l’effort.</em></h2>
       <p class="sec-intro">Ce qui m’occupe loin des écrans : servir, encadrer, organiser et rouler.</p>
     </header>
       <div class="egrid">
         <article class="ecard featured reveal">
-          <span class="eglyph" aria-hidden="true">⌖</span>
+          <svg class="eicon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 19.5 9 8.5l3.6 6.1L15 10.8l6.5 8.7z"></path><path d="m7.4 11.2 1.6 1.4 1.5-1.6"></path></svg>
           <h3>Réserviste opérationnel — 27ᵉ BCA</h3>
           <p class="emeta">Armée de Terre · depuis juillet 2026</p>
           <p>Engagement de cinq ans dans la réserve opérationnelle, au sein du 27ᵉ Bataillon de Chasseurs Alpins, unité des troupes de montagne. Mené en parallèle de l’alternance et des études.</p>
         </article>
         <article class="ecard reveal">
-          <span class="eglyph" aria-hidden="true">★</span>
+          <svg class="eicon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.2" r="3"></circle><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"></path><circle cx="17" cy="9.6" r="2.4"></circle><path d="M15.6 14.4a4.4 4.4 0 0 1 4.9 5.1"></path></svg>
           <h3>Vice-président — Association des jeunes</h3>
           <p class="emeta">Lhuis (01)</p>
           <p>Organisation et animation d’événements pour le village, coordination de l’équipe et de la logistique.</p>
         </article>
         <article class="ecard reveal">
-          <span class="eglyph" aria-hidden="true">⚑</span>
+          <svg class="eicon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"></circle><path d="m12 8.3 3.3 2.4-1.3 3.9H10l-1.3-3.9z"></path><path d="M12 8.3V3.5m3.3 7.2 4.6-1.5M14 14.6l2.8 3.9M10 14.6l-2.8 3.9m1.5-7.8L4.1 9.2"></path></svg>
           <h3>Football en club · 12 saisons</h3>
           <p class="emeta">De 6 à 18 ans · encadrement des jeunes</p>
           <p>Douze saisons en club, puis encadrement des entraînements des équipes de jeunes.</p>
         </article>
         <article class="ecard reveal">
-          <span class="eglyph" aria-hidden="true">↗</span>
+          <svg class="eicon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.8" cy="15.8" r="3.6"></circle><circle cx="18.2" cy="15.8" r="3.6"></circle><path d="m5.8 15.8 3.6-6.6h5.4l3.4 6.6M9.4 9.2l3.3 6.6H5.8M13.4 6.4h2.4"></path></svg>
           <h3>Cyclisme sur route</h3>
           <p class="emeta">~6 h de sport par semaine</p>
           <p>Ma vraie passion. Complétée par la musculation, la course à pied et l’escalade.</p>
@@ -480,7 +470,6 @@
       <a class="promo reveal" href="index.html">
         <span class="promo-sky" aria-hidden="true"></span>
         <span class="promo-text">
-          <span class="promo-kicker">✦ Galaxie 3D</span>
           <span class="promo-pitch">Ce portfolio existe aussi en version jouable : une galaxie où chaque étoile est une section et chaque planète un projet.</span>
         </span>
         <span class="promo-cta">Explorer en 3D →</span>
@@ -489,7 +478,6 @@
   <section class="section" id="contact" aria-labelledby="contact-title"><!--prerender:contact--><div class="wrap">
       <div class="contact-card reveal">
         <div class="cc-main">
-          <p class="sec-label"><span>06</span>Contact</p>
           <h2 class="sec-title" id="contact-title">Un réseau à durcir, <em>une idée à creuser ?</em></h2>
           <p class="cc-intro">Je cherche une poursuite d’études en cybersécurité, en alternance, à partir de septembre 2027. Ouvert aussi aux échanges sur un projet d’infrastructure ou une question technique. Réponse sous 48 h ouvrées.</p>
           <div class="cc-mail">

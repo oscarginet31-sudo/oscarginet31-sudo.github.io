@@ -25,10 +25,12 @@
         "Systems, Networks & Security apprentice"
       ),
       headline: t(
-        "Alternant chez Lamberet SAS · BUT R&T parcours Cybersécurité · IUT d’Annecy",
-        "Apprentice at Lamberet SAS · BUT Networks & Telecom, Cybersecurity track · IUT Annecy"
+        "Alternant chez Lamberet SAS · BUT R&T Cybersécurité, 3ᵉ année · IUT d’Annecy",
+        "Apprentice at Lamberet SAS · BUT Networks & Telecom, Cybersecurity, 3rd year · IUT Annecy"
       ),
-      status: t("En alternance chez Lamberet SAS", "Apprentice at Lamberet SAS"),
+      // Ce que je cherche : la première chose qu'un recruteur doit lire (accueil du mode classique).
+      seeking: t("Disponible dès septembre 2027 pour un master ou une école d’ingénieurs en cybersécurité, en alternance.",
+                 "Available from September 2027 for a cybersecurity master’s or engineering school, as an apprentice."),
       location: t("Annecy (74) · Ain (01)", "Annecy & Ain, France"),
       availability: t("Alternance jusqu’en juillet 2027", "Apprenticeship until July 2027"),
       goal: t(
@@ -354,7 +356,7 @@
       ),
       items: [
         {
-          id: "edr", ctx: "pro", featured: true, diagram: "edr",
+          id: "edr", beam: true, ctx: "pro", featured: true, diagram: "edr",
           link: { href: "etude-edr.html", label: t("Lire l’étude de cas complète", "Read the full case study"), short: t("Étude de cas", "Case study") }, short: t("Migration EDR", "EDR migration"),
           badge: t("Mémoire de BUT", "BUT thesis"),
           title: t("Migration EDR : WithSecure → Trend Micro Vision One", "EDR migration: WithSecure → Trend Micro Vision One"),
@@ -511,7 +513,7 @@
       ),
       items: [
         {
-          glyph: "⌖", featured: true, short: t("Réserve · 27ᵉ BCA", "Reserve · 27th BCA"),
+          glyph: "⌖", icon: "peak", featured: true, short: t("Réserve · 27ᵉ BCA", "Reserve · 27th BCA"),
           title: t("Réserviste opérationnel — 27ᵉ BCA", "Operational reservist — 27th BCA"),
           meta: t("Armée de Terre · depuis juillet 2026", "French Army · since July 2026"),
           desc: t(
@@ -519,7 +521,7 @@
             "Five-year commitment to the operational reserve with the 27th Alpine Chasseurs Battalion, a mountain infantry unit. Carried out alongside my apprenticeship and studies."),
         },
         {
-          glyph: "★", short: t("Association des jeunes", "Youth association"),
+          glyph: "★", icon: "group", short: t("Association des jeunes", "Youth association"),
           title: t("Vice-président — Association des jeunes", "Vice-president — Youth association"),
           meta: "Lhuis (01)",
           desc: t(
@@ -527,7 +529,7 @@
             "Organizing and running village events, coordinating the team and the logistics."),
         },
         {
-          glyph: "⚑", short: "Football",
+          glyph: "⚑", icon: "ball", short: "Football",
           title: t("Football en club · 12 saisons", "Club football · 12 seasons"),
           meta: t("De 6 à 18 ans · encadrement des jeunes", "Age 6 to 18 · youth coaching"),
           desc: t(
@@ -535,7 +537,7 @@
             "Twelve seasons at club level, then coaching youth team training sessions."),
         },
         {
-          glyph: "↗",
+          glyph: "↗", icon: "bike",
           title: t("Cyclisme sur route", "Road cycling"),
           meta: t("~6 h de sport par semaine", "~6 h of sport a week"),
           desc: t(

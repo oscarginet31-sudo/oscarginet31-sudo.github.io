@@ -24,9 +24,8 @@
   ];
 
   const tags = (list) => list.map((x) => `<span class="tag">${esc(tx(x))}</span>`).join("");
-  const head = (num, labelKey, title, intro, id) => `
+  const head = (title, intro, id) => `
     <header class="sec-head reveal">
-      <p class="sec-label"><span>${num}</span>${esc(t(labelKey))}</p>
       <h2 class="sec-title" id="${id}-title">${rich(tx(title))}</h2>
       ${intro ? `<p class="sec-intro">${esc(tx(intro))}</p>` : ""}
     </header>`;
@@ -35,7 +34,7 @@
   function about() {
     const id = C.identity;
     return `<div class="wrap">
-      ${head("01", "about.label", id.motto, null, "about")}
+      ${head(id.motto, null, "about")}
       <div class="about-grid">
         <div class="about-bio reveal">${id.bio.map((p) => `<p>${esc(tx(p))}</p>`).join("")}</div>
         <dl class="facts reveal">${id.facts.map((f) => `
@@ -69,7 +68,7 @@
         <h4>${esc(tx(e.title))}</h4>
         <p class="li-org">${esc(tx(e.org))}</p>
         ${tx(e.desc) ? `<p class="li-desc">${esc(tx(e.desc))}</p>` : ""}
-        ${e.highlight ? `<p class="hl">★ ${esc(tx(e.highlight))}</p>` : ""}
+        ${e.highlight ? `<p class="hl">${esc(tx(e.highlight))}</p>` : ""}
       </li>`).join("");
     const certs = X.certifications.map((c) => `
       <li class="reveal">
@@ -77,7 +76,7 @@
         <span class="li-date">${esc(tx(c.date))}</span>
       </li>`).join("");
     return `<div class="wrap">
-      ${head("02", "path.label", X.title, X.intro, "path")}
+      ${head(X.title, X.intro, "path")}
       <h3 class="sub-label reveal">${esc(t("path.jobs"))}</h3>
       <div class="jobs">${jobs}</div>
       <div class="path-cols">
@@ -95,15 +94,15 @@
       <button type="button" class="fchip${filter === k ? " on" : ""}" data-filter="${k}" aria-pressed="${filter === k}">
         ${esc(t("proj." + k))}<sup>${count(k)}</sup>
       </button>`).join("");
-    const cards = items.map((p, i) => {
+    const cards = items.map((p) => {
       const env = p.env.slice(0, 4).map((e) => `<span class="tag">${esc(e)}</span>`).join("")
         + (p.env.length > 4 ? `<span class="tag more">+${p.env.length - 4}</span>` : "");
       const metrics = p.featured && p.metrics ? `<div class="pc-metrics">${p.metrics.map((m) => `
         <div><b>${esc(tx(m.value))}</b><span>${esc(tx(m.label))}</span></div>`).join("")}</div>` : "";
       return `
-      <article class="pc${p.featured ? " featured" : ""} reveal" data-ctx="${p.ctx}" data-id="${p.id}"${filter !== "all" && p.ctx !== filter ? " hidden" : ""}>
+      <article class="pc${p.featured ? " featured" : ""}${p.beam ? " has-beam" : ""} reveal" data-ctx="${p.ctx}" data-id="${p.id}"${filter !== "all" && p.ctx !== filter ? " hidden" : ""}>
+        ${p.beam ? '<span class="pc-beam" aria-hidden="true"></span>' : ""}
         <div class="pc-top">
-          <span class="pc-num">/${String(i + 1).padStart(2, "0")}</span>
           <span class="pc-org">${esc(t("proj.org." + p.ctx))}</span>
           ${p.badge ? `<span class="pc-badge">${esc(tx(p.badge))}</span>` : ""}
         </div>
@@ -118,7 +117,7 @@
       </article>`;
     }).join("");
     return `<div class="wrap">
-      ${head("03", "proj.label", P.title, P.intro, "projects")}
+      ${head(P.title, P.intro, "projects")}
       <div class="filters reveal" role="group" aria-label="${esc(PF.lang === "fr" ? "Filtrer les projets" : "Filter projects")}">${chips}</div>
       <div class="pgrid">${cards}</div>
     </div>`;
@@ -129,7 +128,6 @@
     const badge = (k) => `<span class="ctx ctx-${k}">${esc(t("ctx." + k))}</span>`;
     const cats = S.categories.map((c) => `
       <div class="scat reveal">
-        <p class="scat-code">${esc(c.code)}</p>
         <h3>${esc(tx(c.name))}</h3>
         <ul>${c.items.map((it) => `
           <li>
@@ -139,19 +137,29 @@
         </ul>
       </div>`).join("");
     return `<div class="wrap">
-      ${head("04", "skills.label", S.title, S.intro, "skills")}
+      ${head(S.title, S.intro, "skills")}
       <p class="legend reveal">${esc(t("skills.where"))} ${["pro", "iut", "perso"].map(badge).join("")}</p>
       <div class="sgrid">${cats}</div>
     </div>`;
   }
 
+  /** Icônes au trait (24 × 24, currentColor), dessinées pour ce site. */
+  const ICONS = {
+    peak: '<path d="M2.5 19.5 9 8.5l3.6 6.1L15 10.8l6.5 8.7z"/><path d="m7.4 11.2 1.6 1.4 1.5-1.6"/>',
+    group: '<circle cx="9" cy="8.2" r="3"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9.6" r="2.4"/><path d="M15.6 14.4a4.4 4.4 0 0 1 4.9 5.1"/>',
+    ball: '<circle cx="12" cy="12" r="8.6"/><path d="m12 8.3 3.3 2.4-1.3 3.9H10l-1.3-3.9z"/><path d="M12 8.3V3.5m3.3 7.2 4.6-1.5M14 14.6l2.8 3.9M10 14.6l-2.8 3.9m1.5-7.8L4.1 9.2"/>',
+    bike: '<circle cx="5.8" cy="15.8" r="3.6"/><circle cx="18.2" cy="15.8" r="3.6"/><path d="m5.8 15.8 3.6-6.6h5.4l3.4 6.6M9.4 9.2l3.3 6.6H5.8M13.4 6.4h2.4"/>',
+  };
+  const icon = (k) => ICONS[k]
+    ? `<svg class="eicon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>` : "";
+
   function engagement() {
     const E = C.engagement;
     return `<div class="wrap">
-      ${head("05", "eng.label", E.title, E.intro, "engagement")}
+      ${head(E.title, E.intro, "engagement")}
       <div class="egrid">${E.items.map((e) => `
         <article class="ecard${e.featured ? " featured" : ""} reveal">
-          <span class="eglyph" aria-hidden="true">${e.glyph}</span>
+          ${icon(e.icon)}
           <h3>${esc(tx(e.title))}</h3>
           <p class="emeta">${esc(tx(e.meta))}</p>
           <p>${esc(tx(e.desc))}</p>
@@ -165,7 +173,6 @@
       <a class="promo reveal" href="index.html">
         <span class="promo-sky" aria-hidden="true"></span>
         <span class="promo-text">
-          <span class="promo-kicker">✦ ${esc(t("nav.galaxy"))}</span>
           <span class="promo-pitch">${esc(t("galaxy.pitch"))}</span>
         </span>
         <span class="promo-cta">${esc(t("galaxy.cta"))} →</span>
@@ -184,7 +191,6 @@
     return `<div class="wrap">
       <div class="contact-card reveal">
         <div class="cc-main">
-          <p class="sec-label"><span>06</span>${esc(t("contact.label"))}</p>
           <h2 class="sec-title" id="contact-title">${rich(tx(K.title))}</h2>
           <p class="cc-intro">${esc(tx(K.intro))}</p>
           <div class="cc-mail">
@@ -211,10 +217,10 @@
     $$("[data-t]").forEach((el) => (el.textContent = t(el.dataset.t)));
     $$("[data-t-label]").forEach((el) => el.setAttribute("aria-label", t(el.dataset.tLabel)));
     $$("[data-lang-pill]").forEach((el) => el.classList.toggle("active", el.dataset.langPill === PF.lang));
-    $("#nav-links").innerHTML = SECTIONS.map((s, i) =>
-      `<a href="#${s.id}" data-sec="${s.id}"${s.id === activeSec ? ' class="on"' : ""}><span class="n">0${i + 1}</span>${esc(t(s.nav))}</a>`).join("");
+    $("#nav-links").innerHTML = SECTIONS.map((s) =>
+      `<a href="#${s.id}" data-sec="${s.id}"${s.id === activeSec ? ' class="on"' : ""}>${esc(t(s.nav))}</a>`).join("");
     $$('a[href^="CV_Ginet_Oscar"]').forEach((a) => a.setAttribute("href", t("cv.file")));   // CV FR ou EN
-    $("#hero-status").textContent = tx(C.identity.status);
+    $("#hero-status").textContent = tx(C.identity.seeking);
     $("#hero-role").textContent = tx(C.identity.headline);
   }
 
@@ -232,28 +238,44 @@
     tagline();
   }
 
-  /* --------------------------- Apparition ------------------------------ */
+  /* --------------------------- Chiffres clés --------------------------- */
+  // Seul mouvement d'apparition de la page : le contenu est là d'emblée (un
+  // recruteur lit vite), seuls les chiffres clés comptent jusqu'à leur valeur
+  // quand ils arrivent à l'écran.
   let io = null;
   function reveal(animate) {
     if (io) io.disconnect();
-    const els = $$(".reveal");
-    // Petit décalage entre éléments voisins d'une même grille.
-    els.forEach((el) => {
-      const sib = [...el.parentElement.children].filter((c) => c.classList.contains("reveal"));
-      el.style.setProperty("--d", (sib.indexOf(el) % 4) * 80 + "ms");
-    });
-    if (!animate || reduced || !("IntersectionObserver" in window)) {
-      els.forEach((el) => el.classList.add("in"));
-      return;
-    }
+    if (!animate || reduced || !("IntersectionObserver" in window)) return;
     io = new IntersectionObserver((entries) => entries.forEach((e) => {
       if (!e.isIntersecting) return;
-      e.target.classList.add("in");
       io.unobserve(e.target);
-      const n = e.target.querySelector("[data-count]");
-      if (n) countUp(n);
-    }), { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-    els.forEach((el) => io.observe(el));
+      countUp(e.target);
+    }), { threshold: 0.5 });
+    $$("[data-count]").forEach((el) => {
+      const m = /^(~?)(\d+)(.*)$/.exec(el.dataset.count);
+      if (m) el.textContent = m[1] + "0" + m[3];
+      io.observe(el);
+    });
+  }
+
+  /* --------------------- Projets : halo sous le curseur -------------------- */
+  // Inspiré de « Magic Card » (Magic UI) : un halo suit la souris sur la carte
+  // survolée et éclaire sa bordure. Souris uniquement : rien sur écran tactile.
+  function spotlight() {
+    if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    let raf = 0, last = null;
+    document.addEventListener("pointermove", (e) => {
+      last = e;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const card = last.target.closest && last.target.closest(".pc");
+        if (!card) return;
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (last.clientX - r.left).toFixed(0) + "px");
+        card.style.setProperty("--my", (last.clientY - r.top).toFixed(0) + "px");
+      });
+    }, { passive: true });
   }
 
   /** "~65" → compte de 0 à 65 en gardant préfixe et suffixe. */
@@ -538,6 +560,9 @@
     };
     addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
     addEventListener("resize", measure);
+    // Le hero change de hauteur (terminal qui se remplit, polices, langue) :
+    // on recale le point de départ du nom pour qu'il reste sur l'original.
+    if ("ResizeObserver" in window) new ResizeObserver(() => measure()).observe($(".hero"));
     $("#nav").addEventListener("transitionend", update);           // le menu se resserre au défilement
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     measure();
@@ -554,5 +579,6 @@
   onScroll();
   network();
   flyingName();
+  spotlight();
   if (location.hash) { const target = $(location.hash); if (target) target.scrollIntoView(); }
 })(window.PF = window.PF || {});
