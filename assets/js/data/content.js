@@ -40,27 +40,23 @@
       focus: t("AD · Virtualisation · EDR · Supervision", "AD · Virtualization · EDR · Monitoring"),
       taglines: {
         fr: [
-          "Je sécurise les réseaux la semaine, je roule sur les routes le week‑end.",
-          "Annuaire redondant, sauvegardes vérifiées, alertes triées.",
-          "Du paquet réseau au sommet alpin — toujours en mouvement.",
+          "Je sécurise les réseaux la semaine et je roule sur les routes le week‑end.",
+          "Je vérifie les sauvegardes et je trie les alertes de sécurité.",
         ],
         en: [
           "I secure networks during the week and ride the roads on weekends.",
-          "Redundant directory, verified backups, triaged alerts.",
-          "From network packet to alpine summit — always on the move.",
+          "I check the backups and triage the security alerts.",
         ],
       },
-      motto: t(
-        "Déterminé, curieux, et une *réelle volonté d’apprendre.*",
-        "Determined, curious, and *genuinely eager to learn.*"
-      ),
+      motto: t("J’apprends le métier *sur une infrastructure en production.*",
+        "I learn the trade *on a live production infrastructure.*"),
       bio: [
         t("Alternant chez Lamberet SAS, constructeur français de carrosseries frigorifiques, et étudiant en BUT Réseaux & Télécommunications parcours Cybersécurité à l’IUT d’Annecy.",
           "Apprentice at Lamberet SAS, a French manufacturer of refrigerated truck bodies, and student in the Networks & Telecommunications BUT (Cybersecurity track) at IUT Annecy."),
         t("Au sein d’une petite équipe informatique, je fais vivre l’infrastructure d’un groupe industriel multi-sites : annuaire, virtualisation, sauvegardes, supervision et sécurité des postes et des serveurs.",
           "Within a small IT team, I run and evolve the infrastructure of a multi-site industrial group: directory services, virtualization, backups, monitoring, and endpoint and server security."),
-        t("Depuis juillet 2026, je sers aussi dans la réserve opérationnelle au 27ᵉ Bataillon de Chasseurs Alpins. Le reste du temps, on me trouve sur mon vélo de route.",
-          "Since July 2026, I have also been serving in the operational reserve with the 27th Alpine Chasseurs Battalion. The rest of the time, you’ll find me on my road bike."),
+        t("Depuis juillet 2026, je sers aussi dans la réserve opérationnelle au 27ᵉ Bataillon de Chasseurs Alpins. Le reste du temps, je roule sur mon vélo de route.",
+        "Since July 2026, I have also served in the operational reserve with the 27th Alpine Chasseurs Battalion. The rest of the time, I ride my road bike."),
       ],
       facts: [
         { label: t("Basé", "Based"), value: t("Annecy (74) · Ain (01)", "Annecy & Ain, France") },
@@ -87,7 +83,7 @@
     /* --- CV (PDF généré depuis cv.html, voir README) -------------------- */
     cv: {
       // Le CV doit se lire en quelques secondes : l'essentiel en **gras**, le détail ensuite.
-      now: [t("**BUT R&T Cybersécurité, 3ᵉ année** · IUT d’Annecy", "**BUT Networks & Telecom, Cybersecurity — 3rd year** · IUT Annecy"),
+      now: [t("**BUT R&T Cybersécurité, 3ᵉ année** · IUT d’Annecy", "**BUT Networks & Telecom, Cybersecurity, 3rd year** · IUT Annecy"),
             t("Alternant chez **Lamberet SAS** depuis 2024", "Apprentice at **Lamberet SAS** since 2024")],
       goal: t("Je recherche une **poursuite d’études en cybersécurité** (master ou école d’ingénieurs), **en alternance dès septembre 2027**.",
               "Looking for **further studies in cybersecurity** (master’s or engineering school), **as an apprentice from September 2027**."),
@@ -128,9 +124,8 @@
       { system: "experience", item: 0, title: t("Parcours", "Path"), text: t(
         "Deux ans d’alternance chez Lamberet SAS, sur l’infrastructure d’un groupe industriel multi-sites.",
         "Two years of apprenticeship at Lamberet SAS, on the infrastructure of a multi-site industrial group.") },
-      { system: "projects", item: 0, title: t("Projets", "Projects"), text: t(
-        "Cinq chantiers menés en production. La migration EDR fait l’objet de mon mémoire de BUT.",
-        "Five projects delivered in production. The EDR migration is the subject of my BUT thesis.") },
+      { system: "projects", item: 0, title: t("Projets", "Projects"), text: t("J’ai mené cinq chantiers en production. La migration EDR est le sujet de mon mémoire de BUT.",
+        "I led five projects in production. The EDR migration is the subject of my BUT thesis.") },
       { system: "projects", item: 1, title: t("Projets", "Projects"), text: t(
         "Un Active Directory redondant sur 7 sites, avec le DHCP en failover entre les deux contrôleurs de domaine.",
         "A redundant Active Directory across 7 sites, with DHCP in failover between the two domain controllers.") },
@@ -140,9 +135,8 @@
       { system: "engagement", item: 0, title: t("Engagements", "Beyond work"), text: t(
         "Depuis juillet 2026, je sers dans la réserve opérationnelle au 27ᵉ Bataillon de Chasseurs Alpins.",
         "Since July 2026, I have been serving in the operational reserve with the 27th Alpine Chasseurs Battalion.") },
-      { system: "contact", item: 0, title: t("Contact", "Contact"), text: t(
-        "Une question, un poste, un réseau à durcir ? Écrivez-moi, je réponds sous 48 h.",
-        "A question, a role, a network to harden? Drop me a line, I reply within 48 hours.") },
+      { system: "contact", item: 0, title: t("Contact", "Contact"), text: t("Écrivez-moi pour une alternance ou une question technique : je réponds sous 48 h.",
+        "Write to me about an apprenticeship or a technical question: I reply within 48 hours.") },
       { system: null, end: true, title: t("À vous de piloter", "Your turn to fly"), text: t(
         "Visez une étoile et cliquez pour y sauter. Astuce : appuyez sur / pour ouvrir le terminal.",
         "Aim at a star and click to jump. Tip: press / to open the terminal.") },
@@ -161,11 +155,10 @@
 
     /* --- Section : Compétences ----------------------------------------- */
     skills: {
-      title: t("Des outils *éprouvés en production.*", "Tools *proven in production.*"),
-      intro: t(
-        "Une stack construite à l’IUT et mise à l’épreuve chaque semaine sur l’infrastructure de Lamberet. Chaque compétence indique où elle est pratiquée.",
-        "A stack built at university and put to the test every week on Lamberet’s infrastructure. Each skill shows where it is practised."
-      ),
+      title: t("Les outils *que je fais tourner.*",
+        "The tools *I run every week.*"),
+      intro: t("J’ai appris ces outils à l’IUT et je les utilise chaque semaine chez Lamberet. Pour chaque compétence, j’indique où je la pratique.",
+        "I learned these tools at university and use them every week at Lamberet. For each skill, I note where I use it."),
       categories: [
         {
           code: "01 / SYS",
@@ -251,19 +244,16 @@
     /* --- Section : Parcours (expériences + formations + certifications) - */
     experience: {
       title: t("Du terrain *aux serveurs.*", "From the field *to the servers.*"),
-      intro: t(
-        "Deux ans d’alternance sur une infrastructure industrielle bien réelle, nourris par une formation en cybersécurité.",
-        "Two years of apprenticeship on a very real industrial infrastructure, backed by a cybersecurity degree."
-      ),
+      intro: t("Depuis deux ans, je travaille sur l’infrastructure d’un groupe industriel, en parallèle d’un BUT orienté cybersécurité.",
+        "For two years I have worked on an industrial group’s infrastructure, alongside a cybersecurity-focused degree."),
       jobs: [
         {
-          date: t("Sept. 2024 — aujourd’hui", "Sep 2024 — present"),
+          date: t("Sept. 2024 – aujourd’hui", "Sep 2024 – present"),
           title: t("Alternant Systèmes, Réseaux & Sécurité", "Systems, Networks & Security apprentice"),
           org: "Lamberet SAS",
           meta: t("Alternance · Saint-Cyr-sur-Menthon (01) · sur site", "Apprenticeship · Saint-Cyr-sur-Menthon, France · on site"),
-          desc: t(
-            "Gestion et évolution de l’infrastructure IT d’un groupe industriel multi-sites, au sein d’une petite équipe informatique.",
-            "Running and evolving the IT infrastructure of a multi-site industrial group, within a small IT team."),
+          desc: t("Je gère et fais évoluer l’infrastructure IT d’un groupe industriel multi-sites, au sein d’une petite équipe informatique.",
+        "I run and evolve the IT infrastructure of a multi-site industrial group, within a small IT team."),
           groups: [
             { label: t("Systèmes & annuaire", "Systems & directory"), points: [
               t("Migration Active Directory vers deux contrôleurs de domaine (Windows Server 2016 → 2025) sur 7 sites",
@@ -295,7 +285,7 @@
           tags: ["Active Directory", "Proxmox", "VMware", "Veeam", "Zabbix", "Grafana", "Vision One", "PowerShell"],
         },
         {
-          date: "2019 — 2023",
+          date: "2019 – 2023",
           title: t("Employé agricole", "Farm worker"),
           org: t("Exploitation agricole", "Local farm"),
           meta: t("Saisonnier · Saint-Benoît (01) · 2 mois cumulés", "Seasonal · Saint-Benoît, France · 2 months in total"),
@@ -307,7 +297,7 @@
       ],
       education: [
         {
-          date: "2024 — 2027",
+          date: "2024 – 2027",
           title: t("BUT Réseaux & Télécommunications", "BUT Networks & Telecommunications"), short: "BUT R&T",
           org: t("IUT d’Annecy · parcours Cybersécurité · alternance", "IUT Annecy · Cybersecurity track · apprenticeship"),
           badge: t("3ᵉ année", "3rd year"),
@@ -323,7 +313,7 @@
           desc: t("", ""),
         },
         {
-          date: "2021 — 2024",
+          date: "2021 – 2024",
           title: t("Baccalauréat général", "French baccalauréat"), short: t("Bac général", "Baccalauréat"),
           org: t("Lycée du Bugey · mention Assez bien", "Lycée du Bugey · with honours"),
           desc: t("Spécialités Mathématiques et Physique-Chimie, classe sport.",
@@ -337,32 +327,30 @@
         },
       ],
       certifications: [
-        { name: "CCNA 2 — Switching, Routing & Wireless Essentials", short: "CCNA 2", issuer: "Cisco", date: t("Juil. 2026", "Jul 2026") },
-        { name: "Stormshield CSNA — Certified Stormshield Network Administrator", short: "Stormshield CSNA", issuer: "Stormshield", date: t("Juin 2026", "Jun 2026"),
+        { name: "CCNA 2 – Switching, Routing & Wireless Essentials", short: "CCNA 2", issuer: "Cisco", date: t("Juil. 2026", "Jul 2026") },
+        { name: "Stormshield CSNA – Certified Stormshield Network Administrator", short: "Stormshield CSNA", issuer: "Stormshield", date: t("Juin 2026", "Jun 2026"),
           note: t("Pare-feu Stormshield Network Security · valide jusqu’en juin 2029", "Stormshield Network Security firewalls · valid until June 2029") },
-        { name: "CCNA 1 — Introduction to Networks", short: "CCNA 1", issuer: "Cisco", date: t("Pendant le BUT", "During the BUT") },
+        { name: "CCNA 1 – Introduction to Networks", short: "CCNA 1", issuer: "Cisco", date: t("Pendant le BUT", "During the BUT") },
         { name: "TOEIC", cvName: "TOEIC 550", issuer: "ETS", date: t("Mars 2026", "Mar 2026"), note: t("Score 550 · valide jusqu’en mars 2028", "Score 550 · valid until March 2028") },
-        { name: "MOOC ANSSI", issuer: t("ANSSI — Agence nationale de la sécurité des SI", "ANSSI — French cybersecurity agency"), date: t("Janv. 2025", "Jan 2025") },
+        { name: "MOOC ANSSI", issuer: t("ANSSI – Agence nationale de la sécurité des SI", "ANSSI – French cybersecurity agency"), date: t("Janv. 2025", "Jan 2025") },
         { name: t("Certification Pix", "Pix certification"), short: "Pix", issuer: "Pix", date: "2023", note: t("404 pix", "404 pix") },
       ],
     },
 
     /* --- Section : Projets --------------------------------------------- */
     projects: {
-      title: t("Là où la curiosité *rencontre la prod.*", "Where curiosity *meets production.*"),
-      intro: t(
-        "Cinq chantiers menés en alternance sur l’infrastructure de Lamberet, et deux projets universitaires. Chaque fiche détaille la démarche et l’environnement technique.",
-        "Five projects delivered on Lamberet’s infrastructure during my apprenticeship, and two university projects. Each sheet details the approach and the tech environment."
-      ),
+      title: t("Ce que j’ai mis *en production.*",
+        "What I’ve *put into production.*"),
+      intro: t("J’ai mené cinq chantiers en alternance chez Lamberet et deux projets à l’IUT. Chaque fiche détaille ma démarche et les outils utilisés.",
+        "I led five projects during my apprenticeship at Lamberet and two at university. Each sheet details my approach and the tools I used."),
       items: [
         {
           id: "edr", beam: true, ctx: "pro", featured: true, diagram: "edr",
           link: { href: "etude-edr.html", label: t("Lire l’étude de cas complète", "Read the full case study"), short: t("Étude de cas", "Case study") }, short: t("Migration EDR", "EDR migration"),
           badge: t("Mémoire de BUT", "BUT thesis"),
           title: t("Migration EDR : WithSecure → Trend Micro Vision One", "EDR migration: WithSecure → Trend Micro Vision One"),
-          desc: t(
-            "Remplacement de la protection des postes et serveurs du groupe, de l’étude comparative jusqu’au triage quotidien des alertes avec un SOC externe.",
-            "Replacing the group’s endpoint and server protection, from the comparative study to daily alert triage with an external SOC."),
+          desc: t("J’ai remplacé la protection des postes et serveurs du groupe, de l’étude comparative jusqu’au triage quotidien des alertes avec un SOC externe.",
+        "I replaced the group’s endpoint and server protection, from the comparative study through to daily alert triage with an external SOC."),
           points: [
             t("Étude comparative des solutions et cadrage du besoin avec la direction informatique",
               "Comparative study of solutions and scoping with IT management"),
@@ -386,9 +374,8 @@
         {
           id: "ad", ctx: "pro", featured: true, diagram: "ad", short: t("AD redondant · 7 sites", "Redundant AD · 7 sites"),
           title: t("Active Directory redondant sur 7 sites", "Redundant Active Directory across 7 sites"),
-          desc: t(
-            "D’un contrôleur de domaine unique sous Windows Server 2016, qui portait à lui seul l’annuaire et tout le DHCP, à deux DC redondants (dont un sous Windows Server 2025) qui se partagent le DHCP en failover.",
-            "From a single Windows Server 2016 domain controller that carried the directory and all of DHCP on its own, to two redundant DCs (including a new Windows Server 2025 one) sharing DHCP in failover."),
+          desc: t("J’ai remplacé le contrôleur de domaine unique sous Windows Server 2016, qui portait l’annuaire et tout le DHCP, par deux DC redondants (dont un sous Windows Server 2025) qui se partagent le DHCP en failover.",
+        "I replaced the single Windows Server 2016 domain controller, which carried the directory and all of DHCP, with two redundant DCs (including a new Windows Server 2025 one) sharing DHCP in failover."),
           points: [
             t("Promotion et configuration du nouveau contrôleur de domaine, contrôle de la réplication et de la santé de l’annuaire (dcdiag, repadmin)",
               "Promoted and configured the new domain controller, checked replication and directory health (dcdiag, repadmin)"),
@@ -400,8 +387,8 @@
               "Site-by-site migration with DHCP relays reconfigured on the routers"),
             t("Nettoyage des autorisations DHCP et des enregistrements DNS obsolètes",
               "Cleaned up stale DHCP authorizations and DNS records"),
-            t("Chaque phase documentée dans un rapport technique remis à l’équipe informatique",
-              "Every phase documented in a technical report handed to the IT team"),
+            t("J’ai documenté chaque phase dans un rapport technique pour l’équipe informatique",
+        "I documented every phase in a technical report for the IT team"),
           ],
           metrics: [
             { value: "7", label: t("sites", "sites") },
@@ -413,9 +400,8 @@
         {
           id: "zabbix", ctx: "pro", diagram: "monitoring", short: "Zabbix + Grafana",
           title: t("Supervision Zabbix 7 + Grafana", "Zabbix 7 + Grafana monitoring"),
-          desc: t(
-            "Mise en place de la première plateforme de supervision centralisée du groupe, des serveurs jusqu’aux onduleurs.",
-            "Set up the group’s first centralized monitoring platform, from servers down to UPS units."),
+          desc: t("J’ai mis en place la première plateforme de supervision centralisée du groupe, des serveurs jusqu’aux onduleurs.",
+        "I set up the group’s first centralized monitoring platform, from servers to UPS units."),
           points: [
             t("Installation et configuration d’un serveur Zabbix 7 sous Debian (base de données, interface web, agents)",
               "Installed and configured a Zabbix 7 server on Debian (database, web UI, agents)"),
@@ -433,9 +419,8 @@
         {
           id: "proxmox", ctx: "pro", diagram: "backup", short: "Proxmox VE",
           title: t("Proxmox VE sur HPE ProLiant DL380 Gen10", "Proxmox VE on an HPE ProLiant DL380 Gen10"),
-          desc: t(
-            "Reconversion d’un serveur auparavant sous VMware ESXi et HPE SimpliVity en plateforme Proxmox pour les tests et le stockage.",
-            "Repurposed a server previously running VMware ESXi and HPE SimpliVity into a Proxmox platform for testing and storage."),
+          desc: t("J’ai reconverti un serveur auparavant sous VMware ESXi et HPE SimpliVity en plateforme Proxmox pour les tests et le stockage.",
+        "I repurposed a server previously running VMware ESXi and HPE SimpliVity into a Proxmox platform for testing and storage."),
           points: [
             t("Installation de Proxmox VE et configuration matérielle via iLO 5",
               "Installed Proxmox VE and configured the hardware through iLO 5"),
@@ -455,9 +440,8 @@
         {
           id: "veeam", ctx: "pro", diagram: "backup", short: "Veeam v13",
           title: t("Sauvegardes Veeam : montée en v13 et dépôt durci", "Veeam backups: v13 upgrade and hardened repository"),
-          desc: t(
-            "Fiabilisation de la chaîne de sauvegarde du groupe : montée de version, dépôt Linux durci et prise en charge du nouvel hyperviseur Proxmox.",
-            "Making the group’s backup chain more reliable: version upgrade, hardened Linux repository and support for the new Proxmox hypervisor."),
+          desc: t("J’ai fiabilisé la chaîne de sauvegarde du groupe : montée de version, dépôt Linux durci et prise en charge du nouvel hyperviseur Proxmox.",
+        "I made the group’s backup chain more reliable: version upgrade, hardened Linux repository and support for the new Proxmox hypervisor."),
           points: [
             t("Montée de version de Veeam Backup & Replication de 12.2 vers v13",
               "Upgraded Veeam Backup & Replication from 12.2 to v13"),
@@ -474,9 +458,8 @@
           id: "sdr", ctx: "iut", short: t("Radio logicielle", "SDR radio"),
           badge: t("SAÉ 301", "SAÉ 301"),
           title: t("Radio logicielle (SDR) en Python", "Software-defined radio (SDR) in Python"),
-          desc: t(
-            "Traitement numérique du signal appliqué à la radio logicielle, à partir d’enregistrements issus d’un récepteur SDR.",
-            "Digital signal processing applied to software-defined radio, using recordings from an SDR receiver."),
+          desc: t("J’ai appliqué le traitement numérique du signal à la radio logicielle, à partir d’enregistrements issus d’un récepteur SDR.",
+        "I applied digital signal processing to software-defined radio, using recordings from an SDR receiver."),
           points: [
             t("Démodulation de signaux radio AM et FM", "AM and FM radio signal demodulation"),
             t("Décodage du RDS (Radio Data System) diffusé en bande FM", "Decoding RDS (Radio Data System) broadcast on the FM band"),
@@ -489,9 +472,8 @@
           id: "cyberzone", ctx: "iut", short: "CyberZone",
           badge: t("SAÉ 203", "SAÉ 203"),
           title: t("CyberZone, site d’un café gaming", "CyberZone, a gaming café website"),
-          desc: t(
-            "Conception et développement en binôme du site web d’un café gaming, présenté devant un jury.",
-            "Designed and built a gaming café website as a pair, presented to a jury."),
+          desc: t("J’ai conçu et développé en binôme le site web d’un café gaming, puis nous l’avons présenté devant un jury.",
+        "With a teammate, I designed and built a gaming café’s website, then we presented it to a jury."),
           points: [
             t("Maquettage et intégration des pages en HTML et CSS", "Mock-ups and page integration in HTML and CSS"),
             t("Fonctionnalités dynamiques en PHP adossées à une base MySQL", "Dynamic features in PHP backed by a MySQL database"),
@@ -506,54 +488,48 @@
 
     /* --- Section : Engagements ----------------------------------------- */
     engagement: {
-      title: t("Le terrain, *l’équipe, l’effort.*", "The field, *the team, the effort.*"),
-      intro: t(
-        "Ce qui m’occupe loin des écrans : servir, encadrer, organiser et rouler.",
-        "What keeps me busy away from screens: serving, coaching, organizing and riding."
-      ),
+      title: t("Ce que je fais *hors du travail.*",
+        "What I do *outside work.*"),
+      intro: t("Hors du travail, je sers dans la réserve et je passe mes week-ends sur le vélo.",
+        "Outside work, I serve in the reserve and spend my weekends on the bike."),
       items: [
         {
           glyph: "⌖", icon: "peak", featured: true, short: t("Réserve · 27ᵉ BCA", "Reserve · 27th BCA"),
           title: t("Réserviste opérationnel — 27ᵉ BCA", "Operational reservist — 27th BCA"),
           meta: t("Armée de Terre · depuis juillet 2026", "French Army · since July 2026"),
-          desc: t(
-            "Engagement de cinq ans dans la réserve opérationnelle, au sein du 27ᵉ Bataillon de Chasseurs Alpins, unité des troupes de montagne. Mené en parallèle de l’alternance et des études.",
-            "Five-year commitment to the operational reserve with the 27th Alpine Chasseurs Battalion, a mountain infantry unit. Carried out alongside my apprenticeship and studies."),
+          desc: t("Je me suis engagé pour cinq ans dans la réserve opérationnelle, au 27ᵉ Bataillon de Chasseurs Alpins (troupes de montagne), en parallèle de l’alternance et des études.",
+        "I signed up for five years in the operational reserve, with the 27th Alpine Chasseurs Battalion (mountain troops), alongside my apprenticeship and studies."),
         },
         {
           glyph: "★", icon: "group", short: t("Association des jeunes", "Youth association"),
           title: t("Vice-président — Association des jeunes", "Vice-president — Youth association"),
           meta: "Lhuis (01)",
-          desc: t(
-            "Organisation et animation d’événements pour le village, coordination de l’équipe et de la logistique.",
-            "Organizing and running village events, coordinating the team and the logistics."),
+          desc: t("J’organise et j’anime des événements pour le village, et je coordonne l’équipe et la logistique.",
+        "I organize and run events for the village, and coordinate the team and logistics."),
         },
         {
           glyph: "⚑", icon: "ball", short: "Football",
           title: t("Football en club · 12 saisons", "Club football · 12 seasons"),
           meta: t("De 6 à 18 ans · encadrement des jeunes", "Age 6 to 18 · youth coaching"),
-          desc: t(
-            "Douze saisons en club, puis encadrement des entraînements des équipes de jeunes.",
-            "Twelve seasons at club level, then coaching youth team training sessions."),
+          desc: t("J’ai joué douze saisons en club, puis j’ai encadré les entraînements des équipes de jeunes.",
+        "I played twelve seasons at club level, then coached youth team training sessions."),
         },
         {
           glyph: "↗", icon: "bike",
           title: t("Cyclisme sur route", "Road cycling"),
           meta: t("~6 h de sport par semaine", "~6 h of sport a week"),
-          desc: t(
-            "Ma vraie passion. Complétée par la musculation, la course à pied et l’escalade.",
-            "My real passion, rounded out with strength training, running and climbing."),
+          desc: t("Le vélo de route est ma passion. Je le complète avec la musculation, la course à pied et l’escalade.",
+        "Road cycling is my passion. I round it out with strength training, running and climbing."),
         },
       ],
     },
 
     /* --- Section : Contact --------------------------------------------- */
     contact: {
-      title: t("Un réseau à durcir, *une idée à creuser ?*", "A network to harden, *an idea to explore?*"),
-      intro: t(
-        "Je cherche une poursuite d’études en cybersécurité, en alternance, à partir de septembre 2027. Ouvert aussi aux échanges sur un projet d’infrastructure ou une question technique. Réponse sous 48 h ouvrées.",
-        "I’m looking for further cybersecurity studies, as an apprentice, from September 2027. Also happy to talk about an infrastructure project or a technical question. Reply within 48 working hours."
-      ),
+      title: t("Parlons de *ma prochaine alternance.*",
+        "Let’s talk about *my next apprenticeship.*"),
+      intro: t("Je cherche une poursuite d’études en cybersécurité, en alternance, à partir de septembre 2027. Écrivez-moi aussi pour un projet d’infrastructure ou une question technique : je réponds sous 48 h ouvrées.",
+        "I’m looking for further studies in cybersecurity, as an apprentice, from September 2027. You can also write to me about an infrastructure project or a technical question: I reply within 48 working hours."),
       email: "o.ginet.pro@gmail.com",
       linkedin: "https://www.linkedin.com/in/oscar-ginet-6523862b3/",
       // Pas de numéro de téléphone sur le site : il n'apparaît que dans le CV PDF (voir tools/build_cv.py).
@@ -583,8 +559,8 @@
     "hud.returnVerb":   t("retour", "back"),
     "system.returnShort": t("↩ RETOUR", "↩ BACK"),
     "intro.classic":    t("Préférez le mode classique →", "Prefer the classic version →"),
-    "intro.reduced":    t("Animations réduites détectées — le mode classique est recommandé.",
-                          "Reduced motion detected — classic mode is recommended."),
+    "intro.reduced":    t("Vous avez réduit les animations : le mode classique vous conviendra mieux.",
+        "You turned on reduced motion: the classic mode will suit you better."),
     "hud.sector":       t("secteur", "sector"),
     "hud.deepspace":    t("espace ouvert", "open space"),
     "hud.cv":           t("CV", "CV"),
