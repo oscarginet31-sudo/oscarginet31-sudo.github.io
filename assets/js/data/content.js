@@ -634,6 +634,7 @@
     "contact.label":    t("Contact", "Contact"),
     "contact.copy":     t("Copier", "Copy"),
     "contact.copied":   t("Copié ✓", "Copied ✓"),
+    "contact.selected": t("Sélectionné, ⌘C", "Selected, ⌘C"),
     "contact.write":    t("Écrire un email", "Send an email"),
     "nav.cv":           t("CV", "CV"),
     "skills.where":     t("Pratiqué :", "Practised:"),

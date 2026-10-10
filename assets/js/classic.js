@@ -28,7 +28,7 @@
   // lecteurs d'écran et les moteurs de recherche ; à l'écran, la phrase parle seule.
   const head = (labelKey, title, intro, id) => `
     <header class="sec-head reveal">
-      <h2 class="sec-title" id="${id}-title"><span class="sr-only">${esc(t(labelKey))} : </span>${rich(tx(title))}</h2>
+      <h2 class="sec-title" id="${id}-title"><span class="sr-only">${esc(t(labelKey))}${PF.lang === "fr" ? "\u00a0:" : ":"} </span>${rich(tx(title))}</h2>
       ${intro ? `<p class="sec-intro">${esc(tx(intro))}</p>` : ""}
     </header>`;
 
@@ -193,7 +193,7 @@
     return `<div class="wrap">
       <div class="contact-card reveal">
         <div class="cc-main">
-          <h2 class="sec-title" id="contact-title"><span class="sr-only">${esc(t("contact.label"))} : </span>${rich(tx(K.title))}</h2>
+          <h2 class="sec-title" id="contact-title"><span class="sr-only">${esc(t("contact.label"))}${PF.lang === "fr" ? "\u00a0:" : ":"} </span>${rich(tx(K.title))}</h2>
           <p class="cc-intro">${esc(tx(K.intro))}</p>
           <div class="cc-mail">
             <a class="cc-email" href="mailto:${esc(K.email)}">${esc(K.email)}</a>
@@ -479,7 +479,18 @@
     const cp = e.target.closest("[data-copy]");
     if (cp) {
       const done = () => { cp.textContent = t("contact.copied"); cp.classList.add("done"); setTimeout(() => { cp.textContent = t("contact.copy"); cp.classList.remove("done"); }, 1800); };
-      if (navigator.clipboard) navigator.clipboard.writeText(cp.dataset.copy).then(done, () => {});
+      // Plan B si le presse-papier est refusé (page non active, ancien navigateur) :
+      // copie classique, sinon l'adresse est sélectionnée pour un ⌘C / Ctrl+C.
+      const fallback = () => {
+        const a = $(".cc-email"), range = document.createRange(), sel = getSelection();
+        range.selectNodeContents(a); sel.removeAllRanges(); sel.addRange(range);
+        let ok = false; try { ok = document.execCommand("copy"); } catch (_) { /* refusé */ }
+        if (ok) return done();
+        cp.textContent = t("contact.selected");
+        setTimeout(() => { cp.textContent = t("contact.copy"); }, 2600);
+      };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(cp.dataset.copy).then(done, fallback);
+      else fallback();
       return;
     }
     if (e.target.closest("#nav-links a")) document.body.classList.remove("nav-open");
@@ -530,8 +541,10 @@
       return;
     }
 
-    const fly = hero.cloneNode(true);
-    fly.classList.add("fly-name");
+    // Copie décorative (div, pas h1 : un seul titre principal pour les lecteurs et les moteurs).
+    const fly = document.createElement("div");
+    fly.className = hero.className + " fly-name";
+    fly.innerHTML = hero.innerHTML;
     fly.setAttribute("aria-hidden", "true");
     document.body.appendChild(fly);
     document.body.classList.add("has-fly");
