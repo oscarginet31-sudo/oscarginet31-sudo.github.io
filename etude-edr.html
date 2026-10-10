@@ -6,8 +6,8 @@
 <!-- Sécurité : aucune ressource tierce, aucun script en ligne, aucun référent envoyé aux sites externes. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="no-referrer">
-<title>Étude de cas EDR — Oscar Ginet</title>
-<meta name="description" content="Étude de cas : migration d'un antivirus vers un EDR supervisé par un SOC externe dans un groupe industriel multi-sites (≈ 450 endpoints, 2 mois). Cahier des charges, étude de marché, déploiement GPO + PowerShell, onboarding SOC, retours d'expérience.">
+<title>Migration EDR + SOC : étude de cas — Oscar Ginet</title>
+<meta name="description" content="Étude de cas : migration d&#x27;un antivirus vers un EDR supervisé par un SOC sur ≈ 450 postes en deux mois. Choix, déploiement GPO + PowerShell, retours.">
 <meta name="author" content="Oscar Ginet">
 <meta property="og:title" content="Étude de cas EDR — Oscar Ginet">
 <meta property="og:description" content="D'un antivirus qu'on ne regarde plus à une surveillance active : migration EDR + SOC en deux mois, sans interruption de couverture.">
@@ -24,6 +24,54 @@
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/classic.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "Passer d’un antivirus qu’on ne regarde plus à une surveillance active",
+      "description": "Étude de cas : migration d'un antivirus vers un EDR supervisé par un SOC sur ≈ 450 postes en deux mois. Choix, déploiement GPO + PowerShell, retours.",
+      "inLanguage": "fr",
+      "datePublished": "2026-10-07",
+      "dateModified": "2026-10-10",
+      "image": "https://oscarginet31-sudo.github.io/og-cover.jpg",
+      "mainEntityOfPage": "https://oscarginet31-sudo.github.io/etude-edr.html",
+      "author": {
+        "@type": "Person",
+        "@id": "https://oscarginet31-sudo.github.io/#oscar",
+        "name": "Oscar Ginet",
+        "url": "https://oscarginet31-sudo.github.io/classic.html"
+      },
+      "about": [
+        "EDR",
+        "SOC",
+        "Trend Micro Vision One",
+        "Cybersécurité",
+        "GPO",
+        "PowerShell"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Portfolio",
+          "item": "https://oscarginet31-sudo.github.io/classic.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Étude de cas EDR",
+          "item": "https://oscarginet31-sudo.github.io/etude-edr.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body class="case-page">
 <a class="skip" href="#case" data-t="skip">Aller au contenu</a>

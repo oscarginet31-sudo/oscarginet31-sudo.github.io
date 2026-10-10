@@ -6,8 +6,8 @@
 <!-- Sécurité : aucune ressource tierce, aucun script en ligne, aucun référent envoyé aux sites externes. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="no-referrer">
-<title>Oscar Ginet — Systèmes, Réseaux & Cybersécurité</title>
-<meta name="description" content="Portfolio d'Oscar Ginet, alternant Systèmes, Réseaux & Cybersécurité chez Lamberet SAS et étudiant en BUT Réseaux & Télécommunications parcours Cybersécurité à l'IUT d'Annecy. Active Directory, virtualisation, sauvegarde, supervision, EDR.">
+<title>Oscar Ginet — Alternant cybersécurité, systèmes &amp; réseaux</title>
+<meta name="description" content="Oscar Ginet, alternant cybersécurité chez Lamberet SAS (BUT R&amp;T, IUT d&#x27;Annecy) : Active Directory, EDR, sauvegardes, supervision. Disponible en septembre 2027.">
 <meta name="author" content="Oscar Ginet">
 <meta property="og:title" content="Oscar Ginet — Systèmes, Réseaux & Cybersécurité">
 <meta property="og:description" content="Alternant SysAdmin & Cyber chez Lamberet SAS · BUT R&T Cybersécurité à l'IUT d'Annecy. Projets, compétences et parcours.">
@@ -27,22 +27,67 @@
 <meta name="theme-color" content="#0d0f14" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
 <script src="assets/js/core/early.js"></script>
+<link rel="preload" href="assets/vendor/fonts/instrument-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/vendor/fonts/instrument-serif-400-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/classic.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Oscar Ginet",
-  "jobTitle": "Alternant Systèmes, Réseaux & Cybersécurité",
-  "worksFor": { "@type": "Organization", "name": "Lamberet SAS" },
-  "alumniOf": { "@type": "CollegeOrUniversity", "name": "IUT d'Annecy" },
-  "email": "mailto:o.ginet.pro@gmail.com",
-  "url": "https://oscarginet31-sudo.github.io/",
-  "image": "https://oscarginet31-sudo.github.io/og-cover.jpg",
-  "sameAs": ["https://www.linkedin.com/in/oscar-ginet-6523862b3/"],
-  "knowsAbout": ["Active Directory", "Windows Server", "Proxmox VE", "VMware vSphere", "Veeam Backup & Replication", "Zabbix", "Grafana", "EDR", "Trend Micro Vision One", "PowerShell", "Python"]
+  "@type": "ProfilePage",
+  "url": "https://oscarginet31-sudo.github.io/classic.html",
+  "inLanguage": "fr",
+  "dateModified": "2026-10-10",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Oscar Ginet",
+    "jobTitle": "Alternant Systèmes, Réseaux & Cybersécurité",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Lamberet SAS"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "IUT d'Annecy"
+    },
+    "email": "mailto:o.ginet.pro@gmail.com",
+    "url": "https://oscarginet31-sudo.github.io/classic.html",
+    "image": "https://oscarginet31-sudo.github.io/og-cover.jpg",
+    "sameAs": [
+      "https://www.linkedin.com/in/oscar-ginet-6523862b3/",
+      "https://github.com/oscarginet31-sudo"
+    ],
+    "knowsAbout": [
+      "Active Directory",
+      "Windows Server",
+      "Proxmox VE",
+      "VMware vSphere",
+      "Veeam Backup & Replication",
+      "Zabbix",
+      "Grafana",
+      "EDR",
+      "Trend Micro Vision One",
+      "PowerShell",
+      "Python",
+      "Stormshield",
+      "Cisco",
+      "Réseaux",
+      "Cybersécurité"
+    ],
+    "@id": "https://oscarginet31-sudo.github.io/#oscar",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Annecy",
+      "addressRegion": "Haute-Savoie",
+      "addressCountry": "FR"
+    },
+    "knowsLanguage": [
+      "fr",
+      "en",
+      "es"
+    ]
+  }
 }
 </script>
 </head>
@@ -97,7 +142,7 @@
   <section class="section" id="about" aria-labelledby="about-title"><!--prerender:about--><div class="wrap">
       
     <header class="sec-head reveal">
-      <h2 class="sec-title" id="about-title">Déterminé, curieux, et une <em>réelle volonté d’apprendre.</em></h2>
+      <h2 class="sec-title" id="about-title"><span class="sr-only">À propos : </span>Déterminé, curieux, et une <em>réelle volonté d’apprendre.</em></h2>
       
     </header>
       <div class="about-grid">
@@ -120,7 +165,7 @@
   <section class="section" id="path" aria-labelledby="path-title"><!--prerender:path--><div class="wrap">
       
     <header class="sec-head reveal">
-      <h2 class="sec-title" id="path-title">Du terrain <em>aux serveurs.</em></h2>
+      <h2 class="sec-title" id="path-title"><span class="sr-only">Parcours : </span>Du terrain <em>aux serveurs.</em></h2>
       <p class="sec-intro">Deux ans d’alternance sur une infrastructure industrielle bien réelle, nourris par une formation en cybersécurité.</p>
     </header>
       <h3 class="sub-label reveal">Expérience</h3>
@@ -210,7 +255,7 @@
   <section class="section" id="projects" aria-labelledby="projects-title"><!--prerender:projects--><div class="wrap">
       
     <header class="sec-head reveal">
-      <h2 class="sec-title" id="projects-title">Là où la curiosité <em>rencontre la prod.</em></h2>
+      <h2 class="sec-title" id="projects-title"><span class="sr-only">Projets : </span>Là où la curiosité <em>rencontre la prod.</em></h2>
       <p class="sec-intro">Cinq chantiers menés en alternance sur l’infrastructure de Lamberet, et deux projets universitaires. Chaque fiche détaille la démarche et l’environnement technique.</p>
     </header>
       <div class="filters reveal" role="group" aria-label="Filtrer les projets">
@@ -338,7 +383,7 @@
   <section class="section" id="skills" aria-labelledby="skills-title"><!--prerender:skills--><div class="wrap">
       
     <header class="sec-head reveal">
-      <h2 class="sec-title" id="skills-title">Des outils <em>éprouvés en production.</em></h2>
+      <h2 class="sec-title" id="skills-title"><span class="sr-only">Compétences : </span>Des outils <em>éprouvés en production.</em></h2>
       <p class="sec-intro">Une stack construite à l’IUT et mise à l’épreuve chaque semaine sur l’infrastructure de Lamberet. Chaque compétence indique où elle est pratiquée.</p>
     </header>
       <p class="legend reveal">Pratiqué : <span class="ctx ctx-pro">Entreprise</span><span class="ctx ctx-iut">IUT</span><span class="ctx ctx-perso">Perso</span></p>
@@ -436,7 +481,7 @@
   <section class="section" id="engagement" aria-labelledby="engagement-title"><!--prerender:engagement--><div class="wrap">
       
     <header class="sec-head reveal">
-      <h2 class="sec-title" id="engagement-title">Le terrain, <em>l’équipe, l’effort.</em></h2>
+      <h2 class="sec-title" id="engagement-title"><span class="sr-only">Engagements : </span>Le terrain, <em>l’équipe, l’effort.</em></h2>
       <p class="sec-intro">Ce qui m’occupe loin des écrans : servir, encadrer, organiser et rouler.</p>
     </header>
       <div class="egrid">
@@ -478,7 +523,7 @@
   <section class="section" id="contact" aria-labelledby="contact-title"><!--prerender:contact--><div class="wrap">
       <div class="contact-card reveal">
         <div class="cc-main">
-          <h2 class="sec-title" id="contact-title">Un réseau à durcir, <em>une idée à creuser ?</em></h2>
+          <h2 class="sec-title" id="contact-title"><span class="sr-only">Contact : </span>Un réseau à durcir, <em>une idée à creuser ?</em></h2>
           <p class="cc-intro">Je cherche une poursuite d’études en cybersécurité, en alternance, à partir de septembre 2027. Ouvert aussi aux échanges sur un projet d’infrastructure ou une question technique. Réponse sous 48 h ouvrées.</p>
           <div class="cc-mail">
             <a class="cc-email" href="mailto:o.ginet.pro@gmail.com">o.ginet.pro@gmail.com</a>

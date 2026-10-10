@@ -39,7 +39,7 @@
 
   function render() {
     document.documentElement.lang = PF.lang;
-    document.title = (PF.lang === "fr" ? "Étude de cas EDR" : "EDR case study") + " — Oscar Ginet";
+    document.title = (PF.lang === "fr" ? "Migration EDR + SOC : étude de cas" : "EDR + SOC rollout: case study") + " — Oscar Ginet";
     $$("[data-t]").forEach((el) => (el.textContent = t(el.dataset.t)));
     $$("[data-t-label]").forEach((el) => el.setAttribute("aria-label", t(el.dataset.tLabel)));
     $$("[data-lang-pill]").forEach((el) => el.classList.toggle("active", el.dataset.langPill === PF.lang));

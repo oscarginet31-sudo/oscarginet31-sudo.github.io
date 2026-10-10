@@ -24,9 +24,11 @@
   ];
 
   const tags = (list) => list.map((x) => `<span class="tag">${esc(tx(x))}</span>`).join("");
-  const head = (title, intro, id) => `
+  // Le nom de la section (« Parcours », « Projets »…) est dans le titre pour les
+  // lecteurs d'écran et les moteurs de recherche ; à l'écran, la phrase parle seule.
+  const head = (labelKey, title, intro, id) => `
     <header class="sec-head reveal">
-      <h2 class="sec-title" id="${id}-title">${rich(tx(title))}</h2>
+      <h2 class="sec-title" id="${id}-title"><span class="sr-only">${esc(t(labelKey))} : </span>${rich(tx(title))}</h2>
       ${intro ? `<p class="sec-intro">${esc(tx(intro))}</p>` : ""}
     </header>`;
 
@@ -34,7 +36,7 @@
   function about() {
     const id = C.identity;
     return `<div class="wrap">
-      ${head(id.motto, null, "about")}
+      ${head("about.label", id.motto, null, "about")}
       <div class="about-grid">
         <div class="about-bio reveal">${id.bio.map((p) => `<p>${esc(tx(p))}</p>`).join("")}</div>
         <dl class="facts reveal">${id.facts.map((f) => `
@@ -76,7 +78,7 @@
         <span class="li-date">${esc(tx(c.date))}</span>
       </li>`).join("");
     return `<div class="wrap">
-      ${head(X.title, X.intro, "path")}
+      ${head("path.label", X.title, X.intro, "path")}
       <h3 class="sub-label reveal">${esc(t("path.jobs"))}</h3>
       <div class="jobs">${jobs}</div>
       <div class="path-cols">
@@ -117,7 +119,7 @@
       </article>`;
     }).join("");
     return `<div class="wrap">
-      ${head(P.title, P.intro, "projects")}
+      ${head("proj.label", P.title, P.intro, "projects")}
       <div class="filters reveal" role="group" aria-label="${esc(PF.lang === "fr" ? "Filtrer les projets" : "Filter projects")}">${chips}</div>
       <div class="pgrid">${cards}</div>
     </div>`;
@@ -137,7 +139,7 @@
         </ul>
       </div>`).join("");
     return `<div class="wrap">
-      ${head(S.title, S.intro, "skills")}
+      ${head("skills.label", S.title, S.intro, "skills")}
       <p class="legend reveal">${esc(t("skills.where"))} ${["pro", "iut", "perso"].map(badge).join("")}</p>
       <div class="sgrid">${cats}</div>
     </div>`;
@@ -156,7 +158,7 @@
   function engagement() {
     const E = C.engagement;
     return `<div class="wrap">
-      ${head(E.title, E.intro, "engagement")}
+      ${head("eng.label", E.title, E.intro, "engagement")}
       <div class="egrid">${E.items.map((e) => `
         <article class="ecard${e.featured ? " featured" : ""} reveal">
           ${icon(e.icon)}
@@ -191,7 +193,7 @@
     return `<div class="wrap">
       <div class="contact-card reveal">
         <div class="cc-main">
-          <h2 class="sec-title" id="contact-title">${rich(tx(K.title))}</h2>
+          <h2 class="sec-title" id="contact-title"><span class="sr-only">${esc(t("contact.label"))} : </span>${rich(tx(K.title))}</h2>
           <p class="cc-intro">${esc(tx(K.intro))}</p>
           <div class="cc-mail">
             <a class="cc-email" href="mailto:${esc(K.email)}">${esc(K.email)}</a>
@@ -212,8 +214,8 @@
   function chrome() {
     document.documentElement.lang = PF.lang;
     document.title = PF.lang === "fr"
-      ? "Oscar Ginet — Systèmes, Réseaux & Cybersécurité"
-      : "Oscar Ginet — Systems, Networks & Security";
+      ? "Oscar Ginet — Alternant cybersécurité, systèmes & réseaux"
+      : "Oscar Ginet — Cybersecurity, systems & networks apprentice";
     $$("[data-t]").forEach((el) => (el.textContent = t(el.dataset.t)));
     $$("[data-t-label]").forEach((el) => el.setAttribute("aria-label", t(el.dataset.tLabel)));
     $$("[data-lang-pill]").forEach((el) => el.classList.toggle("active", el.dataset.langPill === PF.lang));

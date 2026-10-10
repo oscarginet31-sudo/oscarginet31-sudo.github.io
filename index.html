@@ -6,8 +6,8 @@
 <!-- Sécurité : aucune ressource tierce, aucun script en ligne, aucun référent envoyé aux sites externes. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="no-referrer">
-<title>Oscar Ginet — Galaxie cyber & réseaux</title>
-<meta name="description" content="Portfolio 3D d'Oscar Ginet, alternant Systèmes, Réseaux & Cybersécurité chez Lamberet SAS et étudiant en BUT R&T Cybersécurité à l'IUT d'Annecy. Explorez une galaxie où chaque étoile est une section et chaque planète un projet ou une compétence.">
+<title>Oscar Ginet — Portfolio 3D cybersécurité &amp; réseaux</title>
+<meta name="description" content="Portfolio 3D d&#x27;Oscar Ginet, alternant systèmes, réseaux et cybersécurité : une galaxie à explorer où chaque planète est un projet ou une compétence.">
 <meta name="author" content="Oscar Ginet">
 <meta property="og:title" content="Oscar Ginet — Galaxie cyber & réseaux">
 <meta property="og:description" content="Un portfolio 3D jouable : volez dans ma galaxie, sautez d'un système à l'autre, explorez mes projets planète par planète.">
@@ -25,9 +25,43 @@
 <meta name="twitter:image" content="https://oscarginet31-sudo.github.io/og-cover.jpg">
 <meta name="theme-color" content="#020308">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪐</text></svg>">
+<link rel="preload" href="assets/vendor/fonts/instrument-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/vendor/fonts/instrument-serif-400-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/space.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://oscarginet31-sudo.github.io/#site",
+      "url": "https://oscarginet31-sudo.github.io/",
+      "name": "Oscar Ginet — Portfolio",
+      "inLanguage": "fr",
+      "author": {
+        "@id": "https://oscarginet31-sudo.github.io/#oscar"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://oscarginet31-sudo.github.io/#oscar",
+      "name": "Oscar Ginet",
+      "url": "https://oscarginet31-sudo.github.io/classic.html",
+      "jobTitle": "Alternant Systèmes, Réseaux & Cybersécurité",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Lamberet SAS"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/oscar-ginet-6523862b3/",
+        "https://github.com/oscarginet31-sudo"
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="classic.html">Version accessible du portfolio (mode classique)</a>
@@ -83,6 +117,13 @@
     <span class="intro-reduced"></span>
   </div>
 </section>
+
+<noscript>
+  <div class="noscript">
+    <p><strong>Oscar Ginet</strong> — alternant systèmes, réseaux &amp; cybersécurité chez Lamberet SAS, BUT R&amp;T Cybersécurité (3ᵉ année) à l'IUT d'Annecy. Cette galaxie 3D demande JavaScript.</p>
+    <p><a href="classic.html">Voir le portfolio en version classique</a> · <a href="etude-edr.html">Étude de cas : migration EDR + SOC</a> · <a href="CV_Ginet_Oscar.pdf">Télécharger le CV</a></p>
+  </div>
+</noscript>
 
 <!-- Three.js r128 (build global, hébergé avec le site : aucune requête vers un CDN) -->
 <script src="assets/vendor/three/three.min.js"></script>

@@ -510,3 +510,9 @@ body.touring .card-body { top: 44%; max-height: min(64vh, calc(100vh - 260px)); 
       radial-gradient(280px circle at var(--mx, -999px) var(--my, -999px), color-mix(in oklab, var(--hub, var(--blue)) 80%, transparent), var(--line) 100%) border-box;
   }
 }
+
+/* Sans JavaScript : message lisible par-dessus l'intro, avec les liens utiles. */
+.noscript { position: fixed; z-index: 60; left: 50%; bottom: 24px; translate: -50% 0; width: min(640px, calc(100% - 32px));
+  padding: 18px 22px; border-radius: 14px; border: 1px solid var(--hud-line); background: var(--hud-bg); color: var(--hud-fg); font-size: 15px; line-height: 1.6; }
+.noscript p + p { margin-top: 8px; }
+.noscript a { color: var(--hud-accent); }
